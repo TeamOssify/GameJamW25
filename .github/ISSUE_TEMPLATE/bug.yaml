@@ -1,0 +1,11 @@
+name: Bug Report
+description: File a bug report
+labels: ["bug"]
+body:
+- type: textarea
+  id: issue_text
+  attributes:
+    label: Describe your issue here
+    placeholder: When I launch the game, it crashes.
+  validations:
+      required: true

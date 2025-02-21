@@ -1,0 +1,11 @@
+name: Other
+description: Anything else you may have to say
+body:
+- type: textarea
+  id: request_text
+  attributes:
+    label: Write stuff here
+    description: This could be a question, a discussion, or a poem; it's up to you.
+    placeholder: This game literally fixed my life!!
+  validations:
+      required: true

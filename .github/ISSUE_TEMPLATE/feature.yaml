@@ -1,0 +1,11 @@
+name: Feature Request
+description: Suggest a new feature
+labels: ["enhancement"]
+body:
+- type: textarea
+  id: request_text
+  attributes:
+    label: Describe your feature here
+    placeholder: Add Linux support.
+  validations:
+      required: true
