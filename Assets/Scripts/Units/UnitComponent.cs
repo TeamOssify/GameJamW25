@@ -45,6 +45,12 @@ public class UnitComponent : MonoBehaviour {
         for (var y = 0; y < movesSize.y; y++)
         for (var x = 0; x < movesSize.x; x++) {
             var tilePos = new Vector3Int(x, y) - movesOrigin;
+
+            if (tilePos is { x: 0, y: 0 }) {
+                // Don't display current unit tile as a move
+                continue;
+            }
+
             var tile = unitBaseMoves.GetTile(tilePos);
             if (tile) {
                 moves.Add(tilePos);
