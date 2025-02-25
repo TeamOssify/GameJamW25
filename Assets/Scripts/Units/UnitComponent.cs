@@ -36,13 +36,13 @@ public class UnitComponent : MonoBehaviour {
         Debug.Log("tried move to world pos " + pos + " grid pos: " + gridPosition);
     }
 
-    public Vector3Int[] GetUnitMoves() {
+    public List<Vector3Int> GetUnitMoves() {
         var moves = GetBaseMoves();
 
         var upgradeMoves = GetUpgradeMoves();
         moves.AddRange(upgradeMoves);
 
-        return moves.ToArray();
+        return moves;
     }
 
     private List<Vector3Int> GetBaseMoves() {

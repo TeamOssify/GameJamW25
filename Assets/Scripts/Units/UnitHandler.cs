@@ -41,6 +41,8 @@ public class UnitHandler : MonoBehaviour {
         _selectedUnit.Select();
 
         var unitMoves = _selectedUnit.GetUnitMoves();
+        unitMoves.RemoveAll(x => !_tileComponent.IsValidTile(x));
+
         _selectedUnitMoves.AddRange(unitMoves);
         _tileComponent.SetTileHints(unitMoves);
     }

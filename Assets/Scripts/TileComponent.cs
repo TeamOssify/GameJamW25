@@ -12,6 +12,9 @@ public class TileComponent : MonoBehaviour {
 
     [SerializeField]
     private UnitHandler unitHandler;
+
+    [SerializeField]
+    private MovementMaskComponent movementMask;
     
     private Transform _hoverTransform;
     private Vector3Int _hoverPosition;
@@ -24,11 +27,6 @@ public class TileComponent : MonoBehaviour {
     private GameObject tileHintObject;
 
     private readonly Dictionary<Vector3Int, GameObject> _tileHints = new();
-
-    [SerializeField]
-    private GameObject selectedTileObject;
-
-    private readonly Dictionary<Vector3Int, GameObject> _selectedTiles = new();
 
     private Camera _mainCamera;
     private Tilemap _tileMap;
@@ -50,17 +48,6 @@ public class TileComponent : MonoBehaviour {
     }
 
     private void UpdateHoveredTile() {
-        // if (_isHoldingSelect && _hoverVisible) {
-        //     _hoverRenderer.enabled = false;
-        //     _hoverVisible = false;
-        //     return;
-        // }
-        //
-        // if (!_isHoldingSelect && !_hoverVisible) {
-        //     _hoverRenderer.enabled = true;
-        //     _hoverVisible = true;
-        // }
-
         if (_isHoldingSelect) {
             if (!_hoverDark) {
                 _hoverColor = _hoverRenderer.color;
@@ -100,7 +87,6 @@ public class TileComponent : MonoBehaviour {
         if (TryGetTileForWorldPosition(mousePos, out var tilePos)) {
             if (tilePos == _heldTile) {
                 SelectTile(tilePos);
-                unitHandler.SelectTile(tilePos);
             }
         }
 
@@ -115,14 +101,11 @@ public class TileComponent : MonoBehaviour {
     }
 
     private void SelectTile(Vector3Int tilePos) {
-        var cellCenter = _tileMap.GetCellCenterWorld(tilePos);
-        if (_selectedTiles.Remove(tilePos, out var oldObject)) {
-            Destroy(oldObject);
+        if (!IsValidTile(tilePos)) {
+            return;
         }
-        else {
-            var spawnPos = new Vector3(cellCenter.x, cellCenter.y, TILE_Z);
-            _selectedTiles[tilePos] = Instantiate(selectedTileObject, spawnPos, Quaternion.identity);
-        }
+
+        unitHandler.SelectTile(tilePos);
     }
 
     public bool TryGetWorldPositionForTileCenter(Vector3Int tilePos, out Vector3 worldPos) {
@@ -161,8 +144,7 @@ public class TileComponent : MonoBehaviour {
     }
 
     public bool IsValidTile(Vector3Int pos) {
-        // TODO: Collision check against valid tile mask?
-        return _tileMap.HasTile(pos);
+        return _tileMap.HasTile(pos) && !movementMask.IsPositionBlocked(pos);
     }
 
     public void DebugSetTileHints() {
@@ -178,7 +160,7 @@ public class TileComponent : MonoBehaviour {
         SetTileHints(hints);
     }
 
-    public void SetTileHints(Vector3Int[] hints) {
+    public void SetTileHints(IEnumerable<Vector3Int> hints) {
         ClearTileHints();
 
         foreach (var hintPos in hints) {

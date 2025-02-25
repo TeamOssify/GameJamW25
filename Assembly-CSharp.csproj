@@ -51,6 +51,7 @@
     <Compile Include="Assets\Scripts\GameLogic\WaveManager.cs" />
     <Compile Include="Assets\Scripts\Units\UnitHandler.cs" />
     <Compile Include="Assets\Scripts\Units\UnitComponent.cs" />
+    <Compile Include="Assets\Scripts\MovementMaskComponent.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyComponent.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\PathfindingHandler.cs" />
     <Compile Include="Assets\Scripts\GameLogic\Models\SubWave.cs" />
