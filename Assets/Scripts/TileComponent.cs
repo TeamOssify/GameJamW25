@@ -11,7 +11,9 @@ public class TileComponent : MonoBehaviour {
 
     private Transform _hoverTransform;
     private Vector3Int _hoverPosition;
-    private Renderer _hoverRenderer;
+    private SpriteRenderer _hoverRenderer;
+    private Color _hoverColor;
+    private bool _hoverDark;
     private bool _hoverVisible;
 
     [SerializeField]
@@ -27,7 +29,7 @@ public class TileComponent : MonoBehaviour {
 
     internal void Start() {
         _hoverTransform = tileHoverObject.transform;
-        _hoverRenderer = tileHoverObject.GetComponent<Renderer>();
+        _hoverRenderer = tileHoverObject.GetComponent<SpriteRenderer>();
         _hoverVisible = _hoverRenderer.enabled;
 
         _mainCamera = Camera.main;
@@ -51,7 +53,18 @@ public class TileComponent : MonoBehaviour {
         // }
 
         if (_isHoldingSelect) {
+            if (!_hoverDark) {
+                _hoverColor = _hoverRenderer.color;
+                _hoverRenderer.color = Color.Lerp(_hoverColor, Color.clear, 0.33f);
+                _hoverDark = true;
+            }
+
             return;
+        }
+
+        if (_hoverDark) {
+            _hoverRenderer.color = _hoverColor;
+            _hoverDark = false;
         }
 
         var mousePos = GetMouseWorldPosition();
@@ -63,7 +76,9 @@ public class TileComponent : MonoBehaviour {
     }
 
     internal void OnMouseDown() {
-        _isHoldingSelect = true;
+        if (!_isHoldingSelect) {
+            _isHoldingSelect = true;
+        }
 
         var mousePos = GetMouseWorldPosition();
         if (TryGetTileForWorldPosition(mousePos, out var tilePos)) {
@@ -79,8 +94,10 @@ public class TileComponent : MonoBehaviour {
             }
         }
 
-        _isHoldingSelect = false;
-        _heldTile = Vector3Int.zero;
+        if (_isHoldingSelect) {
+            _isHoldingSelect = false;
+            _heldTile = Vector3Int.zero;
+        }
     }
 
 
@@ -103,7 +120,7 @@ public class TileComponent : MonoBehaviour {
         var cellPos = _tileMap.WorldToCell(worldPos);
 
         if (!_tileMap.HasTile(cellPos)) {
-            Debug.Log($"Clicked out of bounds of tile map! Tried to fetch cell at {cellPos}");
+            // Debug.Log($"Clicked out of bounds of tile map! Tried to fetch cell at {cellPos}");
             tilePos = Vector3Int.zero;
             return false;
         }
