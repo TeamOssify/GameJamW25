@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -15,6 +16,11 @@ public class TileComponent : MonoBehaviour {
     private Color _hoverColor;
     private bool _hoverDark;
     private bool _hoverVisible;
+
+    [SerializeField]
+    private GameObject tileHintObject;
+
+    private readonly Dictionary<Vector3Int, GameObject> _tileHints = new();
 
     [SerializeField]
     private GameObject selectedTileObject;
@@ -100,18 +106,17 @@ public class TileComponent : MonoBehaviour {
         }
     }
 
-
     private Vector3 GetMouseWorldPosition() {
         return _mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
     }
 
     private void SelectTile(Vector3Int tilePos) {
-        var cellCenterWorld = _tileMap.GetCellCenterWorld(tilePos);
+        var cellCenter = _tileMap.GetCellCenterWorld(tilePos);
         if (_selectedTiles.Remove(tilePos, out var oldObject)) {
             Destroy(oldObject);
         }
         else {
-            var spawnPos = new Vector3(cellCenterWorld.x, cellCenterWorld.y, TILE_Z);
+            var spawnPos = new Vector3(cellCenter.x, cellCenter.y, TILE_Z);
             _selectedTiles[tilePos] = Instantiate(selectedTileObject, spawnPos, Quaternion.identity);
         }
     }
@@ -127,5 +132,31 @@ public class TileComponent : MonoBehaviour {
 
         tilePos = cellPos;
         return true;
+    }
+
+    public void SetTileHints(Vector3Int[] hints) {
+        ClearTileHints();
+
+        foreach (var hintPos in hints) {
+            if (!_tileHints.ContainsKey(hintPos)) {
+                var cellCenter = _tileMap.GetCellCenterWorld(hintPos);
+                var spawnPos = new Vector3(cellCenter.x, cellCenter.y, TILE_Z);
+                _selectedTiles[hintPos] = Instantiate(tileHintObject, spawnPos, Quaternion.identity);
+            }
+        }
+    }
+
+    public void ForeachHint(Action<Vector3Int, GameObject> predicate) {
+        foreach (var (pos, hint) in _tileHints) {
+            predicate(pos, hint);
+        }
+    }
+
+    public void ClearTileHints() {
+        foreach (var oldHint in _tileHints.Values) {
+            Destroy(oldHint);
+        }
+
+        _tileHints.Clear();
     }
 }
