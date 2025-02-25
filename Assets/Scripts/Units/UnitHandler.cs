@@ -7,7 +7,6 @@ using UnityEngine.Tilemaps;
 public class UnitHandler : MonoBehaviour {
     [SerializeField]
     private Tilemap tileMap;
-
     private TileComponent _tileComponent;
 
     private readonly Dictionary<Vector3Int, UnitComponent> _unitGridPositions = new();

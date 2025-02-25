@@ -6,6 +6,12 @@ using UnityEngine.Tilemaps;
 public enum UnitType {Pawn, Knight, Bishop, Rook, Queen, King, Barbarian, Duke}
 
 public class UnitComponent : MonoBehaviour {
+    [SerializeField]
+    private string unitName;
+
+    [SerializeField]
+    private string unitDescription;
+
     public Vector3Int Position { get; private set; }
 
     [SerializeField]
