@@ -12,10 +12,10 @@ public class UnitComponent : MonoBehaviour {
     [SerializeField]
     private string unitDescription;
 
-    public Vector3Int Position { get; private set; }
-
     [SerializeField]
     private Tilemap unitBaseMoves;
+
+    public Vector3Int Position { get; private set; }
 
     public void Select() {
         Debug.Log("Selected a unit");

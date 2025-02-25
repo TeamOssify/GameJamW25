@@ -25,7 +25,12 @@ public class UnitHandler : MonoBehaviour {
         if (_tileComponent.TryGetTileForWorldPosition(littleGuy.Position, out var pos)) {
             _unitGridPositions.Add(pos, littleGuy);
         }
-        
+
+        UnitComponent bigGuy = Instantiate(testUnit, Vector3.zero, Quaternion.identity);
+        bigGuy.Move(new Vector3(-3.5f,1.5f,0), new Vector3Int(-4,1,0));
+        if (_tileComponent.TryGetTileForWorldPosition(bigGuy.Position, out var bpos)) {
+            _unitGridPositions.Add(bpos, bigGuy);
+        }
     }
 
     private void SelectUnit(UnitComponent unit) {
