@@ -478,3 +478,5 @@ Library/*
 Temp/*
 UserSettings/*
 Build/*
+
+.vscode/
