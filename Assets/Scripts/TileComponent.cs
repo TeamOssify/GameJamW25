@@ -100,8 +100,9 @@ public class TileComponent : MonoBehaviour {
         if (TryGetTileForWorldPosition(mousePos, out var tilePos)) {
             if (tilePos == _heldTile) {
                 SelectTile(tilePos);
-                if (unitHandler.GetUnitAtGridPosition(tilePos))
-                unitHandler.SelectTile(tilePos);
+                if (unitHandler.GetUnitAtGridPosition(tilePos)) {
+                    unitHandler.SelectTile(tilePos);
+                }
             }
         }
 
