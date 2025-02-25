@@ -11,7 +11,7 @@ public class UnitMovement {
 }
 
 public class UnitMoveData {
-    private Dictionary<UnitType, List<UnitMovement>> _unitMovements = new Dictionary<UnitType, List<UnitMovement>> {
+    public readonly Dictionary<UnitType, List<UnitMovement>> UnitMovements = new Dictionary<UnitType, List<UnitMovement>> {
         {
             UnitType.Pawn, new List<UnitMovement> {
                 new UnitMovement { Direction = new Vector2Int(0, 1) },

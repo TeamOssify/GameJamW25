@@ -525,7 +525,7 @@ GameObject:
   - component: {fileID: 1822988472}
   - component: {fileID: 1822988471}
   m_Layer: 0
-  m_Name: UnitHandler
+  m_Name: Unit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -543,6 +543,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e09490ace2075844a66e3e6b14ea7f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: 0
+  HasMoved: 0
+  Position: {x: 0, y: 0}
 --- !u!4 &1822988472
 Transform:
   m_ObjectHideFlags: 0
