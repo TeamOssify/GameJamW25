@@ -48,12 +48,13 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\TileComponent.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyPortalComponent.cs" />
+    <Compile Include="Assets\Scripts\GameLogic\WaveManager.cs" />
     <Compile Include="Assets\Scripts\Units\UnitHandler.cs" />
     <Compile Include="Assets\Scripts\Units\UnitComponent.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyComponent.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\PathfindingHandler.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyHandlerComponent.cs" />
-    <Compile Include="Assets\Scripts\WaveManagerComponent.cs" />
+    <Compile Include="Assets\Scripts\GameLogic\LevelManager.cs" />
     <Compile Include="Assets\Scripts\Units\UnitMovement.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
