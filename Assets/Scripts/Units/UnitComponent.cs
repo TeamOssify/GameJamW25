@@ -31,7 +31,6 @@ public class UnitComponent : MonoBehaviour {
     }
 
     public void Move(Vector3 pos, Vector3Int gridPosition) {
-        //if the move is valid (do later lule)
         transform.position = pos;
         GridPos = gridPosition;
         Debug.Log("tried move to world pos " + pos + " grid pos: " + gridPosition);
