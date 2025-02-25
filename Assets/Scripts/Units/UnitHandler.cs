@@ -8,7 +8,8 @@ public class UnitHandler : MonoBehaviour {
     [SerializeField]
     private Tilemap tileMap;
 
-    public UnitComponent testUnit;
+    public UnitComponent pawn;
+    public UnitComponent rook;
 
     private TileComponent _tileComponent;
 
@@ -20,19 +21,17 @@ public class UnitHandler : MonoBehaviour {
     private void Start() {
         _tileComponent = tileMap.GetComponent<TileComponent>();
 
-        UnitComponent littleGuy = Instantiate(testUnit, Vector3.zero, Quaternion.identity);
-        littleGuy.Move(new Vector3(-1.5f, -1.5f, 0), new Vector3Int(-2, -2, 0));
-        if (_tileComponent.TryGetTileForWorldPosition(littleGuy.GridPos, out var pos)) {
-            _unitGridPositions.Add(pos, littleGuy);
-        }
+        SpawnUnit(new Vector3Int(-5,1,0), pawn);
 
-        UnitComponent bigGuy = Instantiate(testUnit, Vector3.zero, Quaternion.identity);
-        bigGuy.Move(new Vector3(-3.5f,1.5f,0), new Vector3Int(-4,1,0));
-        if (_tileComponent.TryGetTileForWorldPosition(bigGuy.GridPos, out var bpos)) {
-            _unitGridPositions.Add(bpos, bigGuy);
-        }
+        SpawnUnit(new Vector3Int(-1, 1,0), rook);
     }
 
+    public void SpawnUnit(Vector3Int gridPos, UnitComponent unitType) {
+        UnitComponent newUnit = Instantiate(unitType, Vector3.zero, Quaternion.identity);
+        _tileComponent.TryGetWorldPositionForTileCenter(gridPos, out var pos);
+        newUnit.Move(pos,gridPos);
+        _unitGridPositions.Add(gridPos, newUnit);
+    }
     private void SelectUnit(UnitComponent unit) {
         if (_selectedUnit) {
             DeselectUnit();

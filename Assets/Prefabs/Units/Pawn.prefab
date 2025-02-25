@@ -384,7 +384,7 @@ GameObject:
   - component: {fileID: 1328483591800289427}
   - component: {fileID: 2572743752466897568}
   m_Layer: 0
-  m_Name: Unit 1
+  m_Name: Pawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -419,6 +419,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e09490ace2075844a66e3e6b14ea7f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitName: 
-  unitDescription: 
+  unitName: Pawn
+  unitDescription: The most basic unit
   unitBaseMoves: {fileID: 5000254312647381797}
