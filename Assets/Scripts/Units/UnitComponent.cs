@@ -9,9 +9,6 @@ public class UnitComponent : MonoBehaviour {
     public Vector3Int Position { get; private set; }
 
     [SerializeField]
-    private UnitHandler unitHandler;
-
-    [SerializeField]
     private Tilemap unitBaseMoves;
 
     public void Select() { }
@@ -23,9 +20,9 @@ public class UnitComponent : MonoBehaviour {
         return false;
     }
 
-    public void Move(Vector3Int gridPosition) {
+    public void Move(Vector3 pos) {
         //if the move is valid (do later lule)
-        transform.position = unitHandler.GetWorldPositionFromGrid(gridPosition);
+        transform.position = pos;
     }
 
     public Vector3Int[] GetUnitMoves() {
@@ -63,4 +60,6 @@ public class UnitComponent : MonoBehaviour {
     private Vector3Int[] GetUpgradeMoves() {
         return Array.Empty<Vector3Int>();
     }
+    
+    
 }

@@ -36,6 +36,7 @@ public class UnitHandler : MonoBehaviour {
     }
 
     public void SelectTile(Vector3Int gridPosition) {
+        Debug.Log("yo zora");
         if (!_tileComponent.IsValidTile(gridPosition)) {
             return;
         }
@@ -52,7 +53,7 @@ public class UnitHandler : MonoBehaviour {
         if (_selectedUnitMoves.Contains(gridPosition)) {
             if (_tileComponent.IsValidTile(gridPosition)) {
                 _unitGridPositions.Remove(unit!.Position);
-                unit.Move(gridPosition);
+                unit.Move(GetWorldPositionFromGrid(gridPosition));
                 _unitGridPositions.Add(gridPosition, unit);
             }
 
