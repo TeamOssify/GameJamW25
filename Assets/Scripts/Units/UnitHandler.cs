@@ -1,19 +1,21 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Tilemaps;
-public class UnitHandler : MonoBehaviour
-{
-    [SerializeField] private Tilemap tileMap;
-    
-    private Dictionary<Vector3Int, UnitComponent> _unitGridPositions = new Dictionary<Vector3Int, UnitComponent>();
+
+public class UnitHandler : MonoBehaviour {
+    [SerializeField]
+    private Tilemap tileMap;
+    private TileComponent _tileComponent;
+
+    private readonly Dictionary<Vector3Int, UnitComponent> _unitGridPositions = new();
     private UnitComponent _selectedUnit;
     
-    
     private void Start() {
-        
+        _tileComponent = tileMap.GetComponent<TileComponent>();
     }
+
     private void SelectUnit(UnitComponent unit) {
-        if (_selectedUnit != null) {
+        if (_selectedUnit) {
             _selectedUnit.Deselect();
         }
         
@@ -23,7 +25,7 @@ public class UnitHandler : MonoBehaviour
 
     public void SelectTile(Vector3Int gridPosition) {
         UnitComponent unit = GetUnitAtGridPosition(gridPosition);
-        if (_selectedUnit == null) {
+        if (!_selectedUnit) {
             if (unit) {
                 SelectUnit(unit);
             }
@@ -32,7 +34,7 @@ public class UnitHandler : MonoBehaviour
         
         if (_selectedUnit.IsValidMove(gridPosition)) {
             _selectedUnit = null;
-            _unitGridPositions.Remove(unit.position);
+            _unitGridPositions.Remove(unit.Position);
             unit.Move(gridPosition);
             _unitGridPositions.Add(gridPosition, unit);
         }
@@ -46,13 +48,16 @@ public class UnitHandler : MonoBehaviour
     }
 
     public UnitComponent GetUnitAtGridPosition(Vector3Int gridPosition) {
-        _unitGridPositions.TryGetValue(gridPosition, out UnitComponent unit);
+        _unitGridPositions.TryGetValue(gridPosition, out var unit);
         return unit;
     }
     
     public Vector3 GetWorldPositionFromGrid(Vector3Int gridPosition) {
-        // Convert grid position to world position
-        Vector3Int cellPosition = new Vector3Int(gridPosition.x, gridPosition.y, 0);
-        return tileMap.GetCellCenterWorld(cellPosition);
+        if (!_tileComponent.TryGetWorldPositionForTile(gridPosition, out var worldPos)) {
+            Debug.Log($"Grid position {gridPosition} is invalid.");
+            return Vector3.zero;
+        }
+
+        return worldPos;
     }
 }

@@ -121,7 +121,18 @@ public class TileComponent : MonoBehaviour {
         }
     }
 
-    private bool TryGetTileForWorldPosition(Vector3 worldPos, out Vector3Int tilePos) {
+    public bool TryGetWorldPositionForTile(Vector3Int tilePos, out Vector3 worldPos) {
+        if (!IsValidTile(tilePos)) {
+            // Debug.Log($"Clicked out of bounds of tile map! Tried to fetch cell at {cellPos}");
+            worldPos = Vector3Int.zero;
+            return false;
+        }
+
+        worldPos = _tileMap.CellToWorld(tilePos);
+        return true;
+    }
+
+    public bool TryGetTileForWorldPosition(Vector3 worldPos, out Vector3Int tilePos) {
         var cellPos = _tileMap.WorldToCell(worldPos);
 
         if (!IsValidTile(cellPos)) {
