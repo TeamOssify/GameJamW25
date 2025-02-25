@@ -7,6 +7,9 @@ using UnityEngine.Tilemaps;
 public class UnitHandler : MonoBehaviour {
     [SerializeField]
     private Tilemap tileMap;
+
+    public UnitComponent testUnit;    
+    
     private TileComponent _tileComponent;
 
     private readonly Dictionary<Vector3Int, UnitComponent> _unitGridPositions = new();
@@ -16,6 +19,13 @@ public class UnitHandler : MonoBehaviour {
 
     private void Start() {
         _tileComponent = tileMap.GetComponent<TileComponent>();
+        
+        UnitComponent littleGuy = Instantiate(testUnit, Vector3.zero, Quaternion.identity);
+        littleGuy.Move(new Vector3(-1.5f,-1.5f,0), new Vector3Int(-2,-2,0));
+        if (_tileComponent.TryGetTileForWorldPosition(littleGuy.Position, out var pos)) {
+            _unitGridPositions.Add(pos, littleGuy);
+        }
+        
     }
 
     private void SelectUnit(UnitComponent unit) {
@@ -35,35 +45,33 @@ public class UnitHandler : MonoBehaviour {
     }
 
     public void SelectTile(Vector3Int gridPosition) {
-        Debug.Log("yo zora");
         if (!_tileComponent.IsValidTile(gridPosition)) {
             return;
         }
-
+        //if clicked tile is valid
         var unit = GetUnitAtGridPosition(gridPosition);
-        if (!_selectedUnit) {
-            if (unit) {
-                SelectUnit(unit);
+        if (!_selectedUnit) { // if no unit is selected
+            if (unit) { 
+                SelectUnit(unit); //select unit at clicked location
             }
 
+            return; 
+        }
+        // if clicked tile is valid, and a unit is on that tile, and a unit is selected
+        if (unit) {
+            DeselectUnit();
+            SelectUnit(unit);
             return;
         }
-
-        if (_selectedUnitMoves.Contains(gridPosition)) {
-            if (_tileComponent.IsValidTile(gridPosition)) {
-                _unitGridPositions.Remove(unit!.Position);
-                unit.Move(GetWorldPositionFromGrid(gridPosition));
-                _unitGridPositions.Add(gridPosition, unit);
-            }
-
+        
+        //if (_selectedUnitMoves.Contains(gridPosition)) {
+        //if clicked tile is valid, and a unit is selected, and another unit isnt on that tile, try move it to location
+            _unitGridPositions.Remove(_selectedUnit.Position);
+            _selectedUnit.Move(GetWorldPositionFromGrid(gridPosition), gridPosition);
+            _unitGridPositions.Add(gridPosition, _selectedUnit);
+            
             DeselectUnit();
-        }
-        else if (unit) {
-            SelectUnit(unit);
-        }
-        else {
-            DeselectUnit();
-        }
+        //}
     }
 
     [return: MaybeNull]
@@ -71,7 +79,7 @@ public class UnitHandler : MonoBehaviour {
         return _unitGridPositions.GetValueOrDefault(gridPosition);
     }
 
-    public Vector3 GetWorldPositionFromGrid(Vector3Int gridPosition) {
+    private Vector3 GetWorldPositionFromGrid(Vector3Int gridPosition) {
         if (!_tileComponent.TryGetWorldPositionForTile(gridPosition, out var worldPos)) {
             Debug.Log($"Grid position {gridPosition} is invalid.");
             return Vector3.zero;
