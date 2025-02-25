@@ -15,7 +15,7 @@ public class UnitComponent : MonoBehaviour {
     [SerializeField]
     private Tilemap unitBaseMoves;
 
-    public Vector3Int Position { get; private set; }
+    public Vector3Int GridPos { get; private set; }
 
     public void Select() {
         Debug.Log("Selected a unit");
@@ -33,7 +33,7 @@ public class UnitComponent : MonoBehaviour {
     public void Move(Vector3 pos, Vector3Int gridPosition) {
         //if the move is valid (do later lule)
         transform.position = pos;
-        this.Position = gridPosition;
+        GridPos = gridPosition;
         Debug.Log("tried move to world pos " + pos + " grid pos: " + gridPosition);
     }
 
@@ -53,16 +53,15 @@ public class UnitComponent : MonoBehaviour {
         var moves = new List<Vector3Int>();
         for (var y = 0; y < movesSize.y; y++)
         for (var x = 0; x < movesSize.x; x++) {
-            var tilePos = new Vector3Int(x, y) - movesOrigin;
+            var tilePos = new Vector3Int(x, y) + movesOrigin;
 
             if (tilePos is { x: 0, y: 0 }) {
                 // Don't display current unit tile as a move
                 continue;
             }
 
-            var tile = unitBaseMoves.GetTile(tilePos);
-            if (tile) {
-                moves.Add(tilePos);
+            if (unitBaseMoves.HasTile(tilePos)) {
+                moves.Add(tilePos + GridPos);
             }
         }
         

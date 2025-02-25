@@ -8,8 +8,8 @@ public class UnitHandler : MonoBehaviour {
     [SerializeField]
     private Tilemap tileMap;
 
-    public UnitComponent testUnit;    
-    
+    public UnitComponent testUnit;
+
     private TileComponent _tileComponent;
 
     private readonly Dictionary<Vector3Int, UnitComponent> _unitGridPositions = new();
@@ -19,16 +19,16 @@ public class UnitHandler : MonoBehaviour {
 
     private void Start() {
         _tileComponent = tileMap.GetComponent<TileComponent>();
-        
+
         UnitComponent littleGuy = Instantiate(testUnit, Vector3.zero, Quaternion.identity);
-        littleGuy.Move(new Vector3(-1.5f,-1.5f,0), new Vector3Int(-2,-2,0));
-        if (_tileComponent.TryGetTileForWorldPosition(littleGuy.Position, out var pos)) {
+        littleGuy.Move(new Vector3(-1.5f, -1.5f, 0), new Vector3Int(-2, -2, 0));
+        if (_tileComponent.TryGetTileForWorldPosition(littleGuy.GridPos, out var pos)) {
             _unitGridPositions.Add(pos, littleGuy);
         }
 
         UnitComponent bigGuy = Instantiate(testUnit, Vector3.zero, Quaternion.identity);
         bigGuy.Move(new Vector3(-3.5f,1.5f,0), new Vector3Int(-4,1,0));
-        if (_tileComponent.TryGetTileForWorldPosition(bigGuy.Position, out var bpos)) {
+        if (_tileComponent.TryGetTileForWorldPosition(bigGuy.GridPos, out var bpos)) {
             _unitGridPositions.Add(bpos, bigGuy);
         }
     }
@@ -40,12 +40,16 @@ public class UnitHandler : MonoBehaviour {
 
         _selectedUnit = unit;
         _selectedUnit.Select();
-        _selectedUnitMoves.AddRange(_selectedUnit.GetUnitMoves());
+
+        var unitMoves = _selectedUnit.GetUnitMoves();
+        _selectedUnitMoves.AddRange(unitMoves);
+        _tileComponent.SetTileHints(unitMoves);
     }
 
     private void DeselectUnit() {
         _selectedUnit.Deselect();
         _selectedUnitMoves.Clear();
+        _tileComponent.ClearTileHints();
         _selectedUnit = null;
     }
 
@@ -53,43 +57,32 @@ public class UnitHandler : MonoBehaviour {
         if (!_tileComponent.IsValidTile(gridPosition)) {
             return;
         }
-        //if clicked tile is valid
-        var unit = GetUnitAtGridPosition(gridPosition);
-        if (!_selectedUnit) { // if no unit is selected
-            if (unit) { 
-                SelectUnit(unit); //select unit at clicked location
+
+        if (!_selectedUnit) {
+            if (TryGetUnitAtGridPosition(gridPosition, out var unit)) {
+                SelectUnit(unit);
             }
 
-            return; 
-        }
-        // if clicked tile is valid, and a unit is on that tile, and a unit is selected
-        if (unit) {
-            DeselectUnit();
-            SelectUnit(unit);
             return;
         }
-        
-        //if (_selectedUnitMoves.Contains(gridPosition)) {
-        //if clicked tile is valid, and a unit is selected, and another unit isnt on that tile, try move it to location
-            _unitGridPositions.Remove(_selectedUnit.Position);
-            _selectedUnit.Move(GetWorldPositionFromGrid(gridPosition), gridPosition);
+
+        if (!IsOccupiedTile(gridPosition)
+            && _selectedUnitMoves.Contains(gridPosition)
+            && _tileComponent.TryGetWorldPositionForTileCenter(gridPosition, out var worldPos)
+        ) {
+            _unitGridPositions.Remove(_selectedUnit.GridPos);
+            _selectedUnit.Move(worldPos, gridPosition);
             _unitGridPositions.Add(gridPosition, _selectedUnit);
-            
-            DeselectUnit();
-        //}
-    }
-
-    [return: MaybeNull]
-    public UnitComponent GetUnitAtGridPosition(Vector3Int gridPosition) {
-        return _unitGridPositions.GetValueOrDefault(gridPosition);
-    }
-
-    private Vector3 GetWorldPositionFromGrid(Vector3Int gridPosition) {
-        if (!_tileComponent.TryGetWorldPositionForTileCenter(gridPosition, out var worldPos)) {
-            Debug.Log($"Grid position {gridPosition} is invalid.");
-            return Vector3.zero;
         }
 
-        return worldPos;
+        DeselectUnit();
+    }
+
+    private bool IsOccupiedTile(Vector3Int gridPosition) {
+        return _unitGridPositions.ContainsKey(gridPosition);
+    }
+
+    public bool TryGetUnitAtGridPosition(Vector3Int gridPosition, out UnitComponent unit) {
+        return _unitGridPositions.TryGetValue(gridPosition, out unit);
     }
 }
