@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 556330f6e39ee694fafe29473b341650
+guid: 29133b5adbd2850499b1633a8d73675d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2911039937660018388
-    second: Sand Tiles_0
+      213: 6681773892805307588
+    second: sand tiles sand_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Sand Tiles_0
+      name: sand tiles sand_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c21accc9998e997d0800000000000000
-      internalID: -2911039937660018388
+      spriteID: 4cca32634fd6abc50800000000000000
+      internalID: 6681773892805307588
       vertices: []
       indices: 
       edges: []

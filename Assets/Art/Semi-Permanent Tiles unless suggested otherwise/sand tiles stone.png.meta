@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: a8ec15406373d6e41a89a4764327a653
+guid: 74665b802d2bc2244994bb09090d3659
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8100976343439862210
-    second: Jungle Tiles_0
+      213: 4419163214876552099
+    second: sand tiles stone_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Jungle Tiles_0
+      name: sand tiles stone_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 704
-        height: 704
+        width: 640
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e369c6bbfec839f80800000000000000
-      internalID: -8100976343439862210
+      spriteID: 3aba03bb785045d30800000000000000
+      internalID: 4419163214876552099
       vertices: []
       indices: 
       edges: []
