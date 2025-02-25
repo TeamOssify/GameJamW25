@@ -134,6 +134,19 @@ public class TileComponent : MonoBehaviour {
         return true;
     }
 
+    public void DebugSetTileHints() {
+        var hints = new Vector3Int[] {
+            new(-1, 0, 0),
+            new(1, 0, 0),
+            new(0, -1, 0),
+            new(0, 1, 0),
+            new(-3, -3, 0),
+            new(-3, 0, 0),
+        };
+
+        SetTileHints(hints);
+    }
+
     public void SetTileHints(Vector3Int[] hints) {
         ClearTileHints();
 
@@ -141,7 +154,7 @@ public class TileComponent : MonoBehaviour {
             if (!_tileHints.ContainsKey(hintPos)) {
                 var cellCenter = _tileMap.GetCellCenterWorld(hintPos);
                 var spawnPos = new Vector3(cellCenter.x, cellCenter.y, TILE_Z);
-                _selectedTiles[hintPos] = Instantiate(tileHintObject, spawnPos, Quaternion.identity);
+                _tileHints[hintPos] = Instantiate(tileHintObject, spawnPos, Quaternion.identity);
             }
         }
     }
