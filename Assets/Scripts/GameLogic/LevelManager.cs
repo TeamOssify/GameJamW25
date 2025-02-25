@@ -1,9 +1,8 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour {
     [SerializeField]
-    private List<Level> levels;
+    private Level[] levels;
 
     [SerializeField]
     private uint currentLevel;
