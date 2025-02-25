@@ -80,7 +80,7 @@ public class UnitHandler : MonoBehaviour {
     }
 
     private Vector3 GetWorldPositionFromGrid(Vector3Int gridPosition) {
-        if (!_tileComponent.TryGetWorldPositionForTile(gridPosition, out var worldPos)) {
+        if (!_tileComponent.TryGetWorldPositionForTileCenter(gridPosition, out var worldPos)) {
             Debug.Log($"Grid position {gridPosition} is invalid.");
             return Vector3.zero;
         }
