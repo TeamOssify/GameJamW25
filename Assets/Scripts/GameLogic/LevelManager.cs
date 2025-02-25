@@ -1,10 +1,10 @@
-using System.Collections.Generic;
+using Sherbert.Framework.Generic;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour {
     [SerializeField]
-    private Dictionary<uint, GameObject> levels = new();
+    private SerializableDictionary<uint, GameObject> levels;
 
     [SerializeField]
-    private uint currentLevel = 0;
+    private uint currentLevel;
 }
