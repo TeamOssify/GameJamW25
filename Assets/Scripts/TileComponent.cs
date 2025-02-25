@@ -124,7 +124,7 @@ public class TileComponent : MonoBehaviour {
     private bool TryGetTileForWorldPosition(Vector3 worldPos, out Vector3Int tilePos) {
         var cellPos = _tileMap.WorldToCell(worldPos);
 
-        if (!_tileMap.HasTile(cellPos)) {
+        if (!IsValidTile(cellPos)) {
             // Debug.Log($"Clicked out of bounds of tile map! Tried to fetch cell at {cellPos}");
             tilePos = Vector3Int.zero;
             return false;
@@ -132,6 +132,11 @@ public class TileComponent : MonoBehaviour {
 
         tilePos = cellPos;
         return true;
+    }
+
+    public bool IsValidTile(Vector3Int pos) {
+        // TODO: Collision check against valid tile mask?
+        return _tileMap.HasTile(pos);
     }
 
     public void DebugSetTileHints() {
