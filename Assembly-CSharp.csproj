@@ -47,9 +47,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\TileComponent.cs" />
-    <Compile Include="Assets\Scripts\EnemyComponent.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemyPortalComponent.cs" />
     <Compile Include="Assets\Scripts\Units\UnitHandler.cs" />
     <Compile Include="Assets\Scripts\Units\UnitComponent.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemyComponent.cs" />
+    <Compile Include="Assets\Scripts\Pathfinding\PathfindingHandler.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemyHandlerComponent.cs" />
     <Compile Include="Assets\Scripts\WaveManagerComponent.cs" />
     <Compile Include="Assets\Scripts\Units\UnitMovement.cs" />
     <Reference Include="UnityEngine">
