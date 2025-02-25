@@ -17,18 +17,24 @@ public class UnitComponent : MonoBehaviour {
     [SerializeField]
     private Tilemap unitBaseMoves;
 
-    public void Select() { }
+    public void Select() {
+        Debug.Log("Selected a unit");
+    }
 
-    public void Deselect() { }
+    public void Deselect() {
+        Debug.Log("Deselected a unit");
+    }
 
     public bool IsValidMove(Vector3Int gridPosition) {
         Debug.Log("Yo");
         return false;
     }
 
-    public void Move(Vector3 pos) {
+    public void Move(Vector3 pos, Vector3Int gridPosition) {
         //if the move is valid (do later lule)
         transform.position = pos;
+        this.Position = gridPosition;
+        Debug.Log("tried move to world pos " + pos + " grid pos: " + gridPosition);
     }
 
     public Vector3Int[] GetUnitMoves() {
