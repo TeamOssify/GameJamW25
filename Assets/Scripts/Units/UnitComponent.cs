@@ -13,7 +13,15 @@ public class UnitComponent : MonoBehaviour {
     [SerializeField]
     protected Tilemap unitBaseMoves;
 
+    [SerializeField]
+    private Tilemap unitFirstMoves;
+
+    [SerializeField]
+    private Tilemap unitTier1Moves;
+
     public Vector3Int GridPos { get; private set; }
+
+    private bool _hasMoved;
     public void Select() {
         Debug.Log("Selected a unit");
     }
@@ -22,24 +30,29 @@ public class UnitComponent : MonoBehaviour {
         Debug.Log("Deselected a unit");
     }
 
-    public void Move(Vector3 pos, Vector3Int gridPosition) {
+    public void Move(Vector3 pos, Vector3Int gridPosition, bool initializing = false) {
         transform.position = pos;
         GridPos = gridPosition;
-        // Debug.Log($"tried move to world pos {pos} grid pos: {gridPosition}");
+        if (!initializing) {
+            _hasMoved = true;
+        }
     }
 
     public SwapBackArray<Vector3Int> GetUnitMoves(TileComponent tileComponent) {
-        var moves = GetBaseMoves(tileComponent);
-
-        var upgradeMoves = GetUpgradeMoves();
+        var moves = GetMoves(tileComponent, unitBaseMoves);
+        if (!_hasMoved) {
+            var firstMoves = GetMoves(tileComponent, unitFirstMoves);
+            moves.AddRange(firstMoves);
+        }
+        var upgradeMoves = GetMoves(tileComponent, unitTier1Moves);
         moves.AddRange(upgradeMoves);
-
+        Debug.Log(moves.Count);
         return moves;
     }
 
-    protected virtual SwapBackArray<Vector3Int> GetBaseMoves(TileComponent tileComponent) {
-        var movesSize = unitBaseMoves.size;
-        var movesOrigin = unitBaseMoves.origin;
+    protected virtual SwapBackArray<Vector3Int> GetMoves(TileComponent tileComponent, Tilemap moveMap) {
+        var movesSize = moveMap.size;
+        var movesOrigin = moveMap.origin;
 
         var moves = new SwapBackArray<Vector3Int>();
         for (var y = 0; y < movesSize.y; y++)
@@ -51,17 +64,11 @@ public class UnitComponent : MonoBehaviour {
                 continue;
             }
 
-            if (unitBaseMoves.HasTile(tilePos)) {
+            if (moveMap.HasTile(tilePos)) {
                 moves.Add(tilePos + GridPos);
             }
         }
         
         return moves;
     }
-
-    private Vector3Int[] GetUpgradeMoves() {
-        return Array.Empty<Vector3Int>();
-    }
-    
-    
 }

@@ -40,7 +40,7 @@ public class UnitHandler : MonoBehaviour {
         }
         UnitComponent newUnit = Instantiate(unitType, Vector3.zero, Quaternion.identity);
         _tileComponent.TryGetWorldPositionForTileCenter(gridPos, out var pos);
-        newUnit.Move(pos,gridPos);
+        newUnit.Move(pos,gridPos, true);
         _unitGridPositions.Add(gridPos, newUnit);
     }
     private void SelectUnit(UnitComponent unit) {

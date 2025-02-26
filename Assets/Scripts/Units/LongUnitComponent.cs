@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 
 public class LongUnitComponent : UnitComponent {
-    protected override SwapBackArray<Vector3Int> GetBaseMoves(TileComponent tileComponent) {
+    protected override SwapBackArray<Vector3Int> GetMoves(TileComponent tileComponent, Tilemap moveMap) {
         var movesSize = unitBaseMoves.size;
         var movesOrigin = unitBaseMoves.origin;
 
