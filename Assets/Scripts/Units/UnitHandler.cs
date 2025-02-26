@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine.Tilemaps;
 using TMPro;
@@ -53,15 +54,23 @@ public class UnitHandler : MonoBehaviour {
             SpawnUnit(gridPos, unit);
         }
     }
+
     public void SpawnUnit(Vector3Int gridPos, UnitComponent unitType) {
         if (!_tileComponent.IsUnobstructedTile(gridPos)) {
             Debug.LogError($"Invalid grid position: {gridPos}");
+            return;
         }
-        UnitComponent newUnit = Instantiate(unitType, Vector3.zero, Quaternion.identity, gameObject.transform);
-        _tileComponent.TryGetWorldPositionForTileCenter(gridPos, out var pos);
+
+        var newUnit = Instantiate(unitType, Vector3.zero, Quaternion.identity, gameObject.transform);
+        if (!_tileComponent.TryGetWorldPositionForTileCenter(gridPos, out var pos)) {
+            Debug.LogError($"Failed to find tile center: {gridPos}");
+            return;
+        }
+
         newUnit.Move(pos,gridPos, true);
         _unitGridPositions.Add(gridPos, newUnit);
     }
+
     private void SelectUnit(UnitComponent unit) {
         if (_selectedUnit) {
             DeselectUnit();
@@ -70,11 +79,10 @@ public class UnitHandler : MonoBehaviour {
         _selectedUnit = unit;
         _selectedUnit.Select();
 
-        var unitMoves = _selectedUnit.GetUnitMoves(_tileComponent);
-        unitMoves.RemoveAll(x => !_tileComponent.IsUnobstructedTile(x));
+        var unitMoves = _selectedUnit.GetUnitMoves(_tileComponent, x => TryGetUnitAtGridPosition(x, out _));
 
-        _selectedUnitMoves.AddRange(unitMoves);
-        _tileComponent.SetTileHints(unitMoves);
+        _selectedUnitMoves.AddRange(unitMoves.Select(x => x.pos));
+        _tileComponent.SetTileHints(unitMoves.Select(x => x.pos));
     }
 
     private void DeselectUnit() {

@@ -1,7 +1,11 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+
+public enum MoveType : byte {
+    Normal,
+    Jump
+}
 
 public class UnitComponent : MonoBehaviour {
     [SerializeField]
@@ -48,8 +52,9 @@ public class UnitComponent : MonoBehaviour {
         }
     }
 
-    public SwapBackArray<Vector3Int> GetUnitMoves(TileComponent tileComponent) {
+    public SwapBackArray<(Vector3Int pos, MoveType type)> GetUnitMoves(TileComponent tileComponent, Predicate<Vector3Int> additionalFilter) {
         var moves = GetMoves(tileComponent, unitBaseMoves);
+
         if (!_hasMoved && unitFirstMoves) {
             var firstMoves = GetMoves(tileComponent, unitFirstMoves);
             moves.AddRange(firstMoves);
@@ -63,22 +68,19 @@ public class UnitComponent : MonoBehaviour {
         return moves;
     }
 
-    protected virtual SwapBackArray<Vector3Int> GetMoves(TileComponent tileComponent, Tilemap moveMap) {
+    protected virtual SwapBackArray<(Vector3Int pos, MoveType type)> GetMoves(TileComponent tileComponent, Tilemap moveMap) {
         var movesSize = moveMap.size;
         var movesOrigin = moveMap.origin;
 
-        var moves = new SwapBackArray<Vector3Int>();
+        var moves = new SwapBackArray<(Vector3Int pos, MoveType type)>();
         for (var y = 0; y < movesSize.y; y++)
         for (var x = 0; x < movesSize.x; x++) {
             var tilePos = new Vector3Int(x, y) + movesOrigin;
 
-            if (tilePos is { x: 0, y: 0 }) {
-                // Don't display current unit tile as a move
-                continue;
-            }
-
-            if (moveMap.HasTile(tilePos)) {
-                moves.Add(tilePos + GridPos);
+            var tile = moveMap.GetTile(tilePos);
+            if (tile) {
+                // TODO: Check tile to determine if move is jump
+                moves.Add((tilePos + GridPos, MoveType.Normal));
             }
         }
         
