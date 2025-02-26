@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.Tilemaps;
 
 public class LongUnitComponent : UnitComponent {
     protected override SwapBackArray<Vector3Int> GetBaseMoves(TileComponent tileComponent) {
@@ -27,17 +26,13 @@ public class LongUnitComponent : UnitComponent {
         foreach (var direction in directions) {
             var dirNormalized = new Vector3Int(
                 Mathf.Clamp(direction.x, -1, 1),
-                Mathf.Clamp(direction.y, -1, 1),
-                0
+                Mathf.Clamp(direction.y, -1, 1)
             );
 
-            var step = 1;
-            var nextPos = GridPos + dirNormalized * step;
-
+            var nextPos = GridPos + dirNormalized;
             while (tileComponent.IsValidTile(nextPos)) {
                 moves.Add(nextPos);
-                step++;
-                nextPos = GridPos + dirNormalized * step;
+                nextPos += dirNormalized;
             }
         }
 
