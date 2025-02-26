@@ -9,6 +9,7 @@ public class UnitHandler : MonoBehaviour {
 
     public UnitComponent pawn;
     public LongUnitComponent rook;
+    public LongUnitComponent bishop;
 
     private TileComponent _tileComponent;
 
@@ -23,6 +24,8 @@ public class UnitHandler : MonoBehaviour {
         SpawnUnit(new Vector3Int(-5,1,0), pawn);
 
         SpawnUnit(new Vector3Int(-1, 1,0), rook);
+
+        SpawnUnit(new Vector3Int(-3,1,0), bishop);
     }
 
     public void SpawnUnit(Vector3Int gridPos, UnitComponent unitType) {
