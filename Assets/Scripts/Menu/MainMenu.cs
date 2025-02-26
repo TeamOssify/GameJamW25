@@ -17,20 +17,30 @@ public class MainMenu : MonoBehaviour {
     private Image unitDetailsImage;
 
     public void RightArrow() {
-        selectedLevel++;
-        if (selectedLevel >= levels.Length) {
-            selectedLevel = 0;
-        }
+        ChangeSelectedLevel(1);
     }
 
     public void LeftArrow() {
-        selectedLevel--;
-        if (selectedLevel < 0) {
+        ChangeSelectedLevel(-1);
+    }
+
+    private void ChangeSelectedLevel(int level) {
+        selectedLevel += level;
+
+        if (selectedLevel >= levels.Length) {
+            selectedLevel = 0;
+        }
+        else if (selectedLevel < 0) {
             selectedLevel = levels.Length - 1;
         }
     }
 
     public void StartLevel() {
+        if (selectedLevel >= levels.Length) {
+            Debug.Log($"Tried to load level outside of bounds: {selectedLevel}");
+            return;
+        }
+
         SceneManager.LoadSceneAsync(levels[selectedLevel]);
     }
 

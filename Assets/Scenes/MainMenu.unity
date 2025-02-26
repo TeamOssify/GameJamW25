@@ -320,7 +320,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 758155442}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: rightArrow
+        m_MethodName: RightArrow
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1257,6 +1257,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c35bf2ab4611a4e4a8ce5727a5beb2ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levels: 01000000
+  selectedLevel: 0
+  unitDetailsName: {fileID: 0}
+  unitDetailsImage: {fileID: 0}
 --- !u!114 &758155443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1824,7 +1828,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 758155442}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: leftArrow
+        m_MethodName: LeftArrow
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2695,7 +2699,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 758155442}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: startLevel
+        m_MethodName: StartLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
