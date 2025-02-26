@@ -10,6 +10,8 @@ public class UnitHandler : MonoBehaviour {
     public UnitComponent pawn;
     public UnitComponent knight;
     public UnitComponent king;
+    public UnitComponent barbarian;
+    public UnitComponent jarl;
 
     public LongUnitComponent rook;
     public LongUnitComponent bishop;
@@ -32,13 +34,16 @@ public class UnitHandler : MonoBehaviour {
         SpawnUnit(new Vector3Int(0,1,0), knight);
         SpawnUnit(new Vector3Int(-3,3,0), queen);
         SpawnUnit(new Vector3Int(4,-3,0), king);
+        SpawnUnit(new Vector3Int(4,-2,0), barbarian);
+        SpawnUnit(new Vector3Int(4,-1,0), jarl);
+
     }
 
     public void SpawnUnit(Vector3Int gridPos, UnitComponent unitType) {
         if (!_tileComponent.IsUnobstructedTile(gridPos)) {
             Debug.LogError($"Invalid grid position: {gridPos}");
         }
-        UnitComponent newUnit = Instantiate(unitType, Vector3.zero, Quaternion.identity);
+        UnitComponent newUnit = Instantiate(unitType, Vector3.zero, Quaternion.identity, gameObject.transform);
         _tileComponent.TryGetWorldPositionForTileCenter(gridPos, out var pos);
         newUnit.Move(pos,gridPos, true);
         _unitGridPositions.Add(gridPos, newUnit);

@@ -49,7 +49,7 @@ public class UnitComponent : MonoBehaviour {
             var upgradeMoves = GetMoves(tileComponent, unitTier1Moves);
             moves.AddRange(upgradeMoves);
         }
-        
+
         return moves;
     }
 
