@@ -30,7 +30,7 @@ public class LongUnitComponent : UnitComponent {
             );
 
             var nextPos = GridPos + dirNormalized;
-            while (tileComponent.IsValidTile(nextPos)) {
+            while (tileComponent.IsUnobstructedTile(nextPos)) {
                 moves.Add(nextPos);
                 nextPos += dirNormalized;
             }

@@ -101,7 +101,7 @@ public class TileComponent : MonoBehaviour {
     }
 
     private void SelectTile(Vector3Int tilePos) {
-        if (!IsValidTile(tilePos)) {
+        if (!IsUnobstructedTile(tilePos)) {
             return;
         }
 
@@ -144,7 +144,11 @@ public class TileComponent : MonoBehaviour {
     }
 
     public bool IsValidTile(Vector3Int pos) {
-        return _tileMap.HasTile(pos) && !movementMask.IsPositionBlocked(pos);
+        return _tileMap.HasTile(pos);
+    }
+
+    public bool IsUnobstructedTile(Vector3Int pos) {
+        return IsValidTile(pos) && !movementMask.IsPositionBlocked(pos);
     }
 
     public void DebugSetTileHints() {

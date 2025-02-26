@@ -35,7 +35,7 @@ public class UnitHandler : MonoBehaviour {
     }
 
     public void SpawnUnit(Vector3Int gridPos, UnitComponent unitType) {
-        if (!_tileComponent.IsValidTile(gridPos)) {
+        if (!_tileComponent.IsUnobstructedTile(gridPos)) {
             Debug.LogError($"Invalid grid position: {gridPos}");
         }
         UnitComponent newUnit = Instantiate(unitType, Vector3.zero, Quaternion.identity);
@@ -52,7 +52,7 @@ public class UnitHandler : MonoBehaviour {
         _selectedUnit.Select();
 
         var unitMoves = _selectedUnit.GetUnitMoves(_tileComponent);
-        unitMoves.RemoveAll(x => !_tileComponent.IsValidTile(x));
+        unitMoves.RemoveAll(x => !_tileComponent.IsUnobstructedTile(x));
 
         _selectedUnitMoves.AddRange(unitMoves);
         _tileComponent.SetTileHints(unitMoves);
@@ -66,7 +66,7 @@ public class UnitHandler : MonoBehaviour {
     }
 
     public void SelectTile(Vector3Int gridPosition) {
-        if (!_tileComponent.IsValidTile(gridPosition)) {
+        if (!_tileComponent.IsUnobstructedTile(gridPosition)) {
             return;
         }
 
