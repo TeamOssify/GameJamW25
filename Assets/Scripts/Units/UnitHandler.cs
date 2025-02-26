@@ -80,6 +80,12 @@ public class UnitHandler : MonoBehaviour {
     }
 
     private void SelectUnit(UnitComponent unit) {
+        if (ReferenceEquals(_selectedUnit, unit)) {
+            // If the user clicked the same unit more than once, they probably want to deselect
+            DeselectUnit();
+            return;
+        }
+
         if (_selectedUnit) {
             DeselectUnit();
         }
