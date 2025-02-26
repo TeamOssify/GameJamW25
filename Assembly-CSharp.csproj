@@ -76,8 +76,10 @@
   <ItemGroup>
     <None Include="Assets\UI\Test.uxml" />
     <None Include="Assets\UI\TurnCounter.uss" />
+    <None Include="Assets\UI\TitleScreen.uss" />
     <None Include="Assets\UI\TurnCounter.uxml" />
     <None Include="Assets\UI\GameHud.uxml" />
+    <None Include="Assets\UI\TitleScreen.uxml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
