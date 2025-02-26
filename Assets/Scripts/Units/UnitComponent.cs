@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public enum UnitType {Pawn, Knight, Bishop, Rook, Queen, King, Barbarian, Duke}
-
 public class UnitComponent : MonoBehaviour {
     [SerializeField]
     private string unitName;
