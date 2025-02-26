@@ -185,7 +185,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 168804759}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -439,6 +439,14 @@ PrefabInstance:
     - target: {fileID: 3973409776510875857, guid: 9fcc169420bb2934fbbde2abfe29f5d0, type: 3}
       propertyPath: m_Name
       value: UnitHandler
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174565896089572940, guid: 9fcc169420bb2934fbbde2abfe29f5d0, type: 3}
+      propertyPath: pawn
+      value: 
+      objectReference: {fileID: 2572743752466897568, guid: 794412733f3216646ab41d635f8a69ad, type: 3}
+    - target: {fileID: 4174565896089572940, guid: 9fcc169420bb2934fbbde2abfe29f5d0, type: 3}
+      propertyPath: rook
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4174565896089572940, guid: 9fcc169420bb2934fbbde2abfe29f5d0, type: 3}
       propertyPath: tileMap
@@ -1597,6 +1605,10 @@ PrefabInstance:
       propertyPath: unitBaseMoves
       value: 
       objectReference: {fileID: 1742165241}
+    - target: {fileID: 4460840344668977789, guid: 794412733f3216646ab41d635f8a69ad, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7205913911990244250, guid: 794412733f3216646ab41d635f8a69ad, type: 3}
       propertyPath: m_Name
       value: Unit 1

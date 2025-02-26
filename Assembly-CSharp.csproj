@@ -56,6 +56,7 @@
     <Compile Include="Assets\Scripts\Enemy\EnemyComponent.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\PathfindingHandler.cs" />
     <Compile Include="Assets\Scripts\GameLogic\Models\SubWave.cs" />
+    <Compile Include="Assets\Scripts\Units\LongUnitComponent.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyHandlerComponent.cs" />
     <Compile Include="Assets\Scripts\GameLogic\Models\Level.cs" />
     <Compile Include="Assets\Scripts\GameLogic\LevelManager.cs" />

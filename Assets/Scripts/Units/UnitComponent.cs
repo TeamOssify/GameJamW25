@@ -11,10 +11,9 @@ public class UnitComponent : MonoBehaviour {
     private string unitDescription;
 
     [SerializeField]
-    private Tilemap unitBaseMoves;
+    protected Tilemap unitBaseMoves;
 
     public Vector3Int GridPos { get; private set; }
-
     public void Select() {
         Debug.Log("Selected a unit");
     }
@@ -38,7 +37,7 @@ public class UnitComponent : MonoBehaviour {
         return moves;
     }
 
-    private SwapBackArray<Vector3Int> GetBaseMoves() {
+    protected virtual SwapBackArray<Vector3Int> GetBaseMoves() {
         var movesSize = unitBaseMoves.size;
         var movesOrigin = unitBaseMoves.origin;
 
