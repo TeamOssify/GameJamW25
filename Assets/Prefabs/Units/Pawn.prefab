@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5948292620777383936}
   - component: {fileID: 5000254312647381797}
   - component: {fileID: 4460840344668977789}
+  - component: {fileID: 6092446194282655963}
   m_Layer: 0
   m_Name: Unit Base Moves
   m_TagString: Untagged
@@ -191,6 +192,18 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+--- !u!114 &6092446194282655963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2341180025633587128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b90ca664b542fc88ace0287a4a4e7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3157472797645420532
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,6 +215,7 @@ GameObject:
   - component: {fileID: 9062292311786217843}
   - component: {fileID: 5293361015880513409}
   - component: {fileID: 792753633749588944}
+  - component: {fileID: 8702843295791400565}
   m_Layer: 0
   m_Name: Unit First Moves
   m_TagString: Untagged
@@ -422,6 +436,18 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+--- !u!114 &8702843295791400565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3157472797645420532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b90ca664b542fc88ace0287a4a4e7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4081203979736042114
 GameObject:
   m_ObjectHideFlags: 0
@@ -604,9 +630,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitName: Pawn
   unitDescription: The most basic unit
-  unitBaseMoves: {fileID: 5000254312647381797}
-  unitFirstMoves: {fileID: 5293361015880513409}
-  unitTier1Moves: {fileID: 8501123541574663763}
+  unitSprite: {fileID: 0}
+  unitRespawnCost: 0
+  unitUpgradeCost: 0
+  unitBaseMoves: {fileID: 6092446194282655963}
+  unitFirstMoves: {fileID: 8702843295791400565}
+  unitTier1Moves: {fileID: 5592692295568314759}
+  currentTier: 1
 --- !u!1 &9133964655229237951
 GameObject:
   m_ObjectHideFlags: 0
@@ -618,6 +648,7 @@ GameObject:
   - component: {fileID: 7198038511159068790}
   - component: {fileID: 8501123541574663763}
   - component: {fileID: 3524140174231161026}
+  - component: {fileID: 5592692295568314759}
   m_Layer: 0
   m_Name: Unit Tier 1 Moves
   m_TagString: Untagged
@@ -758,3 +789,15 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+--- !u!114 &5592692295568314759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9133964655229237951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b90ca664b542fc88ace0287a4a4e7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

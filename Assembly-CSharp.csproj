@@ -69,22 +69,26 @@
     <Compile Include="Assets\Scripts\Menu\MainMenu.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyPortalComponent.cs" />
     <Compile Include="Assets\Scripts\UI\TitleScreenController.cs" />
+    <Compile Include="Assets\Scripts\Movement\TileMovementComponent.cs" />
     <Compile Include="Assets\Scripts\GameLogic\WaveManager.cs" />
     <Compile Include="Assets\Scripts\GameLogic\TurnStateManager.cs" />
     <Compile Include="Assets\Scripts\Units\UnitHandler.cs" />
+    <Compile Include="Assets\Scripts\Movement\Bfs.cs" />
+    <Compile Include="Assets\Scripts\Movement\Models\Enums.cs" />
     <Compile Include="Assets\Scripts\DeployAreaComponent.cs" />
     <Compile Include="Assets\Scripts\Units\UnitComponent.cs" />
     <Compile Include="Assets\Scripts\Menu\UnitDetails.cs" />
     <Compile Include="Assets\Scripts\Utils\SwapBackArray.cs" />
+    <Compile Include="Assets\Scripts\Movement\LongTileMovementComponent.cs" />
     <Compile Include="Assets\Scripts\MovementMaskComponent.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyComponent.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\PathfindingHandler.cs" />
     <Compile Include="Assets\Scripts\GameLogic\Models\SubWave.cs" />
-    <Compile Include="Assets\Scripts\Units\LongUnitComponent.cs" />
     <Compile Include="Assets\Scripts\UI\MainHudController.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyHandlerComponent.cs" />
     <Compile Include="Assets\Scripts\GameLogic\Models\Level.cs" />
     <Compile Include="Assets\Scripts\GameLogic\LevelManager.cs" />
+    <Compile Include="Assets\Scripts\Movement\MovementComponentBase.cs" />
     <Compile Include="Assets\Scripts\RosterSelector.cs" />
     <Compile Include="Assets\Scripts\GameLogic\Models\Wave.cs" />
   </ItemGroup>

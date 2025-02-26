@@ -24,10 +24,9 @@ public class UnitHandler : MonoBehaviour {
     public UnitComponent king;
     public UnitComponent barbarian;
     public UnitComponent jarl;
-
-    public LongUnitComponent rook;
-    public LongUnitComponent bishop;
-    public LongUnitComponent queen;
+    public UnitComponent rook;
+    public UnitComponent bishop;
+    public UnitComponent queen;
 
     //eventually get dis from the lobby unit selection
     public List<UnitComponent> equippedUnits = new();
@@ -45,6 +44,15 @@ public class UnitHandler : MonoBehaviour {
         equippedUnits.Add(pawn);
         equippedUnits.Add(king);
         equippedUnits.Add(knight);
+
+        SpawnUnit(new Vector3Int(-5,1,0), pawn);
+        SpawnUnit(new Vector3Int(-1, 1,0), rook);
+        SpawnUnit(new Vector3Int(-3,1,0), bishop);
+        SpawnUnit(new Vector3Int(0,1,0), knight);
+        SpawnUnit(new Vector3Int(-3,3,0), queen);
+        SpawnUnit(new Vector3Int(4,-3,0), king);
+        SpawnUnit(new Vector3Int(4,-2,0), barbarian);
+        SpawnUnit(new Vector3Int(4,-1,0), jarl);
 
         PopulateUnitInterface();
     }
@@ -79,7 +87,7 @@ public class UnitHandler : MonoBehaviour {
         _selectedUnit = unit;
         _selectedUnit.Select();
 
-        var unitMoves = _selectedUnit.GetUnitMoves(_tileComponent, x => TryGetUnitAtGridPosition(x, out _));
+        var unitMoves = _selectedUnit.GetUnitMoves(_tileComponent, x => TryGetUnitAtGridPosition(x.pos, out _));
 
         _selectedUnitMoves.AddRange(unitMoves.Select(x => x.pos));
         _tileComponent.SetTileHints(unitMoves.Select(x => x.pos));
