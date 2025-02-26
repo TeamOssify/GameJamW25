@@ -478,4 +478,6 @@ Library/*
 Temp/*
 UserSettings/*
 Build/*
+
+.vscode/
 Assembly-CSharp.csproj

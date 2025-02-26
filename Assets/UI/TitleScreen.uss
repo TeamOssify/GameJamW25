@@ -1,0 +1,52 @@
+#MenuContainer {
+    flex-basis: auto;
+    margin-top: 20%;
+    margin-right: 20%;
+    margin-bottom: 20%;
+    margin-left: 20%;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    align-content: center;
+    align-items: stretch;
+}
+
+Button {
+    margin-top: 10%;
+    width: 22%;
+    height: 100px;
+    align-items: stretch;
+    align-self: center;
+    background-color: rgb(175, 209, 185);
+    font-size: 42px;
+}
+
+#MainMenu {
+    background-color: rgb(96, 183, 138);
+}
+
+#TempLogo {
+    -unity-text-align: upper-center;
+    font-size: 92px;
+}
+
+Button:hover {
+    margin-top: 10%;
+    width: 22%;
+    height: 100px;
+    align-items: stretch;
+    align-self: center;
+    background-color: rgb(135, 161, 143);
+    font-size: 42px;
+}
+
+Button:active {
+    margin-top: 10%;
+    width: 22%;
+    height: 100px;
+    align-items: stretch;
+    align-self: center;
+    background-color: rgb(135, 155, 161);
+    font-size: 42px;
+}
