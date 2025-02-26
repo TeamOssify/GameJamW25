@@ -2,10 +2,21 @@ using UnityEngine;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine.Tilemaps;
+using TMPro;
+using UnityEngine.UI;
 
 public class UnitHandler : MonoBehaviour {
     [SerializeField]
     private Tilemap tileMap;
+
+    [SerializeField]
+    private DeployAreaComponent deployArea;
+
+    [SerializeField]
+    private GameObject unitInterface;
+
+    [SerializeField]
+    private GameObject unitCellPrefab;
 
     public UnitComponent pawn;
     public UnitComponent knight;
@@ -17,8 +28,11 @@ public class UnitHandler : MonoBehaviour {
     public LongUnitComponent bishop;
     public LongUnitComponent queen;
 
+    //eventually get dis from the lobby unit selection
+    public List<UnitComponent> equippedUnits = new();
 
     private TileComponent _tileComponent;
+    public  bool DeployMode {get; private set;}
 
     private readonly Dictionary<Vector3Int, UnitComponent> _unitGridPositions = new();
 
@@ -27,18 +41,18 @@ public class UnitHandler : MonoBehaviour {
 
     private void Start() {
         _tileComponent = tileMap.GetComponent<TileComponent>();
+        equippedUnits.Add(pawn);
+        equippedUnits.Add(king);
+        equippedUnits.Add(knight);
 
-        SpawnUnit(new Vector3Int(-5,1,0), pawn);
-        SpawnUnit(new Vector3Int(-1, 1,0), rook);
-        SpawnUnit(new Vector3Int(-3,1,0), bishop);
-        SpawnUnit(new Vector3Int(0,1,0), knight);
-        SpawnUnit(new Vector3Int(-3,3,0), queen);
-        SpawnUnit(new Vector3Int(4,-3,0), king);
-        SpawnUnit(new Vector3Int(4,-2,0), barbarian);
-        SpawnUnit(new Vector3Int(4,-1,0), jarl);
-
+        PopulateUnitInterface();
     }
 
+    public void DeployUnit(Vector3Int gridPos, UnitComponent unit) {
+        if (deployArea.IsADeploy(gridPos)) {
+            SpawnUnit(gridPos, unit);
+        }
+    }
     public void SpawnUnit(Vector3Int gridPos, UnitComponent unitType) {
         if (!_tileComponent.IsUnobstructedTile(gridPos)) {
             Debug.LogError($"Invalid grid position: {gridPos}");
@@ -106,5 +120,16 @@ public class UnitHandler : MonoBehaviour {
 
     public bool TryGetUnitAtGridPosition(Vector3Int gridPosition, out UnitComponent unit) {
         return _unitGridPositions.TryGetValue(gridPosition, out unit);
+    }
+
+    private void PopulateUnitInterface() {
+        foreach (UnitComponent unit in equippedUnits) {
+            GameObject newCell = Instantiate(unitCellPrefab, unitInterface.transform);
+            newCell.transform.Find("UnitName").GetComponent<TextMeshProUGUI>().text = unit.name;
+            newCell.transform.Find("UnitTier").GetComponent<TextMeshProUGUI>().text = unit.currentTier.ToString();
+            //newCell.transform.Find("UnitImage").GetComponent<Image>().sprite = unit.unitSprite;
+            //add the sprite fields in later
+            newCell.transform.Find("ActionPopout").gameObject.SetActive(false);
+        }
     }
 }

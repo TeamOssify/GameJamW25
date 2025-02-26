@@ -11,6 +11,15 @@ public class UnitComponent : MonoBehaviour {
     private string unitDescription;
 
     [SerializeField]
+    public Sprite unitSprite;
+
+    [SerializeField]
+    private int unitRespawnCost;
+
+    [SerializeField]
+    private int unitUpgradeCost;
+
+    [SerializeField]
     protected Tilemap unitBaseMoves;
 
     [SerializeField]
@@ -20,6 +29,7 @@ public class UnitComponent : MonoBehaviour {
     private Tilemap unitTier1Moves;
 
     public Vector3Int GridPos { get; private set; }
+    public int currentTier = 1;
 
     private bool _hasMoved;
     public void Select() {

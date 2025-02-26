@@ -640,7 +640,7 @@ GameObject:
   - component: {fileID: 975888958900876360}
   - component: {fileID: 5689466423365535890}
   m_Layer: 0
-  m_Name: Unit Image
+  m_Name: UnitImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -764,9 +764,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitName: Barbarian
   unitDescription: The most basic unit
+  unitSprite: {fileID: 0}
+  unitRespawnCost: 0
+  unitUpgradeCost: 0
   unitBaseMoves: {fileID: 5000254312647381797}
   unitFirstMoves: {fileID: 5293361015880513409}
   unitTier1Moves: {fileID: 8501123541574663763}
+  currentTier: 1
 --- !u!1 &9133964655229237951
 GameObject:
   m_ObjectHideFlags: 0

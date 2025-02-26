@@ -15,7 +15,7 @@ public class TileComponent : MonoBehaviour {
 
     [SerializeField]
     private MovementMaskComponent movementMask;
-    
+
     private Transform _hoverTransform;
     private Vector3Int _hoverPosition;
     private SpriteRenderer _hoverRenderer;
