@@ -35,6 +35,9 @@ public class UnitHandler : MonoBehaviour {
     }
 
     public void SpawnUnit(Vector3Int gridPos, UnitComponent unitType) {
+        if (!_tileComponent.IsValidTile(gridPos)) {
+            Debug.LogError($"Invalid grid position: {gridPos}");
+        }
         UnitComponent newUnit = Instantiate(unitType, Vector3.zero, Quaternion.identity);
         _tileComponent.TryGetWorldPositionForTileCenter(gridPos, out var pos);
         newUnit.Move(pos,gridPos);
