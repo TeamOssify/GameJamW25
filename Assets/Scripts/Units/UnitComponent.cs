@@ -25,18 +25,13 @@ public class UnitComponent : MonoBehaviour {
         Debug.Log("Deselected a unit");
     }
 
-    public bool IsValidMove(Vector3Int gridPosition) {
-        Debug.Log("Yo");
-        return false;
-    }
-
     public void Move(Vector3 pos, Vector3Int gridPosition) {
         transform.position = pos;
         GridPos = gridPosition;
         Debug.Log("tried move to world pos " + pos + " grid pos: " + gridPosition);
     }
 
-    public List<Vector3Int> GetUnitMoves() {
+    public SwapBackArray<Vector3Int> GetUnitMoves() {
         var moves = GetBaseMoves();
 
         var upgradeMoves = GetUpgradeMoves();
@@ -45,11 +40,11 @@ public class UnitComponent : MonoBehaviour {
         return moves;
     }
 
-    private List<Vector3Int> GetBaseMoves() {
+    private SwapBackArray<Vector3Int> GetBaseMoves() {
         var movesSize = unitBaseMoves.size;
         var movesOrigin = unitBaseMoves.origin;
 
-        var moves = new List<Vector3Int>();
+        var moves = new SwapBackArray<Vector3Int>();
         for (var y = 0; y < movesSize.y; y++)
         for (var x = 0; x < movesSize.x; x++) {
             var tilePos = new Vector3Int(x, y) + movesOrigin;
