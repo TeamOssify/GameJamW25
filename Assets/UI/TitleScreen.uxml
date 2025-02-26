@@ -1,10 +1,10 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI/MainMenu.uss?fileID=7433441132597879392&amp;guid=56b0f99416680ae4d9af98165162e108&amp;type=3#MainMenu" />
+    <Style src="project://database/Assets/UI/TitleScreen.uss?fileID=7433441132597879392&amp;guid=56b0f99416680ae4d9af98165162e108&amp;type=3#TitleScreen" />
     <engine:VisualElement name="MainMenu" style="flex-grow: 1;">
         <engine:VisualElement name="MenuContainer" style="flex-grow: 1; -unity-text-align: upper-left;">
             <engine:Label text="Chess Tower Defense" name="TempLogo" />
-            <engine:Button text="Play&#10;" />
-            <engine:Button text="Quit&#10;" />
+            <engine:Button text="Play&#10;" name="PlayButton" />
+            <engine:Button text="Quit&#10;" name="QuitButton" />
         </engine:VisualElement>
     </engine:VisualElement>
 </engine:UXML>
