@@ -8,7 +8,7 @@ public class UnitHandler : MonoBehaviour {
     private Tilemap tileMap;
 
     public UnitComponent pawn;
-    public UnitComponent rook;
+    public LongUnitComponent rook;
 
     private TileComponent _tileComponent;
 
@@ -39,7 +39,7 @@ public class UnitHandler : MonoBehaviour {
         _selectedUnit = unit;
         _selectedUnit.Select();
 
-        var unitMoves = _selectedUnit.GetUnitMoves();
+        var unitMoves = _selectedUnit.GetUnitMoves(_tileComponent);
         unitMoves.RemoveAll(x => !_tileComponent.IsValidTile(x));
 
         _selectedUnitMoves.AddRange(unitMoves);

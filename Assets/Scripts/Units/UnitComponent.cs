@@ -28,8 +28,8 @@ public class UnitComponent : MonoBehaviour {
         Debug.Log("tried move to world pos " + pos + " grid pos: " + gridPosition);
     }
 
-    public SwapBackArray<Vector3Int> GetUnitMoves() {
-        var moves = GetBaseMoves();
+    public SwapBackArray<Vector3Int> GetUnitMoves(TileComponent tileComponent) {
+        var moves = GetBaseMoves(tileComponent);
 
         var upgradeMoves = GetUpgradeMoves();
         moves.AddRange(upgradeMoves);
@@ -37,7 +37,7 @@ public class UnitComponent : MonoBehaviour {
         return moves;
     }
 
-    protected virtual SwapBackArray<Vector3Int> GetBaseMoves() {
+    protected virtual SwapBackArray<Vector3Int> GetBaseMoves(TileComponent tileComponent) {
         var movesSize = unitBaseMoves.size;
         var movesOrigin = unitBaseMoves.origin;
 
