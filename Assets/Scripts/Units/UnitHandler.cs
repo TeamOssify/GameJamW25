@@ -8,8 +8,13 @@ public class UnitHandler : MonoBehaviour {
     private Tilemap tileMap;
 
     public UnitComponent pawn;
+    public UnitComponent knight;
+    public UnitComponent king;
+
     public LongUnitComponent rook;
     public LongUnitComponent bishop;
+    public LongUnitComponent queen;
+
 
     private TileComponent _tileComponent;
 
@@ -22,10 +27,11 @@ public class UnitHandler : MonoBehaviour {
         _tileComponent = tileMap.GetComponent<TileComponent>();
 
         SpawnUnit(new Vector3Int(-5,1,0), pawn);
-
         SpawnUnit(new Vector3Int(-1, 1,0), rook);
-
         SpawnUnit(new Vector3Int(-3,1,0), bishop);
+        SpawnUnit(new Vector3Int(0,1,0), knight);
+        SpawnUnit(new Vector3Int(-3,3,0), queen);
+        SpawnUnit(new Vector3Int(4,-3,0), king);
     }
 
     public void SpawnUnit(Vector3Int gridPos, UnitComponent unitType) {
