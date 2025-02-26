@@ -40,13 +40,16 @@ public class UnitComponent : MonoBehaviour {
 
     public SwapBackArray<Vector3Int> GetUnitMoves(TileComponent tileComponent) {
         var moves = GetMoves(tileComponent, unitBaseMoves);
-        if (!_hasMoved) {
+        if (!_hasMoved && unitFirstMoves) {
             var firstMoves = GetMoves(tileComponent, unitFirstMoves);
             moves.AddRange(firstMoves);
         }
-        var upgradeMoves = GetMoves(tileComponent, unitTier1Moves);
-        moves.AddRange(upgradeMoves);
-        Debug.Log(moves.Count);
+
+        if (unitTier1Moves) {
+            var upgradeMoves = GetMoves(tileComponent, unitTier1Moves);
+            moves.AddRange(upgradeMoves);
+        }
+        
         return moves;
     }
 

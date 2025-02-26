@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Tilemaps;
 
 public class LongUnitComponent : UnitComponent {
     protected override SwapBackArray<Vector3Int> GetMoves(TileComponent tileComponent, Tilemap moveMap) {
