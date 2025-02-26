@@ -1,10 +1,20 @@
-using JetBrains.Annotations;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour {
-    private int[] levels = { 1 };
-    private int selectedLevel = 0;
+    [SerializeField]
+    private int[] levels;
+
+    [SerializeField]
+    private int selectedLevel;
+
+    [SerializeField]
+    private TextMeshPro unitDetailsName;
+
+    [SerializeField]
+    private Image unitDetailsImage;
 
     public void RightArrow() {
         selectedLevel++;
@@ -22,5 +32,10 @@ public class MainMenu : MonoBehaviour {
 
     public void StartLevel() {
         SceneManager.LoadSceneAsync(levels[selectedLevel]);
+    }
+
+    public void SetUnitDetails(string unitName, Sprite sprite) {
+        unitDetailsName.text = unitName;
+        unitDetailsImage.sprite = sprite;
     }
 }
