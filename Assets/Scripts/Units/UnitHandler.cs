@@ -64,6 +64,10 @@ public class UnitHandler : MonoBehaviour {
     }
 
     private void DeselectUnit() {
+        if (!_selectedUnit) {
+            return;
+        }
+
         _selectedUnit.Deselect();
         _selectedUnitMoves.Clear();
         _tileComponent.ClearTileHints();
