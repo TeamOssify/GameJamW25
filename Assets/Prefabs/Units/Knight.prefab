@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5948292620777383936}
   - component: {fileID: 5000254312647381797}
   - component: {fileID: 4460840344668977789}
+  - component: {fileID: 2121639354975059386}
   m_Layer: 0
   m_Name: Unit Base Moves
   m_TagString: Untagged
@@ -231,6 +232,18 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+--- !u!114 &2121639354975059386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2341180025633587128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b90ca664b542fc88ace0287a4a4e7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4081203979736042114
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,5 +423,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitName: Knight
-  unitDescription: Icathia, First line of defence
-  unitBaseMoves: {fileID: 5000254312647381797}
+  unitDescription: Icathia, first line of defense
+  unitSprite: {fileID: 0}
+  unitRespawnCost: 0
+  unitUpgradeCost: 0
+  unitBaseMoves: {fileID: 2121639354975059386}
+  unitFirstMoves: {fileID: 0}
+  unitTier1Moves: {fileID: 0}
+  currentTier: 1

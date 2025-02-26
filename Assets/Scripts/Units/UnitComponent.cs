@@ -1,11 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.Tilemaps;
-
-public enum MoveType : byte {
-    Normal,
-    Jump
-}
 
 public class UnitComponent : MonoBehaviour {
     [SerializeField]
@@ -24,18 +18,19 @@ public class UnitComponent : MonoBehaviour {
     private int unitUpgradeCost;
 
     [SerializeField]
-    protected Tilemap unitBaseMoves;
+    protected MovementComponentBase unitBaseMoves;
 
     [SerializeField]
-    private Tilemap unitFirstMoves;
+    private MovementComponentBase unitFirstMoves;
 
     [SerializeField]
-    private Tilemap unitTier1Moves;
+    private MovementComponentBase unitTier1Moves;
 
     public Vector3Int GridPos { get; private set; }
     public int currentTier = 1;
 
     private bool _hasMoved;
+
     public void Select() {
         Debug.Log("Selected a unit");
     }
@@ -52,38 +47,23 @@ public class UnitComponent : MonoBehaviour {
         }
     }
 
-    public SwapBackArray<(Vector3Int pos, MoveType type)> GetUnitMoves(TileComponent tileComponent, Predicate<Vector3Int> additionalFilter) {
-        var moves = GetMoves(tileComponent, unitBaseMoves);
+    public SwapBackArray<(Vector3Int pos, MoveType type)> GetUnitMoves(TileComponent tileComponent, Predicate<(Vector3Int pos, MoveType type)> additionalFilter) {
+        var moves = new SwapBackArray<(Vector3Int pos, MoveType type)>();
+
+        unitBaseMoves.GetMoves(moves, GridPos, tileComponent);
 
         if (!_hasMoved && unitFirstMoves) {
-            var firstMoves = GetMoves(tileComponent, unitFirstMoves);
-            moves.AddRange(firstMoves);
+            unitFirstMoves.GetMoves(moves, GridPos, tileComponent);
         }
 
         if (unitTier1Moves) {
-            var upgradeMoves = GetMoves(tileComponent, unitTier1Moves);
-            moves.AddRange(upgradeMoves);
+            unitTier1Moves.GetMoves(moves, GridPos, tileComponent);
         }
 
-        return moves;
-    }
+        moves.RemoveAll(additionalFilter);
 
-    protected virtual SwapBackArray<(Vector3Int pos, MoveType type)> GetMoves(TileComponent tileComponent, Tilemap moveMap) {
-        var movesSize = moveMap.size;
-        var movesOrigin = moveMap.origin;
+        Bfs.FilterMoves(moves, tileComponent);
 
-        var moves = new SwapBackArray<(Vector3Int pos, MoveType type)>();
-        for (var y = 0; y < movesSize.y; y++)
-        for (var x = 0; x < movesSize.x; x++) {
-            var tilePos = new Vector3Int(x, y) + movesOrigin;
-
-            var tile = moveMap.GetTile(tilePos);
-            if (tile) {
-                // TODO: Check tile to determine if move is jump
-                moves.Add((tilePos + GridPos, MoveType.Normal));
-            }
-        }
-        
         return moves;
     }
 }
