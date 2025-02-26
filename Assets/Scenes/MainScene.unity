@@ -441,6 +441,10 @@ PrefabInstance:
       value: UnitHandler
       objectReference: {fileID: 0}
     - target: {fileID: 4174565896089572940, guid: 9fcc169420bb2934fbbde2abfe29f5d0, type: 3}
+      propertyPath: king
+      value: 
+      objectReference: {fileID: 2572743752466897568, guid: 0891ad5641dc3de44926bf0e146e0197, type: 3}
+    - target: {fileID: 4174565896089572940, guid: 9fcc169420bb2934fbbde2abfe29f5d0, type: 3}
       propertyPath: pawn
       value: 
       objectReference: {fileID: 2572743752466897568, guid: 794412733f3216646ab41d635f8a69ad, type: 3}
@@ -448,6 +452,10 @@ PrefabInstance:
       propertyPath: rook
       value: 
       objectReference: {fileID: 3125728999525277178, guid: c4894b01b93c5144fa2af4b60d70eacb, type: 3}
+    - target: {fileID: 4174565896089572940, guid: 9fcc169420bb2934fbbde2abfe29f5d0, type: 3}
+      propertyPath: queen
+      value: 
+      objectReference: {fileID: 3125728999525277178, guid: f898a7eaa07e17d4b9371c16b6e2f40b, type: 3}
     - target: {fileID: 4174565896089572940, guid: 9fcc169420bb2934fbbde2abfe29f5d0, type: 3}
       propertyPath: bishop
       value: 
