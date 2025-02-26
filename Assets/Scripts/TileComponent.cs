@@ -101,7 +101,7 @@ public class TileComponent : MonoBehaviour {
     }
 
     private void SelectTile(Vector3Int tilePos) {
-        if (!IsUnobstructedTile(tilePos)) {
+        if (!IsValidTile(tilePos)) {
             return;
         }
 

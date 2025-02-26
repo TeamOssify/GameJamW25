@@ -67,31 +67,32 @@ public class UnitHandler : MonoBehaviour {
 
     public void SelectTile(Vector3Int gridPosition) {
         if (!_tileComponent.IsUnobstructedTile(gridPosition)) {
+            // Blocked tile
+            DeselectUnit();
+            return;
+        }
+
+        if (TryGetUnitAtGridPosition(gridPosition, out var unit)) {
+            // Clicked a unit
+            SelectUnit(unit);
             return;
         }
 
         if (!_selectedUnit) {
-            if (TryGetUnitAtGridPosition(gridPosition, out var unit)) {
-                SelectUnit(unit);
-            }
-
+            // No unit selected
             return;
         }
 
-        if (!IsOccupiedTile(gridPosition)
-            && _selectedUnitMoves.Contains(gridPosition)
+        if (_selectedUnitMoves.Contains(gridPosition)
             && _tileComponent.TryGetWorldPositionForTileCenter(gridPosition, out var worldPos)
         ) {
+            // Unit selected, clicked valid move tile
             _unitGridPositions.Remove(_selectedUnit.GridPos);
             _selectedUnit.Move(worldPos, gridPosition);
             _unitGridPositions.Add(gridPosition, _selectedUnit);
         }
 
         DeselectUnit();
-    }
-
-    private bool IsOccupiedTile(Vector3Int gridPosition) {
-        return _unitGridPositions.ContainsKey(gridPosition);
     }
 
     public bool TryGetUnitAtGridPosition(Vector3Int gridPosition, out UnitComponent unit) {
