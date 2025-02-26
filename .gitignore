@@ -480,3 +480,4 @@ UserSettings/*
 Build/*
 
 .vscode/
+Assembly-CSharp.csproj

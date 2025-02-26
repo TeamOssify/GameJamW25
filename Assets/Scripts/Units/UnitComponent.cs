@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public enum UnitType {Pawn, Knight, Bishop, Rook, Queen, King, Barbarian, Duke}
-
 public class UnitComponent : MonoBehaviour {
     [SerializeField]
     private string unitName;
@@ -12,60 +10,68 @@ public class UnitComponent : MonoBehaviour {
     [SerializeField]
     private string unitDescription;
 
-    public Vector3Int Position { get; private set; }
+    [SerializeField]
+    protected Tilemap unitBaseMoves;
 
     [SerializeField]
-    private Tilemap unitBaseMoves;
+    private Tilemap unitFirstMoves;
 
-    public void Select() { }
+    [SerializeField]
+    private Tilemap unitTier1Moves;
 
-    public void Deselect() { }
+    public Vector3Int GridPos { get; private set; }
 
-    public bool IsValidMove(Vector3Int gridPosition) {
-        Debug.Log("Yo");
-        return false;
+    private bool _hasMoved;
+    public void Select() {
+        Debug.Log("Selected a unit");
     }
 
-    public void Move(Vector3 pos) {
-        //if the move is valid (do later lule)
+    public void Deselect() {
+        Debug.Log("Deselected a unit");
+    }
+
+    public void Move(Vector3 pos, Vector3Int gridPosition, bool initializing = false) {
         transform.position = pos;
+        GridPos = gridPosition;
+        if (!initializing) {
+            _hasMoved = true;
+        }
     }
 
-    public Vector3Int[] GetUnitMoves() {
-        var moves = GetBaseMoves();
+    public SwapBackArray<Vector3Int> GetUnitMoves(TileComponent tileComponent) {
+        var moves = GetMoves(tileComponent, unitBaseMoves);
+        if (!_hasMoved && unitFirstMoves) {
+            var firstMoves = GetMoves(tileComponent, unitFirstMoves);
+            moves.AddRange(firstMoves);
+        }
 
-        var upgradeMoves = GetUpgradeMoves();
-        moves.AddRange(upgradeMoves);
+        if (unitTier1Moves) {
+            var upgradeMoves = GetMoves(tileComponent, unitTier1Moves);
+            moves.AddRange(upgradeMoves);
+        }
 
-        return moves.ToArray();
+        return moves;
     }
 
-    private List<Vector3Int> GetBaseMoves() {
-        var movesSize = unitBaseMoves.size;
-        var movesOrigin = unitBaseMoves.origin;
+    protected virtual SwapBackArray<Vector3Int> GetMoves(TileComponent tileComponent, Tilemap moveMap) {
+        var movesSize = moveMap.size;
+        var movesOrigin = moveMap.origin;
 
-        var moves = new List<Vector3Int>();
+        var moves = new SwapBackArray<Vector3Int>();
         for (var y = 0; y < movesSize.y; y++)
         for (var x = 0; x < movesSize.x; x++) {
-            var tilePos = new Vector3Int(x, y) - movesOrigin;
+            var tilePos = new Vector3Int(x, y) + movesOrigin;
 
             if (tilePos is { x: 0, y: 0 }) {
                 // Don't display current unit tile as a move
                 continue;
             }
 
-            var tile = unitBaseMoves.GetTile(tilePos);
-            if (tile) {
-                moves.Add(tilePos);
+            if (moveMap.HasTile(tilePos)) {
+                moves.Add(tilePos + GridPos);
             }
         }
         
         return moves;
     }
-
-    private Vector3Int[] GetUpgradeMoves() {
-        return Array.Empty<Vector3Int>();
-    }
-    
-    
 }

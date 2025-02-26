@@ -1,12 +1,23 @@
 using UnityEngine;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using Unity.VisualScripting;
 using UnityEngine.Tilemaps;
 
 public class UnitHandler : MonoBehaviour {
     [SerializeField]
     private Tilemap tileMap;
+
+    public UnitComponent pawn;
+    public UnitComponent knight;
+    public UnitComponent king;
+    public UnitComponent barbarian;
+    public UnitComponent jarl;
+
+    public LongUnitComponent rook;
+    public LongUnitComponent bishop;
+    public LongUnitComponent queen;
+
+
     private TileComponent _tileComponent;
 
     private readonly Dictionary<Vector3Int, UnitComponent> _unitGridPositions = new();
@@ -16,8 +27,27 @@ public class UnitHandler : MonoBehaviour {
 
     private void Start() {
         _tileComponent = tileMap.GetComponent<TileComponent>();
+
+        SpawnUnit(new Vector3Int(-5,1,0), pawn);
+        SpawnUnit(new Vector3Int(-1, 1,0), rook);
+        SpawnUnit(new Vector3Int(-3,1,0), bishop);
+        SpawnUnit(new Vector3Int(0,1,0), knight);
+        SpawnUnit(new Vector3Int(-3,3,0), queen);
+        SpawnUnit(new Vector3Int(4,-3,0), king);
+        SpawnUnit(new Vector3Int(4,-2,0), barbarian);
+        SpawnUnit(new Vector3Int(4,-1,0), jarl);
+
     }
 
+    public void SpawnUnit(Vector3Int gridPos, UnitComponent unitType) {
+        if (!_tileComponent.IsUnobstructedTile(gridPos)) {
+            Debug.LogError($"Invalid grid position: {gridPos}");
+        }
+        UnitComponent newUnit = Instantiate(unitType, Vector3.zero, Quaternion.identity, gameObject.transform);
+        _tileComponent.TryGetWorldPositionForTileCenter(gridPos, out var pos);
+        newUnit.Move(pos,gridPos, true);
+        _unitGridPositions.Add(gridPos, newUnit);
+    }
     private void SelectUnit(UnitComponent unit) {
         if (_selectedUnit) {
             DeselectUnit();
@@ -25,58 +55,56 @@ public class UnitHandler : MonoBehaviour {
 
         _selectedUnit = unit;
         _selectedUnit.Select();
-        _selectedUnitMoves.AddRange(_selectedUnit.GetUnitMoves());
+
+        var unitMoves = _selectedUnit.GetUnitMoves(_tileComponent);
+        unitMoves.RemoveAll(x => !_tileComponent.IsUnobstructedTile(x));
+
+        _selectedUnitMoves.AddRange(unitMoves);
+        _tileComponent.SetTileHints(unitMoves);
     }
 
     private void DeselectUnit() {
+        if (!_selectedUnit) {
+            return;
+        }
+
         _selectedUnit.Deselect();
         _selectedUnitMoves.Clear();
+        _tileComponent.ClearTileHints();
         _selectedUnit = null;
     }
 
     public void SelectTile(Vector3Int gridPosition) {
-        Debug.Log("yo zora");
-        if (!_tileComponent.IsValidTile(gridPosition)) {
-            return;
-        }
-
-        var unit = GetUnitAtGridPosition(gridPosition);
-        if (!_selectedUnit) {
-            if (unit) {
-                SelectUnit(unit);
-            }
-
-            return;
-        }
-
-        if (_selectedUnitMoves.Contains(gridPosition)) {
-            if (_tileComponent.IsValidTile(gridPosition)) {
-                _unitGridPositions.Remove(unit!.Position);
-                unit.Move(GetWorldPositionFromGrid(gridPosition));
-                _unitGridPositions.Add(gridPosition, unit);
-            }
-
+        if (!_tileComponent.IsUnobstructedTile(gridPosition)) {
+            // Blocked tile
             DeselectUnit();
+            return;
         }
-        else if (unit) {
+
+        if (TryGetUnitAtGridPosition(gridPosition, out var unit)) {
+            // Clicked a unit
             SelectUnit(unit);
+            return;
         }
-        else {
-            DeselectUnit();
+
+        if (!_selectedUnit) {
+            // No unit selected
+            return;
         }
+
+        if (_selectedUnitMoves.Contains(gridPosition)
+            && _tileComponent.TryGetWorldPositionForTileCenter(gridPosition, out var worldPos)
+        ) {
+            // Unit selected, clicked valid move tile
+            _unitGridPositions.Remove(_selectedUnit.GridPos);
+            _selectedUnit.Move(worldPos, gridPosition);
+            _unitGridPositions.Add(gridPosition, _selectedUnit);
+        }
+
+        DeselectUnit();
     }
 
-    [return: MaybeNull]
-    public UnitComponent GetUnitAtGridPosition(Vector3Int gridPosition) {
-        return _unitGridPositions.GetValueOrDefault(gridPosition);
-    }
-
-    public Vector3 GetWorldPositionFromGrid(Vector3Int gridPosition) {
-        if (!_tileComponent.TryGetWorldPositionForTile(gridPosition, out var worldPos)) {
-            Debug.Log($"Grid position {gridPosition} is invalid.");
-            return Vector3.zero;
-        }
-
-        return worldPos;
+    public bool TryGetUnitAtGridPosition(Vector3Int gridPosition, out UnitComponent unit) {
+        return _unitGridPositions.TryGetValue(gridPosition, out unit);
     }
 }
