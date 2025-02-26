@@ -2,29 +2,25 @@ using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour
-{
+public class MainMenu : MonoBehaviour {
     private int[] levels = { 1 };
     private int selectedLevel = 0;
 
-    public void rightArrow() {
-        if(selectedLevel == levels.Length - 1) {
+    public void RightArrow() {
+        selectedLevel++;
+        if (selectedLevel >= levels.Length) {
             selectedLevel = 0;
-        }
-        else {
-            selectedLevel++;
-        }
-    }
-    public void leftArrow() {
-        if (selectedLevel == 0) {
-            selectedLevel = levels.Length - 1;
-        }
-        else {
-            selectedLevel--;
         }
     }
 
-    public void startLevel() {
+    public void LeftArrow() {
+        selectedLevel--;
+        if (selectedLevel < 0) {
+            selectedLevel = levels.Length - 1;
+        }
+    }
+
+    public void StartLevel() {
         SceneManager.LoadSceneAsync(levels[selectedLevel]);
     }
 }
