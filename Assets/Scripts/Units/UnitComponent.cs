@@ -70,6 +70,10 @@ public class UnitComponent : MonoBehaviour {
             unitTier1Moves.GetMoves(moveSet, GridPos, tileComponent);
         }
 
+        if (moveSet.NormalMoves.Count == 0 && moveSet.JumpMoves.Count == 0) {
+            Debug.LogWarning($"Unit {unitName} has no known moves! (Including invalid)");
+        }
+
         moveSet.NormalMoves.RemoveAll(normalAdditionalFilter);
         moveSet.JumpMoves.RemoveAll(jumpAdditionalFilter);
 

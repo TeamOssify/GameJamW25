@@ -44,18 +44,18 @@ public class UnitMovementRenderer : MonoBehaviour {
             Array.Fill(pixels, new Color32(background, background, background, 255));
 
             if (y == 0 && x == 0) {
-                DrawSquare(TILE_SIZE, pixels, 0x37, 0x7F, 0xFF);
+                DrawSquare(TILE_SIZE, 1, pixels, 0x37, 0x7F, 0xFF);
             }
             else {
                 var gridPos = new Vector3Int(x, y);
 
                 // TODO: Find out how to calculate move sets. Might need to instantiate or rewrite
                 if (moveSet.NormalMoves.Contains(gridPos)) {
-                    DrawSquare(TILE_SIZE, pixels, 0, byte.MaxValue, byte.MaxValue);
+                    DrawSquare(TILE_SIZE, 2, pixels, 0, byte.MaxValue, byte.MaxValue);
                 }
 
                 if (moveSet.JumpMoves.Contains(gridPos)) {
-                    DrawLines(TILE_SIZE, pixels, byte.MaxValue, byte.MaxValue / 4, byte.MaxValue);
+                    DrawLines(TILE_SIZE, 2, pixels, byte.MaxValue, byte.MaxValue / 4, byte.MaxValue);
                 }
             }
 
@@ -67,19 +67,19 @@ public class UnitMovementRenderer : MonoBehaviour {
         return _sprite;
     }
 
-    private static void DrawSquare(int tileSize, Color32[] pixels, byte r, byte g, byte b) {
+    private static void DrawSquare(int tileSize, int borderSize, Color32[] pixels, byte r, byte g, byte b) {
         for (var y = 1; y < tileSize - 1; y++) {
-            Array.Fill(pixels, new Color32(r, g, b, 255), y * tileSize + 1, tileSize - 2);
+            Array.Fill(pixels, new Color32(r, g, b, 255), y * tileSize + borderSize, tileSize - borderSize * 2);
         }
     }
 
-    private static void DrawLines(int tileSize, Color32[] pixels, byte r, byte g, byte b) {
+    private static void DrawLines(int tileSize, int borderSize, Color32[] pixels, byte r, byte g, byte b) {
         for (var y = 0; y < tileSize; y++) {
             if (y % 2 == 0) {
                 continue;
             }
 
-            Array.Fill(pixels, new Color32(r, g, b, 255), y * tileSize + 1, tileSize - 2);
+            Array.Fill(pixels, new Color32(r, g, b, 255), y * tileSize + borderSize, tileSize - borderSize * 2);
         }
     }
 }
