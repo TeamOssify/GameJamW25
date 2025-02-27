@@ -409,7 +409,19 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      chesstd_sprsheetPNG_0: -4319199757919216973
+      chesstd_sprsheetPNG_1: 7233384033922994207
+      chesstd_sprsheetPNG_10: -378709503994562868
+      chesstd_sprsheetPNG_11: 4325580259612404533
+      chesstd_sprsheetPNG_2: -3657290806353989488
+      chesstd_sprsheetPNG_3: 6344594605318988635
+      chesstd_sprsheetPNG_4: -5874961865283622124
+      chesstd_sprsheetPNG_5: 4808021847143675334
+      chesstd_sprsheetPNG_6: 7558113798696043768
+      chesstd_sprsheetPNG_7: -3206853066831814430
+      chesstd_sprsheetPNG_8: 3672548628740366316
+      chesstd_sprsheetPNG_9: -7797971741110366876
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -125,7 +125,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: bluebishop_spr
     originalName: 
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.51724136, y: -0.34666666}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -135,7 +135,7 @@ ScriptedImporter:
       y: 4
       width: 29
       height: 75
-    spriteID: f0914fc381409454b8470fc527436049
+    spriteID: 39cbcba793726f049a8306711d520e33
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -157,11 +157,11 @@ ScriptedImporter:
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 0
-        y: 0
+        x: 49
+        y: 26
         width: 29
         height: 75
-      spriteId: f0914fc381409454b8470fc527436049
+      spriteId: 39cbcba793726f049a8306711d520e33
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -180,5 +180,5 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 29, y: 75}
+  canvasSize: {x: 128, y: 128}
   previousTextureSize: {x: 64, y: 128}

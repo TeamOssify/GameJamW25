@@ -125,7 +125,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: redknight_spr
     originalName: 
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.5, y: -0.50793654}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -135,7 +135,7 @@ ScriptedImporter:
       y: 4
       width: 28
       height: 63
-    spriteID: 3bfb5b4666901a14baec66bdb4b1210a
+    spriteID: 50cab7e546c98374e97ecd853f2b2cef
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -157,11 +157,11 @@ ScriptedImporter:
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 0
-        y: 0
+        x: 50
+        y: 32
         width: 28
         height: 63
-      spriteId: 3bfb5b4666901a14baec66bdb4b1210a
+      spriteId: 50cab7e546c98374e97ecd853f2b2cef
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -180,5 +180,5 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 28, y: 63}
+  canvasSize: {x: 128, y: 128}
   previousTextureSize: {x: 64, y: 128}

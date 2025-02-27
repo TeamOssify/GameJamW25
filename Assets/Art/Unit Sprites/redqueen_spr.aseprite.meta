@@ -125,7 +125,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: redqueen_spr
     originalName: 
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.5151515, y: -0.2804878}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -135,7 +135,7 @@ ScriptedImporter:
       y: 4
       width: 33
       height: 82
-    spriteID: d1ad324b25dfd1a42b0d4416e4ea1285
+    spriteID: ed8aca8d789c3c744a646a2468f79b30
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -157,11 +157,11 @@ ScriptedImporter:
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 0
-        y: 0
+        x: 47
+        y: 23
         width: 33
         height: 82
-      spriteId: d1ad324b25dfd1a42b0d4416e4ea1285
+      spriteId: ed8aca8d789c3c744a646a2468f79b30
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -180,5 +180,5 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 33, y: 82}
+  canvasSize: {x: 128, y: 128}
   previousTextureSize: {x: 64, y: 128}
