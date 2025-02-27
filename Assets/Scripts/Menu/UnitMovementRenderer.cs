@@ -51,7 +51,6 @@ public class UnitMovementRenderer : MonoBehaviour {
             else {
                 var gridPos = new Vector3Int(x, y);
 
-                // TODO: Find out how to calculate move sets. Might need to instantiate or rewrite
                 if (moveSet.NormalMoves.Contains(gridPos)) {
                     DrawSquare(TILE_SIZE, 3, pixels, 0, 0xFF, 0x7F);
                 }
