@@ -25,14 +25,14 @@ public class EnemyHandler : MonoBehaviour {
         // }
 
         if (unitHandler.TryGetUnitAtGridPosition(gridPos, out _)) {
-            Debug.LogWarning($"Spawning enemy ono top of unit at {gridPos}!");
+            Debug.LogWarning($"Spawning enemy on top of unit at {gridPos}!");
         }
 
         var newUnit = Instantiate(enemy, Vector3.zero, Quaternion.identity, gameObject.transform);
         if (!tileComponent.TryGetWorldPositionForTileCenter(gridPos, out var pos)) {
             Debug.LogError($"Failed to find tile center for {gridPos}!");
             return;
-        }
+        }   
 
         newUnit.Move(pos,gridPos);
         _enemyGridPositions.Add(gridPos, newUnit);
