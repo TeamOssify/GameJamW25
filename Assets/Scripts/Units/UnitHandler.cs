@@ -32,7 +32,8 @@ public class UnitHandler : MonoBehaviour {
     public List<UnitComponent> equippedUnits = new();
 
     private TileComponent _tileComponent;
-    public  bool DeployMode {get; private set;}
+    public bool DeployMode;
+    private UnitComponent _deployingUnit;
 
     private readonly Dictionary<Vector3Int, UnitComponent> _unitGridPositions = new();
 
@@ -124,6 +125,10 @@ public class UnitHandler : MonoBehaviour {
             // Clicked a unit
             SelectUnit(unit);
             return;
+        }
+
+        if (DeployMode) {
+            DeployUnit(gridPosition, _deployingUnit);
         }
 
         if (!_selectedUnit) {

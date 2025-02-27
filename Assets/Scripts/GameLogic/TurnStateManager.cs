@@ -6,6 +6,10 @@ using System;
 public class TurnStateManager : MonoBehaviour {
     [SerializeField]
     private UnitHandler unitHandler;
+
+    [SerializeField]
+    private MainHudController mainHudController;
+
     public enum TurnState {
         Player,
         Enemy
@@ -24,18 +28,22 @@ public class TurnStateManager : MonoBehaviour {
             CurrentTurnState = TurnState.Enemy;
         }
         _firstPlayerTurn = false;
+        mainHudController.UpdateTurnCount(TurnCount + 1);
         BeginEnemyTurn();
+
     }
 
     public void EndEnemyTurn() {
         if (CurrentTurnState == TurnState.Enemy) {
             CurrentTurnState = TurnState.Player;
         }
+        mainHudController.UpdateTurnCount(TurnCount + 1);
         BeginPlayerTurn();
     }
 
     public void BeginPlayerTurn() {
         if (_firstPlayerTurn) {
+            unitHandler.DeployMode = true;
         }
     }
 
