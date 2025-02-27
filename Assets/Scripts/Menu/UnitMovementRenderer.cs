@@ -1,5 +1,5 @@
 using System;
-using System.Linq;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class UnitMovementRenderer : MonoBehaviour {
@@ -14,6 +14,7 @@ public class UnitMovementRenderer : MonoBehaviour {
 
     private Texture2D _texture;
     private Sprite _sprite;
+    private readonly Dictionary<UnitComponent, MoveSet> _cachedMoves = new();
 
     private void Start() {
         if (_tileComponent) {
@@ -30,9 +31,9 @@ public class UnitMovementRenderer : MonoBehaviour {
     }
 
     public Sprite RenderUnitMovement(UnitComponent unit) {
-        Debug.Log($"Rendering {unit.UnitName} moves to {_texture.width}x{_texture.height} texture.");
+        // Debug.Log($"Rendering {unit.UnitName} moves to {_texture.width}x{_texture.height} texture.");
 
-        var moveSet = unit.GetUnitMoves(_tileComponent, _ => false, _ => false);
+        var moveSet = GetOrGenerateMoveSet(unit);
 
         var pixels = new Color32[TILE_SIZE * TILE_SIZE];
 
@@ -52,11 +53,11 @@ public class UnitMovementRenderer : MonoBehaviour {
 
                 // TODO: Find out how to calculate move sets. Might need to instantiate or rewrite
                 if (moveSet.NormalMoves.Contains(gridPos)) {
-                    DrawSquare(TILE_SIZE, 3, pixels, 0, byte.MaxValue, byte.MaxValue);
+                    DrawSquare(TILE_SIZE, 3, pixels, 0, 0xFF, 0x7F);
                 }
 
                 if (moveSet.JumpMoves.Contains(gridPos)) {
-                    DrawLines(TILE_SIZE, 2, 2, pixels, byte.MaxValue, byte.MaxValue / 4, byte.MaxValue);
+                    DrawLines(TILE_SIZE, 2, 2, pixels, 0xFF, 0x3F, 0xFF);
                 }
             }
 
@@ -66,6 +67,19 @@ public class UnitMovementRenderer : MonoBehaviour {
         _texture.Apply();
 
         return _sprite;
+    }
+
+    private MoveSet GetOrGenerateMoveSet(UnitComponent unit) {
+        if (_cachedMoves.TryGetValue(unit, out var moveSet)) {
+            return moveSet;
+        }
+
+        var unitObject = Instantiate(unit, new Vector3(1000, 1000, 1000), Quaternion.identity);
+        moveSet = unitObject.GetUnitMoves(_tileComponent, _ => false, _ => false);
+        Destroy(unitObject);
+
+        _cachedMoves[unit] = moveSet;
+        return moveSet;
     }
 
     private static void DrawSquare(int tileSize, int borderSize, Color32[] pixels, byte r, byte g, byte b) {
