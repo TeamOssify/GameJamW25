@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scripts\GameLogic\TurnStateManager.cs" />
     <Compile Include="Assets\Scripts\Menu\UnitMovementRenderer.cs" />
     <Compile Include="Assets\Scripts\Units\UnitHandler.cs" />
+    <Compile Include="Assets\Scripts\GameLogic\GameState.cs" />
     <Compile Include="Assets\Scripts\Movement\Bfs.cs" />
     <Compile Include="Assets\Scripts\Movement\Models\Enums.cs" />
     <Compile Include="Assets\Scripts\DeployAreaComponent.cs" />
@@ -90,10 +91,10 @@
     <Compile Include="Assets\Scripts\UI\MainHudController.cs" />
     <Compile Include="Assets\Scripts\GameLogic\Models\Level.cs" />
     <Compile Include="Assets\Scripts\GameLogic\LevelManager.cs" />
+    <Compile Include="Assets\Scripts\Enums.cs" />
     <Compile Include="Assets\Scripts\Movement\MovementComponentBase.cs" />
     <Compile Include="Assets\Scripts\GameLogic\Models\Wave.cs" />
     <Compile Include="Assets\Scripts\Movement\Models\MoveSet.cs" />
-    <Compile Include="Assets\Scripts\GameState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\UI\Test.uxml" />

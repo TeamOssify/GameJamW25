@@ -51,13 +51,18 @@ public class GameState : MonoBehaviour
             unitHandler.SpawnUnit(i.position, i.pieceType);
         }
 
+        capturePointHandler.allPointsCaptured.AddListener(disableInput);
         handlersReady = true;
+    }
+
+
+    private void disableInput() {
+        Destroy(unitHandler);
     }
 
     // Had to do this bc System.Tuple isn't serializable
     [Serializable]
     private class UnitPosition {
-        // Adding this from the editor is pretty annyoing, should find a better way of doing this (later ;) )
         public UnitComponent pieceType; 
         public Vector3Int position;
     }

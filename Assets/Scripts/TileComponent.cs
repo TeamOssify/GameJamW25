@@ -1,9 +1,9 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
 public class TileComponent : MonoBehaviour {
@@ -22,10 +22,11 @@ public class TileComponent : MonoBehaviour {
     private bool _hoverDark;
     private bool _hoverVisible;
 
+    [FormerlySerializedAs("tileHintObject")]
     [SerializeField]
-    private GameObject tileHintObject;
+    private GameObject debugHintObject;
 
-    private readonly Dictionary<Vector3Int, GameObject> _tileHints = new();
+    private readonly Dictionary<HintBucket, Dictionary<Vector3Int, GameObject>> _tileHints = new();
 
     private Camera _mainCamera;
     private Tilemap _tileMap;
@@ -33,7 +34,7 @@ public class TileComponent : MonoBehaviour {
     private bool _isHoldingSelect;
     private Vector3Int _heldTile;
 
-    public EventHandler<Vector3Int> onTileSelected;
+    public EventHandler<Vector3Int> OnTileSelected;
 
     internal void Start() {
         _hoverTransform = tileHoverObject.transform;
@@ -42,6 +43,14 @@ public class TileComponent : MonoBehaviour {
 
         _mainCamera = Camera.main;
         _tileMap = gameObject.GetComponent<Tilemap>();
+
+        foreach (HintBucket value in Enum.GetValues(typeof(HintBucket))) {
+            if (value is HintBucket.All) {
+                continue;
+            }
+
+            _tileHints[value] = new Dictionary<Vector3Int, GameObject>();
+        }
     }
 
     internal void OnMouseOver() {
@@ -106,7 +115,7 @@ public class TileComponent : MonoBehaviour {
             return;
         }
 
-        onTileSelected?.Invoke(this, tilePos);
+        OnTileSelected?.Invoke(this, tilePos);
     }
 
     public bool TryGetWorldPositionForTileCenter(Vector3Int tilePos, out Vector3 worldPos) {
@@ -162,35 +171,65 @@ public class TileComponent : MonoBehaviour {
             new(-3, 0, 0),
         };
 
-        SetTileHints(hints);
+        SetTileHints(HintBucket.NormalMove, hints, debugHintObject);
     }
 
-    public void SetTileHints(IEnumerable<Vector3Int> hints) {
-        ClearTileHints();
-        AddTileHints(hints);
+    public void SetTileHints(HintBucket hintBucket, IEnumerable<Vector3Int> hints, GameObject hintObject) {
+        ClearTileHints(hintBucket);
+        AddTileHints(hintBucket, hints, hintObject);
     }
 
-    public void AddTileHints(IEnumerable<Vector3Int> hints) {
+    public void AddTileHints(HintBucket hintBucket, IEnumerable<Vector3Int> hints, GameObject hintObject) {
+        if (hintBucket is HintBucket.All) {
+            Debug.LogError("Cannot add hints to all buckets!");
+            return;
+        }
+
+        var bucket = _tileHints[hintBucket];
         foreach (var hintPos in hints) {
-            if (!_tileHints.ContainsKey(hintPos)) {
-                var cellCenter = _tileMap.GetCellCenterWorld(hintPos);
-                var spawnPos = new Vector3(cellCenter.x, cellCenter.y, TILE_Z);
-                _tileHints[hintPos] = Instantiate(tileHintObject, spawnPos, Quaternion.identity);
+            if (bucket.ContainsKey(hintPos)) {
+                continue;
             }
+
+            var cellCenter = _tileMap.GetCellCenterWorld(hintPos);
+            var spawnPos = new Vector3(cellCenter.x, cellCenter.y, TILE_Z);
+            var hintObj = Instantiate(hintObject, spawnPos, Quaternion.identity);
+            hintObj.GetComponent<SpriteRenderer>().enabled = true;
+            bucket[hintPos] = hintObj;
         }
     }
 
-    public void ForeachHint(Action<Vector3Int, GameObject> predicate) {
-        foreach (var (pos, hint) in _tileHints) {
+    public void ForeachHint(HintBucket hintBucket, Action<Vector3Int, GameObject> predicate) {
+        if (hintBucket is HintBucket.All) {
+            foreach (var bucket in _tileHints.Keys.ToArray()) {
+                ForeachHint(bucket, predicate);
+            }
+
+            return;
+        }
+
+        foreach (var (pos, hint) in _tileHints[hintBucket]) {
             predicate(pos, hint);
         }
     }
 
-    public void ClearTileHints() {
-        foreach (var oldHint in _tileHints.Values) {
+    public void ClearAllTileHints() {
+        ClearTileHints(HintBucket.All);
+    }
+
+    public void ClearTileHints(HintBucket hintBucket) {
+        if (hintBucket is HintBucket.All) {
+            foreach (var bucket in _tileHints.Keys.ToArray()) {
+                ClearTileHints(bucket);
+            }
+
+            return;
+        }
+
+        foreach (var oldHint in _tileHints[hintBucket].Values) {
             Destroy(oldHint);
         }
 
-        _tileHints.Clear();
+        _tileHints[hintBucket].Clear();
     }
 }
