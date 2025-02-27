@@ -63,7 +63,8 @@ public class UnitComponent : MonoBehaviour {
         moveSet.NormalMoves.RemoveAll(normalAdditionalFilter);
         moveSet.JumpMoves.RemoveAll(jumpAdditionalFilter);
 
-        Bfs.FilterMoves(GridPos, moveSet.NormalMoves, tileComponent);
+        var notVisited = Bfs.FloodFill(GridPos, moveSet.NormalMoves, tileComponent);
+        moveSet.NormalMoves.RemoveAll(x => notVisited.Contains(x));
 
         return moveSet;
     }
