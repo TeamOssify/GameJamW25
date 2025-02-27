@@ -143,11 +143,11 @@ public class TileComponent : MonoBehaviour {
         return true;
     }
 
-    public bool IsValidTile(Vector3Int pos) {
+    public virtual bool IsValidTile(Vector3Int pos) {
         return _tileMap.HasTile(pos);
     }
 
-    public bool IsUnobstructedTile(Vector3Int pos) {
+    public virtual bool IsUnobstructedTile(Vector3Int pos) {
         return IsValidTile(pos) && !movementMask.IsPositionBlocked(pos);
     }
 
