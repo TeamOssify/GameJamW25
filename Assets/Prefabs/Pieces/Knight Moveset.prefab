@@ -244,6 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70b90ca664b542fc88ace0287a4a4e7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isJumpMap: 1
 --- !u!1 &5807124235027116557
 GameObject:
   m_ObjectHideFlags: 0
