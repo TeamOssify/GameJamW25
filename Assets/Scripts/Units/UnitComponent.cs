@@ -2,23 +2,33 @@ using System;
 using UnityEngine;
 
 public class UnitComponent : MonoBehaviour {
+    public string UnitName => unitName;
+
     [SerializeField]
     private string unitName;
+
+    public string UnitDescription => unitDescription;
 
     [SerializeField]
     private string unitDescription;
 
+    public Sprite UnitSprite => unitSprite;
+
     [SerializeField]
-    public Sprite unitSprite;
+    private Sprite unitSprite;
+
+    public int RespawnCost => unitRespawnCost;
 
     [SerializeField]
     private int unitRespawnCost;
+
+    public int UpgradeCost => unitUpgradeCost;
 
     [SerializeField]
     private int unitUpgradeCost;
 
     [SerializeField]
-    protected MovementComponentBase unitBaseMoves;
+    private MovementComponentBase unitBaseMoves;
 
     [SerializeField]
     private MovementComponentBase unitFirstMoves;
