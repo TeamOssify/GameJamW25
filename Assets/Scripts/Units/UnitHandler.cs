@@ -17,6 +17,9 @@ public class UnitHandler : MonoBehaviour {
     [SerializeField]
     private GameObject unitCellPrefab;
 
+    [SerializeField]
+    private TurnStateManager turnStateManager;
+
     public UnitComponent pawn;
     public UnitComponent knight;
     public UnitComponent king;
@@ -50,10 +53,6 @@ public class UnitHandler : MonoBehaviour {
         _tileComponent = tileMap.GetComponent<TileComponent>();
         _tileComponent.OnTileSelected += SelectTile;
 
-        equippedUnits.Add(pawn);
-        equippedUnits.Add(king);
-        equippedUnits.Add(knight);
-
         // Removed in favour of GameState
         // SpawnUnit(new Vector3Int(-5,1,0), pawn);
         // SpawnUnit(new Vector3Int(-1, 1,0), rook);
@@ -74,9 +73,29 @@ public class UnitHandler : MonoBehaviour {
         _tileComponent.OnTileSelected -= SelectTile;
     }
 
+    public void InitDeploy() {
+        //eventually, we'll grab the stuff from main menu here
+        equippedUnits.Add(pawn);
+        equippedUnits.Add(king);
+        equippedUnits.Add(knight);
+
+        turnStateManager.EnterDeployment();
+    }
+    
+    public void SetUnitForDeployment(UnitComponent unit) {
+        _deployingUnit = unit;
+    }
+
     public void DeployUnit(Vector3Int gridPos, UnitComponent unit) {
         if (deployArea.IsADeploy(gridPos)) {
             SpawnUnit(gridPos, unit);
+            Debug.Log("Spawned unit");
+            if (turnStateManager.CurrentTurnState == TurnStateManager.TurnState.Deployment) {
+                turnStateManager.UnitDeployed();
+            }
+            else {
+                // its a respawn
+            }
         }
     }
 
@@ -139,12 +158,16 @@ public class UnitHandler : MonoBehaviour {
 
         if (TryGetUnitAtGridPosition(gridPosition, out var unit)) {
             // Clicked a unit
-            SelectUnit(unit);
+            if (!DeployMode) {
+                SelectUnit(unit);
+            }
             return;
         }
 
-        if (DeployMode) {
+        if (DeployMode && _deployingUnit != null) {
+            Debug.Log("deployed unit");
             DeployUnit(gridPosition, _deployingUnit);
+            return;
         }
 
         if (!_selectedUnit) {
@@ -177,7 +200,15 @@ public class UnitHandler : MonoBehaviour {
             newCell.transform.Find("UnitTier").GetComponent<TextMeshProUGUI>().text = unit.currentTier.ToString();
             //newCell.transform.Find("UnitImage").GetComponent<Image>().sprite = unit.unitSprite;
             //add the sprite fields in later
-            newCell.transform.Find("ActionPopout").gameObject.SetActive(false);
+            GameObject actionPopout = newCell.transform.Find("ActionPopout").gameObject;
+            actionPopout.SetActive(false);
+
+            Button openButton = newCell.transform.Find("OpenActionPopout").GetComponent<Button>();
+
+            openButton.onClick.AddListener(() => {
+                Debug.Log("added listener to buttone");
+                actionPopout.SetActive(!actionPopout.activeSelf);
+            });
         }
     }
 }
