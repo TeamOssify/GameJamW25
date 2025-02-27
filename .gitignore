@@ -405,7 +405,8 @@ __pycache__/
 # !tools/packages.config
 
 # Tabs Studio
-*.tss
+#*.tss
+# ^ gonna strangle whoever put this here
 
 # Telerik's JustMock configuration file
 *.jmconfig
@@ -478,4 +479,6 @@ Library/*
 Temp/*
 UserSettings/*
 Build/*
+
+.vscode/
 Assembly-CSharp.csproj

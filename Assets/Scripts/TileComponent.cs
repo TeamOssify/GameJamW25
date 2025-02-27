@@ -15,7 +15,7 @@ public class TileComponent : MonoBehaviour {
 
     [SerializeField]
     private MovementMaskComponent movementMask;
-    
+
     private Transform _hoverTransform;
     private Vector3Int _hoverPosition;
     private SpriteRenderer _hoverRenderer;
@@ -166,7 +166,10 @@ public class TileComponent : MonoBehaviour {
 
     public void SetTileHints(IEnumerable<Vector3Int> hints) {
         ClearTileHints();
+        AddTileHints(hints);
+    }
 
+    public void AddTileHints(IEnumerable<Vector3Int> hints) {
         foreach (var hintPos in hints) {
             if (!_tileHints.ContainsKey(hintPos)) {
                 var cellCenter = _tileMap.GetCellCenterWorld(hintPos);

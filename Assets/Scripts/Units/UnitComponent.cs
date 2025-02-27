@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class UnitComponent : MonoBehaviour {
     [SerializeField]
@@ -11,17 +9,28 @@ public class UnitComponent : MonoBehaviour {
     private string unitDescription;
 
     [SerializeField]
-    protected Tilemap unitBaseMoves;
+    public Sprite unitSprite;
 
     [SerializeField]
-    private Tilemap unitFirstMoves;
+    private int unitRespawnCost;
 
     [SerializeField]
-    private Tilemap unitTier1Moves;
+    private int unitUpgradeCost;
+
+    [SerializeField]
+    protected MovementComponentBase unitBaseMoves;
+
+    [SerializeField]
+    private MovementComponentBase unitFirstMoves;
+
+    [SerializeField]
+    private MovementComponentBase unitTier1Moves;
 
     public Vector3Int GridPos { get; private set; }
+    public int currentTier = 1;
 
     private bool _hasMoved;
+
     public void Select() {
         Debug.Log("Selected a unit");
     }
@@ -38,40 +47,25 @@ public class UnitComponent : MonoBehaviour {
         }
     }
 
-    public SwapBackArray<Vector3Int> GetUnitMoves(TileComponent tileComponent) {
-        var moves = GetMoves(tileComponent, unitBaseMoves);
+    public MoveSet GetUnitMoves(TileComponent tileComponent, Predicate<Vector3Int> normalAdditionalFilter, Predicate<Vector3Int> jumpAdditionalFilter) {
+        var moveSet = new MoveSet();
+
+        unitBaseMoves.GetMoves(moveSet, GridPos, tileComponent);
+
         if (!_hasMoved && unitFirstMoves) {
-            var firstMoves = GetMoves(tileComponent, unitFirstMoves);
-            moves.AddRange(firstMoves);
+            unitFirstMoves.GetMoves(moveSet, GridPos, tileComponent);
         }
 
         if (unitTier1Moves) {
-            var upgradeMoves = GetMoves(tileComponent, unitTier1Moves);
-            moves.AddRange(upgradeMoves);
+            unitTier1Moves.GetMoves(moveSet, GridPos, tileComponent);
         }
 
-        return moves;
-    }
+        moveSet.NormalMoves.RemoveAll(normalAdditionalFilter);
+        moveSet.JumpMoves.RemoveAll(jumpAdditionalFilter);
 
-    protected virtual SwapBackArray<Vector3Int> GetMoves(TileComponent tileComponent, Tilemap moveMap) {
-        var movesSize = moveMap.size;
-        var movesOrigin = moveMap.origin;
+        var notVisited = Bfs.FloodFill(GridPos, moveSet.NormalMoves, tileComponent);
+        moveSet.NormalMoves.RemoveAll(x => notVisited.Contains(x));
 
-        var moves = new SwapBackArray<Vector3Int>();
-        for (var y = 0; y < movesSize.y; y++)
-        for (var x = 0; x < movesSize.x; x++) {
-            var tilePos = new Vector3Int(x, y) + movesOrigin;
-
-            if (tilePos is { x: 0, y: 0 }) {
-                // Don't display current unit tile as a move
-                continue;
-            }
-
-            if (moveMap.HasTile(tilePos)) {
-                moves.Add(tilePos + GridPos);
-            }
-        }
-        
-        return moves;
+        return moveSet;
     }
 }

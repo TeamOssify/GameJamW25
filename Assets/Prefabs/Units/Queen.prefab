@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5948292620777383936}
   - component: {fileID: 5000254312647381797}
   - component: {fileID: 4460840344668977789}
+  - component: {fileID: 334027994311954807}
   m_Layer: 0
   m_Name: Unit Base Moves
   m_TagString: Untagged
@@ -245,6 +246,18 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+--- !u!114 &334027994311954807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2341180025633587128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12ffc26dee034e288a1c0726360d2bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4081203979736042114
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,7 +399,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1328483591800289427}
-  - component: {fileID: 3125728999525277178}
+  - component: {fileID: 11694682010008481}
   m_Layer: 0
   m_Name: Queen
   m_TagString: Untagged
@@ -411,7 +424,7 @@ Transform:
   - {fileID: 9143423862064333545}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3125728999525277178
+--- !u!114 &11694682010008481
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -420,9 +433,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 7205913911990244250}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93666f6b0eb64914b8fd6e8edcfb1ddd, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e09490ace2075844a66e3e6b14ea7f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   unitName: Queen
   unitDescription: Bow before me!
-  unitBaseMoves: {fileID: 5000254312647381797}
+  unitSprite: {fileID: 0}
+  unitRespawnCost: 0
+  unitUpgradeCost: 0
+  unitBaseMoves: {fileID: 334027994311954807}
+  unitFirstMoves: {fileID: 0}
+  unitTier1Moves: {fileID: 0}
+  currentTier: 1

@@ -32,6 +32,7 @@ public class SwapBackArray<T> : List<T> {
 
             this[i] = this[^(1 + removed)];
             removed++;
+            i--;
         }
 
         if (removed > 0) {
