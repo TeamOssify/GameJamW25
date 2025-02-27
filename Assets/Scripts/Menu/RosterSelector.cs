@@ -2,13 +2,14 @@ using UnityEngine;
 
 public class RosterSelector : MonoBehaviour
 {
-    public GameObject InfoOverlay;
+    [SerializeField]
+    private GameObject InfoOverlay;
 
-    public void openOverlay() {
+    public void OnPointerEnter() {
         InfoOverlay.SetActive(true);
     }
 
-    public void closeOverlay() {
+    public void OnPointerExit() {
         InfoOverlay.SetActive(false);
     }
 

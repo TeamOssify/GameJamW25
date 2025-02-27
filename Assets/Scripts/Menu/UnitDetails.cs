@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class UnitDetails : MonoBehaviour {
     [SerializeField]
@@ -10,7 +11,8 @@ public class UnitDetails : MonoBehaviour {
     [SerializeField]
     private MainMenu mainMenu;
 
-    private void OnMouseEnter() {
+    public void OnPointerEnter(BaseEventData e) {
+        Debug.Log("mouse over called");
         mainMenu.SetUnitDetails(unitName, unitSprite);
     }
 }

@@ -11,7 +11,7 @@ public class MainMenu : MonoBehaviour {
     private int selectedLevel;
 
     [SerializeField]
-    private TextMeshPro unitDetailsName;
+    private TextMeshProUGUI unitDetailsName;
 
     [SerializeField]
     private Image unitDetailsImage;
