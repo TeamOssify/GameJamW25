@@ -41,7 +41,7 @@ public class TurnStateManager : MonoBehaviour {
             //mainHudController.UpdateTurnCount(TurnCount + 1);
             TurnCount++;
             Debug.Log("Player Turn: " + CurrentTurnState + " Count: " + TurnCount);
-            mainHudController.UpdateTurnCount(TurnCount + 1);
+            mainHudController.UpdateTurnCount(TurnCount);
             BeginEnemyTurn();
         }
     }
@@ -50,7 +50,7 @@ public class TurnStateManager : MonoBehaviour {
         if (CurrentTurnState == TurnState.Enemy) {
             CurrentTurnState = TurnState.Player;
         }
-        mainHudController.UpdateTurnCount(TurnCount + 1);
+        mainHudController.UpdateTurnCount(TurnCount);
         BeginPlayerTurn();
     }
 

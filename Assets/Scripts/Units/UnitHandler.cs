@@ -21,6 +21,9 @@ public class UnitHandler : MonoBehaviour {
     [SerializeField]
     private TurnStateManager turnStateManager;
 
+    [SerializeField]
+    private EnemyHandler enemyHandler;
+
     public UnitComponent pawn;
     public UnitComponent knight;
     public UnitComponent king;
