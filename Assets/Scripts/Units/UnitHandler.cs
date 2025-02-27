@@ -140,7 +140,12 @@ public class UnitHandler : MonoBehaviour {
         _selectedUnit = unit;
         _selectedUnit.Select();
 
-        var unitMoves = _selectedUnit.GetUnitMoves(_tileComponent, x => TryGetUnitAtGridPosition(x, out _) || capturePointHandler.capturePointPositions.Contains(x), x => TryGetUnitAtGridPosition(x, out _) || capturePointHandler.capturePointPositions.Contains(x));
+        // ReSharper disable once ConvertToLambdaExpression
+        Predicate<Vector3Int> moveFilter = x => {
+            return TryGetUnitAtGridPosition(x, out _) || capturePointHandler.CapturePointPositions.Contains(x);
+        };
+
+        var unitMoves = _selectedUnit.GetUnitMoves(_tileComponent, moveFilter, moveFilter);
 
         var captureMoves = new List<Vector3Int>();
         captureMoves.AddRange(unitMoves.NormalMoves.Where(x => enemyHandler.WouldCaptureEnemy(x)));

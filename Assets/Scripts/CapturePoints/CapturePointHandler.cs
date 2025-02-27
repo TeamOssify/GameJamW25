@@ -9,9 +9,7 @@ public class CapturePointHandler : MonoBehaviour {
 
     private TileComponent _tileComponent;
 
-    private int capturePoints = 0;
-
-    public List<Vector3Int> capturePointPositions {get; private set;} = new List<Vector3Int>();
+    public readonly HashSet<Vector3Int> CapturePointPositions = new();
 
     public Tilemap tilemap;
     public EnemyHandler enemyHandler;
@@ -33,19 +31,17 @@ public class CapturePointHandler : MonoBehaviour {
         _tileComponent.TryGetWorldPositionForTileCenter(i, out var pos);
         pointComponent.Move(pos, i);
 
-        capturePoints++;
-        capturePointPositions.Add(i);
+        CapturePointPositions.Add(i);
 
         enemyHandler.enemiesMoved += pointComponent.OnEnemyMove;
         pointComponent.captured.AddListener(() => {OnPointCaptured(pointComponent);});
     }
 
     public void OnPointCaptured(CapturePoint capturePoint) {
-        capturePoints--;
-        capturePointPositions.Remove(capturePoint.GridPosition);
+        CapturePointPositions.Remove(capturePoint.GridPosition);
         enemyHandler.enemiesMoved -= capturePoint.OnEnemyMove;
 
-        if (capturePoints <= 0) {
+        if (CapturePointPositions.Count == 0) {
             allPointsCaptured.Invoke();
         }
     }
