@@ -77,9 +77,11 @@
     <Compile Include="Assets\Scripts\GameLogic\TurnStateManager.cs" />
     <Compile Include="Assets\Scripts\Menu\UnitMovementRenderer.cs" />
     <Compile Include="Assets\Scripts\Units\UnitHandler.cs" />
+    <Compile Include="Assets\Scripts\GameLogic\GameState.cs" />
     <Compile Include="Assets\Scripts\Movement\Bfs.cs" />
     <Compile Include="Assets\Scripts\Movement\Models\Enums.cs" />
     <Compile Include="Assets\Scripts\DeployAreaComponent.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemyHandler.cs" />
     <Compile Include="Assets\Scripts\Menu\RosterDetails.cs" />
     <Compile Include="Assets\Scripts\StubSizedTileComponent.cs" />
     <Compile Include="Assets\Scripts\Units\UnitComponent.cs" />
@@ -90,15 +92,12 @@
     <Compile Include="Assets\Scripts\Enemy\EnemyComponent.cs" />
     <Compile Include="Assets\Scripts\GameLogic\Models\SubWave.cs" />
     <Compile Include="Assets\Scripts\UI\MainHudController.cs" />
-    <Compile Include="Assets\Scripts\Enemy\EnemyHandlerComponent.cs" />
     <Compile Include="Assets\Scripts\GameLogic\Models\Level.cs" />
     <Compile Include="Assets\Scripts\GameLogic\LevelManager.cs" />
+    <Compile Include="Assets\Scripts\Enums.cs" />
     <Compile Include="Assets\Scripts\Movement\MovementComponentBase.cs" />
     <Compile Include="Assets\Scripts\GameLogic\Models\Wave.cs" />
     <Compile Include="Assets\Scripts\Movement\Models\MoveSet.cs" />
-    <Compile Include="Assets\Scripts\GameState.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Assets\UI\Test.uxml" />
     <None Include="Assets\UI\TurnCounter.uss" />
     <None Include="Assets\UI\TitleScreen.uss" />

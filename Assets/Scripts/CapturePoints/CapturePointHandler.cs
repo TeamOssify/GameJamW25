@@ -30,13 +30,13 @@ public class CapturePointHandler : MonoBehaviour {
 
         capturePoints++;
 
-        unitHandler.unitMoved += pointComponent.OnUnitMove;
+        unitHandler.UnitMoved += pointComponent.OnUnitMove;
         pointComponent.captured.AddListener(() => {OnPointCaptured(pointComponent);});
     }
 
     public void OnPointCaptured(CapturePoint capturePoint) {
         capturePoints--;
-        unitHandler.unitMoved -= capturePoint.OnUnitMove;
+        unitHandler.UnitMoved -= capturePoint.OnUnitMove;
 
         if (capturePoints <= 0) {
             Debug.Log("All points have been captured");

@@ -38,11 +38,17 @@ public class UnitHandler : MonoBehaviour {
     private UnitComponent _selectedUnit;
     private readonly HashSet<Vector3Int> _selectedUnitMoves = new();
 
-    public EventHandler<Vector3Int> unitMoved;
+    public EventHandler<Vector3Int> UnitMoved;
+
+    [SerializeField]
+    private GameObject normalMoveHint;
+
+    [SerializeField]
+    private GameObject jumpMoveHint;
 
     private void Start() {
         _tileComponent = tileMap.GetComponent<TileComponent>();
-        _tileComponent.onTileSelected += SelectTile;
+        _tileComponent.OnTileSelected += SelectTile;
 
         equippedUnits.Add(pawn);
         equippedUnits.Add(king);
@@ -65,7 +71,7 @@ public class UnitHandler : MonoBehaviour {
 
     private void OnDestroy() {
         // I would prefer if these were in OnEnable and OnDisable but we don't have a choice
-        _tileComponent.onTileSelected -= SelectTile;
+        _tileComponent.OnTileSelected -= SelectTile;
     }
 
     public void DeployUnit(Vector3Int gridPos, UnitComponent unit) {
@@ -109,8 +115,8 @@ public class UnitHandler : MonoBehaviour {
         _selectedUnitMoves.AddRange(unitMoves.NormalMoves);
         _selectedUnitMoves.AddRange(unitMoves.JumpMoves);
 
-        _tileComponent.SetTileHints(unitMoves.NormalMoves);
-        _tileComponent.AddTileHints(unitMoves.JumpMoves);
+        _tileComponent.SetTileHints(HintBucket.NormalMove, unitMoves.NormalMoves, normalMoveHint);
+        _tileComponent.SetTileHints(HintBucket.JumpMove, unitMoves.JumpMoves, jumpMoveHint);
     }
 
     private void DeselectUnit() {
@@ -120,7 +126,7 @@ public class UnitHandler : MonoBehaviour {
 
         _selectedUnit.Deselect();
         _selectedUnitMoves.Clear();
-        _tileComponent.ClearTileHints();
+        _tileComponent.ClearAllTileHints();
         _selectedUnit = null;
     }
 
@@ -154,7 +160,7 @@ public class UnitHandler : MonoBehaviour {
             _selectedUnit.Move(worldPos, gridPosition);
             _unitGridPositions.Add(gridPosition, _selectedUnit);
 
-            unitMoved?.Invoke(this, gridPosition);
+            UnitMoved?.Invoke(this, gridPosition);
         }
 
         DeselectUnit();
