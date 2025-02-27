@@ -45,7 +45,6 @@ public class TileComponent : MonoBehaviour {
         // Retrive unit handler from game state
         GameState gState = GameObject.FindGameObjectWithTag("GameState").GetComponent<GameState>();
         yield return new WaitUntil(() => gState.handlersReady);
-        Debug.Log(gState);
         unitHandler = gState.GetComponentInChildren<UnitHandler>();
     }
 
