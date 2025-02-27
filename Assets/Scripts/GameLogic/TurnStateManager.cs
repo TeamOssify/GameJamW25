@@ -38,7 +38,6 @@ public class TurnStateManager : MonoBehaviour {
             CurrentTurnState = TurnState.Enemy;
 
             _firstPlayerTurn = false;
-            //mainHudController.UpdateTurnCount(TurnCount + 1);
             TurnCount++;
             Debug.Log("Player Turn: " + CurrentTurnState + " Count: " + TurnCount);
             mainHudController.UpdateTurnCount(TurnCount);
