@@ -16,6 +16,8 @@ public class EnemyHandler : MonoBehaviour {
     private Dictionary<Vector3Int, EnemyComponent> _enemyGridPositions = new();
     private Dictionary<Vector3Int, EnemyComponent> _futureEnemyGridPositions = new();
 
+    public EventHandler<Dictionary<Vector3Int, EnemyComponent>> enemiesMoved;
+
     public bool CanSpawnEnemy(Vector3Int gridPos) {
         return !unitHandler.TryGetUnitAtGridPosition(gridPos, out _) && !_enemyGridPositions.ContainsKey(gridPos);
     }
@@ -66,6 +68,7 @@ public class EnemyHandler : MonoBehaviour {
         }
 
         (_enemyGridPositions, _futureEnemyGridPositions) = (_futureEnemyGridPositions, _enemyGridPositions);
+        enemiesMoved?.Invoke(this, _enemyGridPositions);
     }
 
     public bool WouldCaptureEnemy(Vector3Int gridPos) {

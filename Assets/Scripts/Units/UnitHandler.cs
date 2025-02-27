@@ -18,6 +18,7 @@ public class UnitHandler : MonoBehaviour {
 
     [SerializeField]
     private GameObject unitCellPrefab;
+    
 
     [SerializeField]
     private TurnStateManager turnStateManager;
@@ -47,6 +48,9 @@ public class UnitHandler : MonoBehaviour {
     private readonly HashSet<Vector3Int> _selectedUnitMoves = new();
 
     public EventHandler<Vector3Int> UnitMoved;
+
+    [DoNotSerialize]
+    public CapturePointHandler capturePointHandler;
 
     [SerializeField]
     private GameObject normalMoveHint;
@@ -126,7 +130,7 @@ public class UnitHandler : MonoBehaviour {
         _selectedUnit = unit;
         _selectedUnit.Select();
 
-        var unitMoves = _selectedUnit.GetUnitMoves(_tileComponent, x => TryGetUnitAtGridPosition(x, out _), x => TryGetUnitAtGridPosition(x, out _));
+        var unitMoves = _selectedUnit.GetUnitMoves(_tileComponent, x => TryGetUnitAtGridPosition(x, out _) || capturePointHandler.capturePointPositions.Contains(x), x => TryGetUnitAtGridPosition(x, out _) || capturePointHandler.capturePointPositions.Contains(x));
 
         var captureMoves = new List<Vector3Int>();
         captureMoves.AddRange(unitMoves.NormalMoves.Where(x => enemyHandler.WouldCaptureEnemy(x)));

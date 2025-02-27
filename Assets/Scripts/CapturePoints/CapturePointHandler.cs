@@ -11,8 +11,10 @@ public class CapturePointHandler : MonoBehaviour {
 
     private int capturePoints = 0;
 
+    public List<Vector3Int> capturePointPositions {get; private set;} = new List<Vector3Int>();
+
     public Tilemap tilemap;
-    public UnitHandler unitHandler;
+    public EnemyHandler enemyHandler;
     public List<Vector3Int> spawnPoints;
 
     public UnityEvent allPointsCaptured;
@@ -32,14 +34,16 @@ public class CapturePointHandler : MonoBehaviour {
         pointComponent.Move(pos, i);
 
         capturePoints++;
+        capturePointPositions.Add(i);
 
-        unitHandler.UnitMoved += pointComponent.OnUnitMove;
+        enemyHandler.enemiesMoved += pointComponent.OnEnemyMove;
         pointComponent.captured.AddListener(() => {OnPointCaptured(pointComponent);});
     }
 
     public void OnPointCaptured(CapturePoint capturePoint) {
         capturePoints--;
-        unitHandler.UnitMoved -= capturePoint.OnUnitMove;
+        capturePointPositions.Remove(capturePoint.GridPosition);
+        enemyHandler.enemiesMoved -= capturePoint.OnEnemyMove;
 
         if (capturePoints <= 0) {
             allPointsCaptured.Invoke();
