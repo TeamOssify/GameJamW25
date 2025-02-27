@@ -9,10 +9,10 @@ public static class Bfs {
         moves.RemoveAll(x => notVisited.Contains(x));
     }
 
-    private static HashSet<Vector3Int> BfsFloodFill(Vector3Int unitPosition, SwapBackArray<Vector3Int> moves, TileComponent tileComponent) {
-        var notVisited = new HashSet<Vector3Int>(moves);
+    private static HashSet<Vector3Int> BfsFloodFill(Vector3Int startingPos, IEnumerable<Vector3Int> toVisit, TileComponent tileComponent) {
+        var notVisited = new HashSet<Vector3Int>(toVisit);
         var queue = new Queue<Vector3Int>();
-        queue.Enqueue(unitPosition);
+        queue.Enqueue(startingPos);
 
         while (queue.TryDequeue(out var current)) {
             for (var y = -1; y <= 1; y++)
