@@ -14,6 +14,9 @@ public class TurnStateManager : MonoBehaviour {
     [SerializeField]
     private DeployAreaComponent deployArea;
 
+    [SerializeField]
+    private EnemyHandler enemyHandler;
+
     public enum TurnState {
         Player,
         Enemy,
