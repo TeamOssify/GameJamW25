@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a367ec21104557f4f8c1b1b7c498c889
+guid: 68f93d3010bb68e4ea6004b770decf05
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,9 +123,9 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: redrook_spr
+  - name: chesstd_sprsheet
     originalName: 
-    pivot: {x: 0.5, y: -0.53225803}
+    pivot: {x: 0.5014749, y: -0.13300492}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -133,9 +133,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 36
-      height: 62
-    spriteID: 7a400b404f09daf43887710202e31312
+      width: 678
+      height: 203
+    spriteID: 01674cda711f754498bf902768a0659e
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -147,21 +147,21 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -820080144
-    name: redrook_spr
+    guid: -371808581
+    name: chesstd_sprsheet
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: redrook_spr
+    - name: chesstd_sprsheet
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 46
-        y: 33
-        width: 36
-        height: 62
-      spriteId: 7a400b404f09daf43887710202e31312
+        x: 44
+        y: 27
+        width: 678
+        height: 203
+      spriteId: 01674cda711f754498bf902768a0659e
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -180,5 +180,5 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 128, y: 128}
-  previousTextureSize: {x: 64, y: 128}
+  canvasSize: {x: 768, y: 256}
+  previousTextureSize: {x: 1024, y: 256}

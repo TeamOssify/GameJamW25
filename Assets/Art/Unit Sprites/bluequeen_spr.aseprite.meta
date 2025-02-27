@@ -125,7 +125,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: bluequeen_spr
     originalName: 
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.5135135, y: -0.24705882}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -135,7 +135,7 @@ ScriptedImporter:
       y: 4
       width: 37
       height: 85
-    spriteID: 88d1c3a1f04688d4f9e3b390dee41b5f
+    spriteID: 86f57f361bac84b4c99cd5ae608fb0f7
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -157,11 +157,11 @@ ScriptedImporter:
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 0
-        y: 0
+        x: 45
+        y: 21
         width: 37
         height: 85
-      spriteId: 88d1c3a1f04688d4f9e3b390dee41b5f
+      spriteId: 86f57f361bac84b4c99cd5ae608fb0f7
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -180,5 +180,5 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 37, y: 85}
+  canvasSize: {x: 128, y: 128}
   previousTextureSize: {x: 64, y: 128}

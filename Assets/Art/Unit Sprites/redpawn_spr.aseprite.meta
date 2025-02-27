@@ -125,7 +125,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: redpawn_spr
     originalName: 
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.5, y: -0.61403507}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -135,7 +135,7 @@ ScriptedImporter:
       y: 4
       width: 40
       height: 57
-    spriteID: 59ee76acc32da894a9afd575dce379f4
+    spriteID: 2838ff0df02c0a74f9846d15300674d0
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -157,11 +157,11 @@ ScriptedImporter:
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 0
-        y: 0
+        x: 44
+        y: 35
         width: 40
         height: 57
-      spriteId: 59ee76acc32da894a9afd575dce379f4
+      spriteId: 2838ff0df02c0a74f9846d15300674d0
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -180,5 +180,5 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 40, y: 57}
+  canvasSize: {x: 128, y: 128}
   previousTextureSize: {x: 64, y: 128}

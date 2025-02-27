@@ -125,7 +125,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: redbishop_spr
     originalName: 
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.51724136, y: -0.34666666}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -135,7 +135,7 @@ ScriptedImporter:
       y: 4
       width: 29
       height: 75
-    spriteID: b8f38d0827410b2498b43a20eec0f0c7
+    spriteID: eba6699ae65397243bf8e0bd486ecd5a
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -157,11 +157,11 @@ ScriptedImporter:
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 0
-        y: 0
+        x: 49
+        y: 26
         width: 29
         height: 75
-      spriteId: b8f38d0827410b2498b43a20eec0f0c7
+      spriteId: eba6699ae65397243bf8e0bd486ecd5a
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -180,5 +180,5 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 29, y: 75}
+  canvasSize: {x: 128, y: 128}
   previousTextureSize: {x: 64, y: 128}

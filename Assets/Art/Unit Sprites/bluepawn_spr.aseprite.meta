@@ -125,7 +125,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: bluepawn_spr
     originalName: 
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.5, y: -0.61403507}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -135,7 +135,7 @@ ScriptedImporter:
       y: 4
       width: 40
       height: 57
-    spriteID: a983fffab910fa0458d4e686b9ad4410
+    spriteID: 896d42bd7995cb04792eeb7d4e891de6
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -157,11 +157,11 @@ ScriptedImporter:
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 0
-        y: 0
+        x: 44
+        y: 35
         width: 40
         height: 57
-      spriteId: a983fffab910fa0458d4e686b9ad4410
+      spriteId: 896d42bd7995cb04792eeb7d4e891de6
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -180,5 +180,5 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 40, y: 57}
+  canvasSize: {x: 128, y: 128}
   previousTextureSize: {x: 64, y: 128}

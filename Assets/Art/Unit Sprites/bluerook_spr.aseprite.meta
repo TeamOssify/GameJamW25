@@ -125,7 +125,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: bluerook_spr
     originalName: 
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.5, y: -0.53225803}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -135,7 +135,7 @@ ScriptedImporter:
       y: 4
       width: 36
       height: 62
-    spriteID: 01fad29bcc8780e4fa1c9f44e5ef2a42
+    spriteID: aa408ca8019066247a914657b5e8f157
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -157,11 +157,11 @@ ScriptedImporter:
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 0
-        y: 0
+        x: 46
+        y: 33
         width: 36
         height: 62
-      spriteId: 01fad29bcc8780e4fa1c9f44e5ef2a42
+      spriteId: aa408ca8019066247a914657b5e8f157
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -180,5 +180,5 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 36, y: 62}
+  canvasSize: {x: 128, y: 128}
   previousTextureSize: {x: 64, y: 128}

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a367ec21104557f4f8c1b1b7c498c889
+guid: cb3d63af4445e7d40aad1a7eefcd55a6
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,9 +123,9 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: redrook_spr
+  - name: blueking_spr
     originalName: 
-    pivot: {x: 0.5, y: -0.53225803}
+    pivot: {x: 0.5, y: -0.3033708}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -134,8 +134,8 @@ ScriptedImporter:
       x: 4
       y: 4
       width: 36
-      height: 62
-    spriteID: 7a400b404f09daf43887710202e31312
+      height: 89
+    spriteID: 8ecacb4c7b1ce2043b85f46254a8056d
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -147,21 +147,21 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -820080144
-    name: redrook_spr
+    guid: -1562444633
+    name: blueking_spr
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: redrook_spr
+    - name: blueking_spr
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
         x: 46
-        y: 33
+        y: 27
         width: 36
-        height: 62
-      spriteId: 7a400b404f09daf43887710202e31312
+        height: 89
+      spriteId: 8ecacb4c7b1ce2043b85f46254a8056d
     linkedCells: []
     parentIndex: -1
   platformSettings:
