@@ -9,17 +9,14 @@ public class GameState : MonoBehaviour
 {
     // Prefabs
     [SerializeField]
-    private GameObject unitHandlerPrefab;
-    [SerializeField]
     private GameObject capturePointHandlerPrefab;
 
     // References
     [SerializeField]
     private Tilemap tilemap;
+
     [SerializeField]
-    private DeployAreaComponent deployArea;
-    [SerializeField]
-    private GameObject unitFrame;
+    private UnitHandler unitHandler;
 
     // Setup
     [SerializeField]
@@ -33,24 +30,16 @@ public class GameState : MonoBehaviour
 
     public bool HandlersReady { get; private set; } = false;
 
-    private IEnumerator Start() {
-        _unitHandler = Instantiate(unitHandlerPrefab, transform).GetComponent<UnitHandler>();
+    private void Start() {
         _capturePointHandler = Instantiate(capturePointHandlerPrefab, transform).GetComponent<CapturePointHandler>();
         _tileComponent = tilemap.GetComponent<TileComponent>();
 
         // Inject required fields
-        _unitHandler.tileMap = tilemap;
-        _unitHandler.deployArea = deployArea;
-        _unitHandler.unitInterface = unitFrame;
         _capturePointHandler.tilemap = tilemap;
-        _capturePointHandler.unitHandler = _unitHandler;
+        _capturePointHandler.unitHandler = unitHandler;
 
         // Create Capture points and units
         _capturePointHandler.spawnPoints = capturePointPositions;
-        yield return new WaitUntil(() => _unitHandler.isReady); // In order ot prevent a null error caused by _tileComponent in unitHandler
-        foreach (var i in unitPositions) {
-            _unitHandler.SpawnUnit(i.position, i.pieceType);
-        }
 
         _capturePointHandler.allPointsCaptured.AddListener(DisableInput);
         HandlersReady = true;
