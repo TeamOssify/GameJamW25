@@ -15,7 +15,7 @@ public class DeployAreaComponent : MonoBehaviour {
     }
 
     public void ToggleDeployAreaVisibility() {
-        Debug.Log("Toggled Deploy Area Visibility");
+        Debug.Log("Deploy area visible");
         if (_tilemapRenderer) {
             _tilemapRenderer.enabled = !_tilemapRenderer.enabled;
         }
