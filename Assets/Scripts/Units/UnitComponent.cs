@@ -47,23 +47,24 @@ public class UnitComponent : MonoBehaviour {
         }
     }
 
-    public SwapBackArray<(Vector3Int pos, MoveType type)> GetUnitMoves(TileComponent tileComponent, Predicate<(Vector3Int pos, MoveType type)> additionalFilter) {
-        var moves = new SwapBackArray<(Vector3Int pos, MoveType type)>();
+    public MoveSet GetUnitMoves(TileComponent tileComponent, Predicate<Vector3Int> normalAdditionalFilter, Predicate<Vector3Int> jumpAdditionalFilter) {
+        var moveSet = new MoveSet();
 
-        unitBaseMoves.GetMoves(moves, GridPos, tileComponent);
+        unitBaseMoves.GetMoves(moveSet, GridPos, tileComponent);
 
         if (!_hasMoved && unitFirstMoves) {
-            unitFirstMoves.GetMoves(moves, GridPos, tileComponent);
+            unitFirstMoves.GetMoves(moveSet, GridPos, tileComponent);
         }
 
         if (unitTier1Moves) {
-            unitTier1Moves.GetMoves(moves, GridPos, tileComponent);
+            unitTier1Moves.GetMoves(moveSet, GridPos, tileComponent);
         }
 
-        moves.RemoveAll(additionalFilter);
+        moveSet.NormalMoves.RemoveAll(normalAdditionalFilter);
+        moveSet.JumpMoves.RemoveAll(jumpAdditionalFilter);
 
-        Bfs.FilterMoves(moves, tileComponent);
+        Bfs.FilterMoves(GridPos, moveSet.NormalMoves, tileComponent);
 
-        return moves;
+        return moveSet;
     }
 }

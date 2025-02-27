@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class TileMovementComponent : MovementComponentBase {
-    public override void GetMoves(SwapBackArray<(Vector3Int pos, MoveType type)> existingMoves, Vector3Int unitPosition, TileComponent tileComponent) {
+    public override void GetMoves(MoveSet moveSet, Vector3Int unitPosition, TileComponent tileComponent) {
         var movesSize = MoveMap.size;
         var movesOrigin = MoveMap.origin;
 
@@ -23,7 +23,7 @@ public class TileMovementComponent : MovementComponentBase {
             var tile = MoveMap.GetTile(tilePos);
             if (tile) {
                 // TODO: Check tile to determine if move is jump
-                existingMoves.Add((moveTilePos, MoveType.Normal));
+                moveSet.NormalMoves.Add(moveTilePos);
             }
         }
     }

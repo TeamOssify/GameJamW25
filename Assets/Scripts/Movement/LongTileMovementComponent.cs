@@ -29,7 +29,7 @@ public class LongTileMovementComponent : MovementComponentBase {
         }
     }
 
-    public override void GetMoves(SwapBackArray<(Vector3Int pos, MoveType type)> existingMoves, Vector3Int unitPosition, TileComponent tileComponent) {
+    public override void GetMoves(MoveSet moveSet, Vector3Int unitPosition, TileComponent tileComponent) {
         foreach (var direction in _moveDirections) {
             // TODO: We Might not want to normalize to allow for long jumpy movement maps
             var dirNormalized = new Vector3Int(
@@ -44,7 +44,7 @@ public class LongTileMovementComponent : MovementComponentBase {
 
             var nextPos = unitPosition + dirNormalized;
             while (tileComponent.IsUnobstructedTile(nextPos)) {
-                existingMoves.Add((nextPos, MoveType.Normal));
+                moveSet.NormalMoves.Add(nextPos);
                 nextPos += dirNormalized;
             }
         }

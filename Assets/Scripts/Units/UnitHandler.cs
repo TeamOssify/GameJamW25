@@ -93,10 +93,13 @@ public class UnitHandler : MonoBehaviour {
         _selectedUnit = unit;
         _selectedUnit.Select();
 
-        var unitMoves = _selectedUnit.GetUnitMoves(_tileComponent, x => TryGetUnitAtGridPosition(x.pos, out _));
+        var unitMoves = _selectedUnit.GetUnitMoves(_tileComponent, x => TryGetUnitAtGridPosition(x, out _), x => TryGetUnitAtGridPosition(x, out _));
 
-        _selectedUnitMoves.AddRange(unitMoves.Select(x => x.pos));
-        _tileComponent.SetTileHints(unitMoves.Select(x => x.pos));
+        _selectedUnitMoves.AddRange(unitMoves.NormalMoves);
+        _selectedUnitMoves.AddRange(unitMoves.JumpMoves);
+
+        _tileComponent.SetTileHints(unitMoves.NormalMoves);
+        _tileComponent.AddTileHints(unitMoves.JumpMoves);
     }
 
     private void DeselectUnit() {

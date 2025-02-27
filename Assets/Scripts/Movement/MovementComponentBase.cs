@@ -10,5 +10,5 @@ public abstract class MovementComponentBase : MonoBehaviour {
         }
     }
 
-    public abstract void GetMoves(SwapBackArray<(Vector3Int pos, MoveType type)> existingMoves, Vector3Int unitPosition, TileComponent tileComponent);
+    public abstract void GetMoves(MoveSet moveSet, Vector3Int unitPosition, TileComponent tileComponent);
 }
