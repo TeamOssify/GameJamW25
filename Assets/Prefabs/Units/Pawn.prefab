@@ -630,7 +630,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitName: Pawn
   unitDescription: The most basic unit
-  unitSprite: {fileID: 0}
+  unitSprite: {fileID: -6099414836462707880, guid: 2b5932837c2ed664d86b675597fddbb0, type: 3}
   unitRespawnCost: 0
   unitUpgradeCost: 0
   unitBaseMoves: {fileID: 6092446194282655963}
