@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Tilemaps;
 
 public class CapturePointHandler : MonoBehaviour {
@@ -13,6 +14,8 @@ public class CapturePointHandler : MonoBehaviour {
     public Tilemap tilemap;
     public UnitHandler unitHandler;
     public List<Vector3Int> spawnPoints;
+
+    public UnityEvent allPointsCaptured;
 
     public void Start() {
         _tileComponent = tilemap.GetComponent<TileComponent>();
@@ -39,7 +42,7 @@ public class CapturePointHandler : MonoBehaviour {
         unitHandler.UnitMoved -= capturePoint.OnUnitMove;
 
         if (capturePoints <= 0) {
-            Debug.Log("All points have been captured");
+            allPointsCaptured.Invoke();
         }
     }
 }

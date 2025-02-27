@@ -98,6 +98,8 @@
     <Compile Include="Assets\Scripts\Movement\MovementComponentBase.cs" />
     <Compile Include="Assets\Scripts\GameLogic\Models\Wave.cs" />
     <Compile Include="Assets\Scripts\Movement\Models\MoveSet.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Assets\UI\Test.uxml" />
     <None Include="Assets\UI\TurnCounter.uss" />
     <None Include="Assets\UI\TitleScreen.uss" />
