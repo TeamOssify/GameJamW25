@@ -190,7 +190,7 @@ public class UnitHandler : MonoBehaviour {
             var newCell = Instantiate(unitCellPrefab, unitInterface.transform);
             newCell.transform.Find("UnitName").GetComponent<TextMeshProUGUI>().text = unit.name;
             newCell.transform.Find("UnitTier").GetComponent<TextMeshProUGUI>().text = unit.currentTier.ToString();
-            //newCell.transform.Find("UnitImage").GetComponent<Image>().sprite = unit.unitSprite;
+            newCell.transform.Find("UnitImage").GetComponent<Image>().sprite = unit.unitSprite;
             //add the sprite fields in later
             GameObject actionPopout = newCell.transform.Find("ActionPopout").gameObject;
             actionPopout.SetActive(false);
