@@ -1,7 +1,8 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
-public class RosterDetails : MonoBehaviour
-{
+
+public class RosterDetails : MonoBehaviour {
     [SerializeField]
     private Image image;
 
@@ -9,17 +10,14 @@ public class RosterDetails : MonoBehaviour
     private UnitComponent unit;
 
     [SerializeField]
-    private GameObject InfoOverlay;
+    private GameObject infoOverlay;
 
     [SerializeField]
     private MainMenu mainMenu;
 
-
     public void SetUnit(UnitComponent unit) {
         this.unit = unit;
-        Debug.Log(image);
         image.sprite = unit.UnitSprite;
- 
     }
 
     public void ClearUnit() {
@@ -28,15 +26,16 @@ public class RosterDetails : MonoBehaviour
     }
 
     public void OnPointerEnter() {
-        if(unit == null) {
+        if (!unit) {
             return;
         }
-        InfoOverlay.SetActive(true);
-        mainMenu.SetUnitDetails(unit.UnitName, unit.UnitDescription, unit.UnitSprite);
+
+        infoOverlay.SetActive(true);
+        mainMenu.SetUnitDetails(unit);
     }
 
     public void OnPointerExit() {
-        InfoOverlay.SetActive(false);
+        infoOverlay.SetActive(false);
     }
 
     public void OnClick() {

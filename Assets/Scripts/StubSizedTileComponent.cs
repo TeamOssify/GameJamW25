@@ -11,4 +11,6 @@ public class StubSizedTileComponent : TileComponent {
     public override bool IsUnobstructedTile(Vector3Int pos) {
         return IsValidTile(pos);
     }
+
+    internal new void Start() { }
 }

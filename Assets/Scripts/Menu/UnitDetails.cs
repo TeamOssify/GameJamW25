@@ -9,7 +9,7 @@ public class UnitDetails : MonoBehaviour {
     private MainMenu mainMenu;
 
     public void OnPointerEnter(BaseEventData e) {
-        mainMenu.SetUnitDetails(unit.UnitName, unit.UnitDescription, unit.UnitSprite);
+        mainMenu.SetUnitDetails(unit);
     }
 
     public void ButtonPress() {

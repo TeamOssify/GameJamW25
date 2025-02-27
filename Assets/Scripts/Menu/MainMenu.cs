@@ -23,7 +23,11 @@ public class MainMenu : MonoBehaviour {
     [SerializeField]
     private RosterDetails[] rosterSlots;
 
-    private readonly HashSet<UnitComponent> selectedUnits = new();
+    [SerializeField]
+    private UnitMovementRenderer movementRenderer;
+
+    private readonly HashSet<UnitComponent> _selectedUnits = new();
+
     public void RightArrow() {
         ChangeSelectedLevel(1);
     }
@@ -42,7 +46,7 @@ public class MainMenu : MonoBehaviour {
             selectedLevel = levels.Length - 1;
         }
     }
-    
+
     public void StartLevel() {
         if (selectedLevel >= levels.Length) {
             Debug.Log($"Tried to load level outside of bounds: {selectedLevel}");
@@ -52,38 +56,41 @@ public class MainMenu : MonoBehaviour {
         SceneManager.LoadSceneAsync(levels[selectedLevel].LevelScene.BuildIndex);
     }
 
-    public void SetUnitDetails(string unitName, string unitDescription, Sprite sprite) {
-        unitDetailsName.text = unitName;
-        unitDetailsDescription.text = unitDescription;
-        unitDetailsImage.sprite = sprite;
+    public void SetUnitDetails(UnitComponent unit) {
+        unitDetailsName.text = unit.UnitName;
+        unitDetailsDescription.text = unit.UnitDescription;
+        // unitDetailsImage.sprite = unit.UnitSprite;
+        unitDetailsImage.sprite = movementRenderer.RenderUnitMovement(unit);
     }
 
     public void SelectUnit(UnitComponent unit) {
+        if (_selectedUnits.Count >= rosterSlots.Length) {
+            return;
+        }
 
-        if(selectedUnits.Count >= rosterSlots.Length) {
+        if (!_selectedUnits.Add(unit)) {
             return;
         }
-        if(!selectedUnits.Add(unit)) {
-            return;
-        }
+
         UpdateRoster();
     }
 
     public void DeselectUnit(UnitComponent unit) {
-        if(!selectedUnits.Remove(unit)) {
+        if (!_selectedUnits.Remove(unit)) {
             return;
         }
+
         UpdateRoster();
     }
 
     private void UpdateRoster() {
         var i = 0;
-        foreach (var unit in selectedUnits) {
-
+        foreach (var unit in _selectedUnits) {
             rosterSlots[i].SetUnit(unit);
             i++;
         }
-        for(; i < rosterSlots.Length; i++) {
+
+        for (; i < rosterSlots.Length; i++) {
             rosterSlots[i].ClearUnit();
         }
     }

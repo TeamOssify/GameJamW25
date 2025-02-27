@@ -147,7 +147,6 @@ GameObject:
   - component: {fileID: 27720885}
   - component: {fileID: 27720884}
   - component: {fileID: 27720883}
-  - component: {fileID: 27720886}
   m_Layer: 5
   m_Name: InfoScreen
   m_TagString: Untagged
@@ -238,19 +237,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 1
   m_TargetDisplay: 0
---- !u!114 &27720886
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 27720881}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e1d61da2fc7fbc45b7153e4ee818407, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InfoOverlay: {fileID: 27720881}
 --- !u!1001 &37260154
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1098,6 +1084,10 @@ PrefabInstance:
       propertyPath: InfoOverlay
       value: 
       objectReference: {fileID: 27720881}
+    - target: {fileID: 4928410010513806402, guid: ec1d3621f4491ef4b94c3fce8d8df7c6, type: 3}
+      propertyPath: infoOverlay
+      value: 
+      objectReference: {fileID: 27720881}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1388,6 +1378,7 @@ GameObject:
   - component: {fileID: 758155439}
   - component: {fileID: 758155443}
   - component: {fileID: 758155442}
+  - component: {fileID: 758155444}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1494,6 +1485,7 @@ MonoBehaviour:
   - {fileID: 626008614}
   - {fileID: 1760956756}
   - {fileID: 418266489}
+  movementRenderer: {fileID: 758155444}
 --- !u!114 &758155443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1538,6 +1530,19 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &758155444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 758155438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87453bd352b145c5b43f3355561f7233, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fieldRadius: 3
 --- !u!1 &875502884
 GameObject:
   m_ObjectHideFlags: 0
@@ -1789,7 +1794,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e1d61da2fc7fbc45b7153e4ee818407, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InfoOverlay: {fileID: 27720881}
+  infoOverlay: {fileID: 27720881}
 --- !u!114 &933672582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2069,6 +2074,10 @@ PrefabInstance:
       objectReference: {fileID: 758155442}
     - target: {fileID: 4928410010513806402, guid: ec1d3621f4491ef4b94c3fce8d8df7c6, type: 3}
       propertyPath: InfoOverlay
+      value: 
+      objectReference: {fileID: 27720881}
+    - target: {fileID: 4928410010513806402, guid: ec1d3621f4491ef4b94c3fce8d8df7c6, type: 3}
+      propertyPath: infoOverlay
       value: 
       objectReference: {fileID: 27720881}
     m_RemovedComponents: []
@@ -2368,6 +2377,10 @@ PrefabInstance:
       propertyPath: InfoOverlay
       value: 
       objectReference: {fileID: 27720881}
+    - target: {fileID: 4928410010513806402, guid: ec1d3621f4491ef4b94c3fce8d8df7c6, type: 3}
+      propertyPath: infoOverlay
+      value: 
+      objectReference: {fileID: 27720881}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2651,6 +2664,10 @@ PrefabInstance:
       objectReference: {fileID: 758155442}
     - target: {fileID: 4928410010513806402, guid: ec1d3621f4491ef4b94c3fce8d8df7c6, type: 3}
       propertyPath: InfoOverlay
+      value: 
+      objectReference: {fileID: 27720881}
+    - target: {fileID: 4928410010513806402, guid: ec1d3621f4491ef4b94c3fce8d8df7c6, type: 3}
+      propertyPath: infoOverlay
       value: 
       objectReference: {fileID: 27720881}
     m_RemovedComponents: []
@@ -3548,6 +3565,10 @@ PrefabInstance:
       propertyPath: InfoOverlay
       value: 
       objectReference: {fileID: 27720881}
+    - target: {fileID: 4928410010513806402, guid: ec1d3621f4491ef4b94c3fce8d8df7c6, type: 3}
+      propertyPath: infoOverlay
+      value: 
+      objectReference: {fileID: 27720881}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3756,6 +3777,10 @@ PrefabInstance:
       objectReference: {fileID: 758155442}
     - target: {fileID: 4928410010513806402, guid: ec1d3621f4491ef4b94c3fce8d8df7c6, type: 3}
       propertyPath: InfoOverlay
+      value: 
+      objectReference: {fileID: 27720881}
+    - target: {fileID: 4928410010513806402, guid: ec1d3621f4491ef4b94c3fce8d8df7c6, type: 3}
+      propertyPath: infoOverlay
       value: 
       objectReference: {fileID: 27720881}
     m_RemovedComponents: []
