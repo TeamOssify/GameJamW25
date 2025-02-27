@@ -14,6 +14,15 @@ public class EnemyPortalHandler : MonoBehaviour {
         _enemyPortalPositions.Add(initPos, _enemyPortalPositions.Count);
     }
     public void SpawnSubwave(SubWave wave, EnemyPortalComponent portal) {
-        
+
+        // I have no clue if this is how to use these but :3
+        EnemyHandler newSubWave = new EnemyHandler();
+
+        for (int i = 0; i < wave.EnemyCount; i++) {
+            newSubWave.SpawnEnemy(wave.EnemyToSpawn, portal.GridPos);
+        }
+
+        newSubWave.ComputeEnemyMoves();
+        newSubWave.MoveEnemies();
     }
 }
