@@ -1061,6 +1061,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &956095468 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4652167733984886649, guid: b345891ea0f233044a9aedf27ebb1f57, type: 3}
+  m_PrefabInstance: {fileID: 1073184001}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae9bda42f367fb7439a7776a50f92756, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1007283532
 GameObject:
   m_ObjectHideFlags: 0
@@ -1431,7 +1442,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1178525367}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 52438254}
+        m_TargetAssemblyTypeName: TurnStateManager, Assembly-CSharp
+        m_MethodName: EndPlayerTurn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1178525367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2243,6 +2266,10 @@ PrefabInstance:
       propertyPath: unitHandler
       value: 
       objectReference: {fileID: 1818598135}
+    - target: {fileID: 5650186298423401230, guid: e27135d426622d34aad6390b2ec92fc1, type: 3}
+      propertyPath: mainHudController
+      value: 
+      objectReference: {fileID: 956095468}
     - target: {fileID: 6363475599546487274, guid: e27135d426622d34aad6390b2ec92fc1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 482.84738

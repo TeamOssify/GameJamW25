@@ -15,7 +15,7 @@ public class UnitComponent : MonoBehaviour {
     public Sprite UnitSprite => unitSprite;
 
     [SerializeField]
-    private Sprite unitSprite;
+    public Sprite unitSprite;
 
     public int RespawnCost => unitRespawnCost;
 
