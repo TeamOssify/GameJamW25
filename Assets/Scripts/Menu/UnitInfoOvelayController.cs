@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class RosterSelector : MonoBehaviour {
+public class UnitInfoOvelayController : MonoBehaviour {
     [SerializeField]
     private GameObject infoOverlay;
 

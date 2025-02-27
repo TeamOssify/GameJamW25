@@ -52,7 +52,6 @@
     <Compile Include="Assets\Scripts\UI\TitleScreenController.cs" />
     <Compile Include="Assets\Scripts\CapturePoints\CapturePoint.cs" />
     <Compile Include="Assets\Scripts\Movement\TileMovementComponent.cs" />
-    <Compile Include="Assets\Scripts\Menu\RosterSelector.cs" />
     <Compile Include="Assets\Scripts\GameLogic\WaveManager.cs" />
     <Compile Include="Assets\Scripts\CapturePoints\CapturePointHandler.cs" />
     <Compile Include="Assets\Scripts\GameLogic\TurnStateManager.cs" />
@@ -73,8 +72,10 @@
     <Compile Include="Assets\Scripts\MovementMaskComponent.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyComponent.cs" />
     <Compile Include="Assets\Scripts\GameLogic\Models\SubWave.cs" />
+    <Compile Include="Assets\Scripts\Menu\UnitInfoOvelayController.cs" />
     <Compile Include="Assets\Scripts\UI\MainHudController.cs" />
     <Compile Include="Assets\Scripts\GameLogic\Models\Level.cs" />
+    <Compile Include="Assets\Scripts\Menu\UnitSelectorManager.cs" />
     <Compile Include="Assets\Scripts\GameLogic\LevelManager.cs" />
     <Compile Include="Assets\Scripts\Enums.cs" />
     <Compile Include="Assets\Scripts\Movement\MovementComponentBase.cs" />
