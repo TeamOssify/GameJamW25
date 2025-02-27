@@ -7,7 +7,7 @@ using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
 public class TileComponent : MonoBehaviour {
-    private const float TILE_Z = -1;
+    private const float TILE_Z = -2;
 
     [SerializeField]
     private GameObject tileHoverObject;
