@@ -67,4 +67,8 @@ public class EnemyHandler : MonoBehaviour {
 
         (_enemyGridPositions, _futureEnemyGridPositions) = (_futureEnemyGridPositions, _enemyGridPositions);
     }
+
+    public bool WouldCaptureEnemy(Vector3Int gridPos) {
+        return _enemyGridPositions.ContainsKey(gridPos);
+    }
 }

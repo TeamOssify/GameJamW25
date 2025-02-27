@@ -5,6 +5,7 @@ using UnityEngine.Tilemaps;
 using TMPro;
 using UnityEngine.UI;
 using System;
+using System.Linq;
 
 public class UnitHandler : MonoBehaviour {
     public Tilemap tileMap;
@@ -53,11 +54,12 @@ public class UnitHandler : MonoBehaviour {
     [SerializeField]
     private GameObject jumpMoveHint;
 
+    [SerializeField]
+    private GameObject captureMoveHint;
+
     private void Start() {
         _tileComponent = tileMap.GetComponent<TileComponent>();
         _tileComponent.OnTileSelected += SelectTile;
-
-
 
         isReady = true;
     }
@@ -126,11 +128,16 @@ public class UnitHandler : MonoBehaviour {
 
         var unitMoves = _selectedUnit.GetUnitMoves(_tileComponent, x => TryGetUnitAtGridPosition(x, out _), x => TryGetUnitAtGridPosition(x, out _));
 
+        var captureMoves = new List<Vector3Int>();
+        captureMoves.AddRange(unitMoves.NormalMoves.Where(x => enemyHandler.WouldCaptureEnemy(x)));
+        captureMoves.AddRange(unitMoves.JumpMoves.Where(x => enemyHandler.WouldCaptureEnemy(x)));
+
         _selectedUnitMoves.AddRange(unitMoves.NormalMoves);
         _selectedUnitMoves.AddRange(unitMoves.JumpMoves);
 
         _tileComponent.SetTileHints(HintBucket.NormalMove, unitMoves.NormalMoves, normalMoveHint);
         _tileComponent.SetTileHints(HintBucket.JumpMove, unitMoves.JumpMoves, jumpMoveHint);
+        _tileComponent.SetTileHints(HintBucket.CaptureMove, captureMoves, captureMoveHint);
     }
 
     private void DeselectUnit() {
