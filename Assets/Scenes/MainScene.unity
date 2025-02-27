@@ -2332,6 +2332,10 @@ PrefabInstance:
       value: EnemyHandler
       objectReference: {fileID: 0}
     - target: {fileID: 3125632657500253129, guid: f5794b909f10bee4aa52920e6faa0a02, type: 3}
+      propertyPath: barbarian
+      value: 
+      objectReference: {fileID: -1893874399672768844, guid: 67460be3d7d62524a96e39a46c53a272, type: 3}
+    - target: {fileID: 3125632657500253129, guid: f5794b909f10bee4aa52920e6faa0a02, type: 3}
       propertyPath: unitHandler
       value: 
       objectReference: {fileID: 1818598135}

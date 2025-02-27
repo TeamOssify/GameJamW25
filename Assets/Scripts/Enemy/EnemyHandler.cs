@@ -11,6 +11,8 @@ public class EnemyHandler : MonoBehaviour {
 
     private Vector3Int[] _pointsOfInterest;
 
+    public EnemyComponent barbarian;
+
     private Dictionary<Vector3Int, EnemyComponent> _enemyGridPositions = new();
     private Dictionary<Vector3Int, EnemyComponent> _futureEnemyGridPositions = new();
 
