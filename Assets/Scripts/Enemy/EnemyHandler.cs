@@ -2,14 +2,41 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyHandlerComponent : MonoBehaviour {
+public class EnemyHandler : MonoBehaviour {
     [SerializeField]
     private TileComponent tileComponent;
+
+    [SerializeField]
+    private UnitHandler unitHandler;
 
     private Vector3Int[] _pointsOfInterest;
 
     private Dictionary<Vector3Int, EnemyComponent> _enemyGridPositions = new();
     private Dictionary<Vector3Int, EnemyComponent> _futureEnemyGridPositions = new();
+
+    public bool CanSpawnEnemy(Vector3Int gridPos) {
+        return !unitHandler.TryGetUnitAtGridPosition(gridPos, out _) && !_enemyGridPositions.ContainsKey(gridPos);
+    }
+
+    public void SpawnEnemy(EnemyComponent enemy, Vector3Int gridPos) {
+        // if (!tileComponent.IsUnobstructedTile(gridPos)) {
+        //     Debug.LogError($"Invalid grid position: {gridPos}");
+        //     return;
+        // }
+
+        if (unitHandler.TryGetUnitAtGridPosition(gridPos, out _)) {
+            Debug.LogWarning($"Spawning enemy on top of unit at {gridPos}!");
+        }
+
+        var newUnit = Instantiate(enemy, Vector3.zero, Quaternion.identity, gameObject.transform);
+        if (!tileComponent.TryGetWorldPositionForTileCenter(gridPos, out var pos)) {
+            Debug.LogError($"Failed to find tile center for {gridPos}!");
+            return;
+        }   
+
+        newUnit.Move(pos,gridPos);
+        _enemyGridPositions.Add(gridPos, newUnit);
+    }
 
     public void UpdatePointsOfInterest() {
 

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -5,7 +6,7 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour {
     [SerializeField]
-    private int[] levels;
+    private Level[] levels;
 
     [SerializeField]
     private int selectedLevel;
@@ -14,7 +15,18 @@ public class MainMenu : MonoBehaviour {
     private TextMeshProUGUI unitDetailsName;
 
     [SerializeField]
+    private TextMeshProUGUI unitDetailsDescription;
+
+    [SerializeField]
     private Image unitDetailsImage;
+
+    [SerializeField]
+    private RosterDetails[] rosterSlots;
+
+    [SerializeField]
+    private UnitMovementRenderer movementRenderer;
+
+    private readonly HashSet<UnitComponent> _selectedUnits = new();
 
     public void RightArrow() {
         ChangeSelectedLevel(1);
@@ -41,11 +53,45 @@ public class MainMenu : MonoBehaviour {
             return;
         }
 
-        SceneManager.LoadSceneAsync(levels[selectedLevel]);
+        SceneManager.LoadSceneAsync(levels[selectedLevel].LevelScene.BuildIndex);
     }
 
-    public void SetUnitDetails(string unitName, Sprite sprite) {
-        unitDetailsName.text = unitName;
-        unitDetailsImage.sprite = sprite;
+    public void SetUnitDetails(UnitComponent unit) {
+        unitDetailsName.text = unit.UnitName;
+        unitDetailsDescription.text = unit.UnitDescription;
+        // unitDetailsImage.sprite = unit.UnitSprite;
+        unitDetailsImage.sprite = movementRenderer.RenderUnitMovement(unit);
+    }
+
+    public void SelectUnit(UnitComponent unit) {
+        if (_selectedUnits.Count >= rosterSlots.Length) {
+            return;
+        }
+
+        if (!_selectedUnits.Add(unit)) {
+            return;
+        }
+
+        UpdateRoster();
+    }
+
+    public void DeselectUnit(UnitComponent unit) {
+        if (!_selectedUnits.Remove(unit)) {
+            return;
+        }
+
+        UpdateRoster();
+    }
+
+    private void UpdateRoster() {
+        var i = 0;
+        foreach (var unit in _selectedUnits) {
+            rosterSlots[i].SetUnit(unit);
+            i++;
+        }
+
+        for (; i < rosterSlots.Length; i++) {
+            rosterSlots[i].ClearUnit();
+        }
     }
 }

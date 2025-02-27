@@ -1,6 +1,9 @@
 using UnityEngine;
 
 public class TileMovementComponent : MovementComponentBase {
+    [SerializeField]
+    private bool isJumpMap;
+
     public override void GetMoves(MoveSet moveSet, Vector3Int unitPosition, TileComponent tileComponent) {
         var movesSize = MoveMap.size;
         var movesOrigin = MoveMap.origin;
@@ -20,10 +23,13 @@ public class TileMovementComponent : MovementComponentBase {
                 continue;
             }
 
-            var tile = MoveMap.GetTile(tilePos);
-            if (tile) {
-                // TODO: Check tile to determine if move is jump
-                moveSet.NormalMoves.Add(moveTilePos);
+            if (MoveMap.HasTile(tilePos)) {
+                if (isJumpMap) {
+                    moveSet.JumpMoves.Add(moveTilePos);
+                }
+                else {
+                    moveSet.NormalMoves.Add(moveTilePos);
+                }
             }
         }
     }

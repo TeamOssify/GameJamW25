@@ -1,23 +1,25 @@
 using UnityEngine;
 using System.Collections.Generic;
-using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine.Tilemaps;
 using TMPro;
 using UnityEngine.UI;
+using System;
 
 public class UnitHandler : MonoBehaviour {
-    [SerializeField]
-    private Tilemap tileMap;
+    public Tilemap tileMap;
 
-    [SerializeField]
-    private DeployAreaComponent deployArea;
+    public DeployAreaComponent deployArea;
 
-    [SerializeField]
-    private GameObject unitInterface;
+    public GameObject unitInterface;
+
+    public bool isReady {get; private set;} = false;
 
     [SerializeField]
     private GameObject unitCellPrefab;
+
+    [SerializeField]
+    private TurnStateManager turnStateManager;
 
     public UnitComponent pawn;
     public UnitComponent knight;
@@ -40,27 +42,52 @@ public class UnitHandler : MonoBehaviour {
     private UnitComponent _selectedUnit;
     private readonly HashSet<Vector3Int> _selectedUnitMoves = new();
 
+    public EventHandler<Vector3Int> UnitMoved;
+
+    [SerializeField]
+    private GameObject normalMoveHint;
+
+    [SerializeField]
+    private GameObject jumpMoveHint;
+
     private void Start() {
         _tileComponent = tileMap.GetComponent<TileComponent>();
+        _tileComponent.OnTileSelected += SelectTile;
+
+
+
+        isReady = true;
+    }
+
+    private void OnDestroy() {
+        // I would prefer if these were in OnEnable and OnDisable but we don't have a choice
+        _tileComponent.OnTileSelected -= SelectTile;
+    }
+
+    public void InitDeploy() {
+        //eventually, we'll grab the stuff from main menu here
         equippedUnits.Add(pawn);
         equippedUnits.Add(king);
         equippedUnits.Add(knight);
 
-        SpawnUnit(new Vector3Int(-5,1,0), pawn);
-        SpawnUnit(new Vector3Int(-1, 1,0), rook);
-        SpawnUnit(new Vector3Int(-3,1,0), bishop);
-        SpawnUnit(new Vector3Int(0,1,0), knight);
-        SpawnUnit(new Vector3Int(-3,3,0), queen);
-        SpawnUnit(new Vector3Int(4,-3,0), king);
-        SpawnUnit(new Vector3Int(4,-2,0), barbarian);
-        SpawnUnit(new Vector3Int(4,-1,0), jarl);
-
         PopulateUnitInterface();
+        turnStateManager.EnterDeployment();
+    }
+    
+    public void SetUnitForDeployment(UnitComponent unit) {
+        _deployingUnit = unit;
     }
 
     public void DeployUnit(Vector3Int gridPos, UnitComponent unit) {
         if (deployArea.IsADeploy(gridPos)) {
             SpawnUnit(gridPos, unit);
+            Debug.Log("Spawned unit");
+            if (turnStateManager.CurrentTurnState == TurnStateManager.TurnState.Deployment) {
+                turnStateManager.UnitDeployed();
+            }
+            else {
+                // its a respawn
+            }
         }
     }
 
@@ -99,8 +126,8 @@ public class UnitHandler : MonoBehaviour {
         _selectedUnitMoves.AddRange(unitMoves.NormalMoves);
         _selectedUnitMoves.AddRange(unitMoves.JumpMoves);
 
-        _tileComponent.SetTileHints(unitMoves.NormalMoves);
-        _tileComponent.AddTileHints(unitMoves.JumpMoves);
+        _tileComponent.SetTileHints(HintBucket.NormalMove, unitMoves.NormalMoves, normalMoveHint);
+        _tileComponent.SetTileHints(HintBucket.JumpMove, unitMoves.JumpMoves, jumpMoveHint);
     }
 
     private void DeselectUnit() {
@@ -110,11 +137,11 @@ public class UnitHandler : MonoBehaviour {
 
         _selectedUnit.Deselect();
         _selectedUnitMoves.Clear();
-        _tileComponent.ClearTileHints();
+        _tileComponent.ClearAllTileHints();
         _selectedUnit = null;
     }
 
-    public void SelectTile(Vector3Int gridPosition) {
+    private void SelectTile(object sender, Vector3Int gridPosition) {
         if (!_tileComponent.IsUnobstructedTile(gridPosition)) {
             // Blocked tile
             DeselectUnit();
@@ -123,12 +150,16 @@ public class UnitHandler : MonoBehaviour {
 
         if (TryGetUnitAtGridPosition(gridPosition, out var unit)) {
             // Clicked a unit
-            SelectUnit(unit);
+            if (!DeployMode) {
+                SelectUnit(unit);
+            }
             return;
         }
 
-        if (DeployMode) {
+        if (DeployMode && _deployingUnit != null) {
+            Debug.Log("deployed unit");
             DeployUnit(gridPosition, _deployingUnit);
+            return;
         }
 
         if (!_selectedUnit) {
@@ -143,6 +174,8 @@ public class UnitHandler : MonoBehaviour {
             _unitGridPositions.Remove(_selectedUnit.GridPos);
             _selectedUnit.Move(worldPos, gridPosition);
             _unitGridPositions.Add(gridPosition, _selectedUnit);
+
+            UnitMoved?.Invoke(this, gridPosition);
         }
 
         DeselectUnit();
@@ -153,13 +186,21 @@ public class UnitHandler : MonoBehaviour {
     }
 
     private void PopulateUnitInterface() {
-        foreach (UnitComponent unit in equippedUnits) {
-            GameObject newCell = Instantiate(unitCellPrefab, unitInterface.transform);
+        foreach (var unit in equippedUnits) {
+            var newCell = Instantiate(unitCellPrefab, unitInterface.transform);
             newCell.transform.Find("UnitName").GetComponent<TextMeshProUGUI>().text = unit.name;
             newCell.transform.Find("UnitTier").GetComponent<TextMeshProUGUI>().text = unit.currentTier.ToString();
             //newCell.transform.Find("UnitImage").GetComponent<Image>().sprite = unit.unitSprite;
             //add the sprite fields in later
-            newCell.transform.Find("ActionPopout").gameObject.SetActive(false);
+            GameObject actionPopout = newCell.transform.Find("ActionPopout").gameObject;
+            actionPopout.SetActive(false);
+
+            Button openButton = newCell.transform.Find("OpenActionPopout").GetComponent<Button>();
+
+            openButton.onClick.AddListener(() => {
+                Debug.Log("added listener to buttone");
+                actionPopout.SetActive(!actionPopout.activeSelf);
+            });
         }
     }
 }

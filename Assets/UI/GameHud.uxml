@@ -1,10 +1,10 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <engine:Template name="TurnCounter" src="project://database/Assets/UI/TurnCounter.uxml?fileID=9197481963319205126&amp;guid=c816ccbf359a7f949b9f271b1e365ef5&amp;type=3#TurnCounter" />
-    <engine:VisualElement name="HudContainer" style="align-content: stretch; justify-content: space-evenly; align-items: auto; height: 100%;">
-        <engine:VisualElement name="HudTop" style="flex-grow: 1; width: 100%; align-content: auto;">
+    <engine:VisualElement name="HudContainer" picking-mode="Ignore" style="align-content: stretch; justify-content: space-evenly; align-items: auto; height: 100%;">
+        <engine:VisualElement name="HudTop" picking-mode="Ignore" style="flex-grow: 1; width: 100%; align-content: auto;">
             <engine:Instance template="TurnCounter" style="align-self: flex-start; width: 20%; height: 35%;" />
         </engine:VisualElement>
-        <engine:VisualElement name="HudCenter" style="flex-grow: 1; width: 100%;" />
-        <engine:VisualElement data-source-path="HudBottom" name="HudBottom" style="flex-grow: 1; width: 100%; align-self: flex-start;" />
+        <engine:VisualElement name="HudCenter" picking-mode="Ignore" style="flex-grow: 1; width: 100%;" />
+        <engine:VisualElement data-source-path="HudBottom" name="HudBottom" picking-mode="Ignore" style="flex-grow: 1; width: 100%; align-self: flex-start;" />
     </engine:VisualElement>
 </engine:UXML>
