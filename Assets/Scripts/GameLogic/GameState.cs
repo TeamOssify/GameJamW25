@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -28,36 +27,45 @@ public class GameState : MonoBehaviour
     [SerializeField]
     private List<Vector3Int> capturePointPositions;
 
-    private UnitHandler unitHandler;
-    private CapturePointHandler capturePointHandler;
+    private UnitHandler _unitHandler;
+    private CapturePointHandler _capturePointHandler;
+    private TileComponent _tileComponent;
 
-    public bool handlersReady {get; private set;} = false;
-    IEnumerator Start()
-    {
-        unitHandler = Instantiate(unitHandlerPrefab, transform).GetComponent<UnitHandler>();
-        capturePointHandler = Instantiate(capturePointHandlerPrefab, transform).GetComponent<CapturePointHandler>();
+    public bool HandlersReady { get; private set; } = false;
+
+    private IEnumerator Start() {
+        _unitHandler = Instantiate(unitHandlerPrefab, transform).GetComponent<UnitHandler>();
+        _capturePointHandler = Instantiate(capturePointHandlerPrefab, transform).GetComponent<CapturePointHandler>();
+        _tileComponent = tilemap.GetComponent<TileComponent>();
 
         // Inject required fields
-        unitHandler.tileMap = tilemap;
-        unitHandler.deployArea = deployArea;
-        unitHandler.unitInterface = unitFrame;
-        capturePointHandler.tilemap = tilemap;
-        capturePointHandler.unitHandler = unitHandler;
+        _unitHandler.tileMap = tilemap;
+        _unitHandler.deployArea = deployArea;
+        _unitHandler.unitInterface = unitFrame;
+        _capturePointHandler.tilemap = tilemap;
+        _capturePointHandler.unitHandler = _unitHandler;
 
         // Create Capture points and units
-        capturePointHandler.spawnPoints = capturePointPositions;
-        yield return new WaitUntil(() => unitHandler.isReady); // In order ot prevent a null error caused by _tileComponent in unitHandler
+        _capturePointHandler.spawnPoints = capturePointPositions;
+        yield return new WaitUntil(() => _unitHandler.isReady); // In order ot prevent a null error caused by _tileComponent in unitHandler
         foreach (var i in unitPositions) {
-            unitHandler.SpawnUnit(i.position, i.pieceType);
+            _unitHandler.SpawnUnit(i.position, i.pieceType);
         }
 
-        capturePointHandler.allPointsCaptured.AddListener(disableInput);
-        handlersReady = true;
+        _capturePointHandler.allPointsCaptured.AddListener(DisableInput);
+        HandlersReady = true;
     }
 
+    private void OnDestroy() {
+        _capturePointHandler.allPointsCaptured.RemoveListener(DisableInput);
+    }
 
-    private void disableInput() {
-        Destroy(unitHandler);
+    private void DisableInput() {
+        _tileComponent.Interactable = false;
+    }
+
+    private void EnableInput() {
+        _tileComponent.Interactable = true;
     }
 
     // Had to do this bc System.Tuple isn't serializable

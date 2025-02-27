@@ -36,6 +36,8 @@ public class TileComponent : MonoBehaviour {
 
     public EventHandler<Vector3Int> OnTileSelected;
 
+    public bool Interactable { get; set; } = true;
+
     internal void Start() {
         _hoverTransform = tileHoverObject.transform;
         _hoverRenderer = tileHoverObject.GetComponent<SpriteRenderer>();
@@ -86,6 +88,10 @@ public class TileComponent : MonoBehaviour {
             _isHoldingSelect = true;
         }
 
+        if (!Interactable) {
+            return;
+        }
+
         var mousePos = GetMouseWorldPosition();
         if (TryGetTileForWorldPosition(mousePos, out var tilePos)) {
             _heldTile = tilePos;
@@ -93,10 +99,12 @@ public class TileComponent : MonoBehaviour {
     }
 
     internal void OnMouseUp() {
-        var mousePos = GetMouseWorldPosition();
-        if (TryGetTileForWorldPosition(mousePos, out var tilePos)) {
-            if (tilePos == _heldTile) {
-                SelectTile(tilePos);
+        if (Interactable) {
+            var mousePos = GetMouseWorldPosition();
+            if (TryGetTileForWorldPosition(mousePos, out var tilePos)) {
+                if (tilePos == _heldTile) {
+                    SelectTile(tilePos);
+                }
             }
         }
 
