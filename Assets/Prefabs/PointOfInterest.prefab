@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5798773702134913144}
   - component: {fileID: 6883485429967346066}
   m_Layer: 0
-  m_Name: VictoryCapturePoint
+  m_Name: PointOfInterest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: -712631045867808456, guid: b670ab75dde984907b8570040daa08c5, type: 3}
+  m_Sprite: {fileID: 3285335331047773680, guid: 602377b0442a9124cb4e5db0918147c9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
