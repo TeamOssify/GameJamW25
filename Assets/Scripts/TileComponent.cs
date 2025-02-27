@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 
@@ -10,8 +11,6 @@ public class TileComponent : MonoBehaviour {
 
     [SerializeField]
     private GameObject tileHoverObject;
-
-    private UnitHandler unitHandler;
 
     [SerializeField]
     private MovementMaskComponent movementMask;
@@ -34,18 +33,15 @@ public class TileComponent : MonoBehaviour {
     private bool _isHoldingSelect;
     private Vector3Int _heldTile;
 
-    internal IEnumerator Start() {
+    public EventHandler<Vector3Int> onTileSelected;
+
+    internal void Start() {
         _hoverTransform = tileHoverObject.transform;
         _hoverRenderer = tileHoverObject.GetComponent<SpriteRenderer>();
         _hoverVisible = _hoverRenderer.enabled;
 
         _mainCamera = Camera.main;
         _tileMap = gameObject.GetComponent<Tilemap>();
-
-        // Retrive unit handler from game state
-        GameState gState = GameObject.FindGameObjectWithTag("GameState").GetComponent<GameState>();
-        yield return new WaitUntil(() => gState.handlersReady);
-        unitHandler = gState.GetComponentInChildren<UnitHandler>();
     }
 
     internal void OnMouseOver() {
@@ -110,7 +106,7 @@ public class TileComponent : MonoBehaviour {
             return;
         }
 
-        unitHandler.SelectTile(tilePos);
+        onTileSelected?.Invoke(this, tilePos);
     }
 
     public bool TryGetWorldPositionForTileCenter(Vector3Int tilePos, out Vector3 worldPos) {

@@ -6,7 +6,7 @@ public class CapturePointHandler : MonoBehaviour {
     [SerializeField]
     private GameObject capturePointPrefab;
 
-    private TileComponent tileComponent;
+    private TileComponent _tileComponent;
 
     private int capturePoints = 0;
 
@@ -15,7 +15,7 @@ public class CapturePointHandler : MonoBehaviour {
     public List<Vector3Int> spawnPoints;
 
     public void Start() {
-        tileComponent = tilemap.GetComponent<TileComponent>();
+        _tileComponent = tilemap.GetComponent<TileComponent>();
         foreach (var i in spawnPoints) {
             AddCapturePoint(i);
         }
@@ -25,18 +25,18 @@ public class CapturePointHandler : MonoBehaviour {
         var newPoint = Instantiate(capturePointPrefab, transform);
         var pointComponent = newPoint.GetComponent<CapturePoint>();
 
-        tileComponent.TryGetWorldPositionForTileCenter(i, out var pos);
+        _tileComponent.TryGetWorldPositionForTileCenter(i, out var pos);
         pointComponent.Move(pos, i);
 
         capturePoints++;
 
-        unitHandler.unitMoved += pointComponent.onUnitMove;
-        pointComponent.captured.AddListener(() => {onPointCaptured(pointComponent);});
+        unitHandler.unitMoved += pointComponent.OnUnitMove;
+        pointComponent.captured.AddListener(() => {OnPointCaptured(pointComponent);});
     }
 
-    public void onPointCaptured(CapturePoint capturePoint) {
+    public void OnPointCaptured(CapturePoint capturePoint) {
         capturePoints--;
-        unitHandler.unitMoved -= capturePoint.onUnitMove;
+        unitHandler.unitMoved -= capturePoint.OnUnitMove;
 
         if (capturePoints <= 0) {
             Debug.Log("All points have been captured");

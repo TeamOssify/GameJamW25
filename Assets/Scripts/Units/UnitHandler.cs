@@ -40,15 +40,17 @@ public class UnitHandler : MonoBehaviour {
     private UnitComponent _selectedUnit;
     private readonly HashSet<Vector3Int> _selectedUnitMoves = new();
 
-    public Action<Vector3Int> unitMoved;
+    public EventHandler<Vector3Int> unitMoved;
 
     private void Start() {
         _tileComponent = tileMap.GetComponent<TileComponent>();
+        _tileComponent.onTileSelected += SelectTile;
+
         equippedUnits.Add(pawn);
         equippedUnits.Add(king);
         equippedUnits.Add(knight);
 
-        /// Removed in favour of GameState
+        // Removed in favour of GameState
         // SpawnUnit(new Vector3Int(-5,1,0), pawn);
         // SpawnUnit(new Vector3Int(-1, 1,0), rook);
         // SpawnUnit(new Vector3Int(-3,1,0), bishop);
@@ -61,6 +63,11 @@ public class UnitHandler : MonoBehaviour {
         PopulateUnitInterface();
 
         isReady = true;
+    }
+
+    private void OnDestroy() {
+        // I would prefer if these were in OnEnable and OnDisable but we don't have a choice
+        _tileComponent.onTileSelected -= SelectTile;
     }
 
     public void DeployUnit(Vector3Int gridPos, UnitComponent unit) {
@@ -119,7 +126,7 @@ public class UnitHandler : MonoBehaviour {
         _selectedUnit = null;
     }
 
-    public void SelectTile(Vector3Int gridPosition) {
+    private void SelectTile(object sender, Vector3Int gridPosition) {
         if (!_tileComponent.IsUnobstructedTile(gridPosition)) {
             // Blocked tile
             DeselectUnit();
@@ -149,7 +156,7 @@ public class UnitHandler : MonoBehaviour {
             _selectedUnit.Move(worldPos, gridPosition);
             _unitGridPositions.Add(gridPosition, _selectedUnit);
 
-            unitMoved.Invoke(gridPosition);
+            unitMoved?.Invoke(this, gridPosition);
         }
 
         DeselectUnit();
@@ -160,8 +167,8 @@ public class UnitHandler : MonoBehaviour {
     }
 
     private void PopulateUnitInterface() {
-        foreach (UnitComponent unit in equippedUnits) {
-            GameObject newCell = Instantiate(unitCellPrefab, unitInterface.transform);
+        foreach (var unit in equippedUnits) {
+            var newCell = Instantiate(unitCellPrefab, unitInterface.transform);
             newCell.transform.Find("UnitName").GetComponent<TextMeshProUGUI>().text = unit.name;
             newCell.transform.Find("UnitTier").GetComponent<TextMeshProUGUI>().text = unit.currentTier.ToString();
             //newCell.transform.Find("UnitImage").GetComponent<Image>().sprite = unit.unitSprite;

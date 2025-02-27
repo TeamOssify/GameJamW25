@@ -4,16 +4,16 @@ using UnityEngine.Events;
 public class CapturePoint : MonoBehaviour
 {
     public UnityEvent captured;
-    public Vector3Int gridPosition {get; private set;}
+    public Vector3Int GridPosition {get; private set;}
 
     public void Move(Vector3 worldPos, Vector3Int gridPos) {
         transform.position = worldPos;
-        gridPosition = gridPos;
+        GridPosition = gridPos;
     }
     
     // Should be linked to UnitHandler's unitMoved
-    public void onUnitMove(Vector3Int pos) {
-        if (pos == gridPosition) {
+    public void OnUnitMove(object sender, Vector3Int pos) {
+        if (pos == GridPosition) {
             captured.Invoke();
             Destroy(gameObject);
         }
