@@ -46,6 +46,7 @@ public class UnitHandler : MonoBehaviour {
 
     private UnitComponent _selectedUnit;
     private readonly HashSet<Vector3Int> _selectedUnitMoves = new();
+    private readonly HashSet<UnitComponent> _movedUnits = new();
 
     public EventHandler<Vector3Int> UnitMoved;
 
@@ -66,6 +67,11 @@ public class UnitHandler : MonoBehaviour {
         _tileComponent.OnTileSelected += SelectTile;
 
         isReady = true;
+        turnStateManager.OnNextPlayerTurn += OnNextPlayerTurn;
+    }
+
+    private void OnNextPlayerTurn(object sender, EventArgs e) {
+        _movedUnits.Clear();
     }
 
     private void OnDestroy() {
@@ -127,6 +133,10 @@ public class UnitHandler : MonoBehaviour {
             DeselectUnit();
         }
 
+        if (_movedUnits.Contains(unit)) {
+            return;
+        }
+
         _selectedUnit = unit;
         _selectedUnit.Select();
 
@@ -167,6 +177,7 @@ public class UnitHandler : MonoBehaviour {
             if (!DeployMode) {
                 SelectUnit(unit);
             }
+
             return;
         }
 
@@ -183,6 +194,7 @@ public class UnitHandler : MonoBehaviour {
 
         if (_selectedUnitMoves.Contains(gridPosition)
             && _tileComponent.TryGetWorldPositionForTileCenter(gridPosition, out var worldPos)
+            && _movedUnits.Add(_selectedUnit)
         ) {
             // Unit selected, clicked valid move tile
             _unitGridPositions.Remove(_selectedUnit.GridPos);
