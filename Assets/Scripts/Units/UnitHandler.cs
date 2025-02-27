@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine.Tilemaps;
 using TMPro;
 using UnityEngine.UI;
+using System;
 
 public class UnitHandler : MonoBehaviour {
     [SerializeField]
@@ -39,6 +40,8 @@ public class UnitHandler : MonoBehaviour {
 
     private UnitComponent _selectedUnit;
     private readonly HashSet<Vector3Int> _selectedUnitMoves = new();
+
+    public Action<Vector3Int> unitMoved;
 
     private void Start() {
         _tileComponent = tileMap.GetComponent<TileComponent>();
@@ -143,6 +146,8 @@ public class UnitHandler : MonoBehaviour {
             _unitGridPositions.Remove(_selectedUnit.GridPos);
             _selectedUnit.Move(worldPos, gridPosition);
             _unitGridPositions.Add(gridPosition, _selectedUnit);
+
+            unitMoved.Invoke(gridPosition);
         }
 
         DeselectUnit();
