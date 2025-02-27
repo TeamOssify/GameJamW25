@@ -75,7 +75,7 @@ public class UnitMovementRenderer : MonoBehaviour {
 
         var unitObject = Instantiate(unit, new Vector3(1000, 1000, 1000), Quaternion.identity);
         moveSet = unitObject.GetUnitMoves(_tileComponent, _ => false, _ => false);
-        Destroy(unitObject);
+        Destroy(unitObject.gameObject);
 
         _cachedMoves[unit] = moveSet;
         return moveSet;
