@@ -1,13 +1,18 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class EnemyComponent : MonoBehaviour {
     [SerializeField]
     private string enemyName;
 
     [SerializeField]
-    private Tilemap enemyMoves;
+    private MovementComponentBase enemyBaseMoves;
+
+    [SerializeField]
+    private MovementComponentBase enemyFirstMoves;
+
+    [SerializeField]
+    private MovementComponentBase enemyTier1Moves;
 
     public Vector3Int GridPos { get; private set; }
     public Vector3Int NextMove { get; private set; }
