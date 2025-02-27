@@ -17,7 +17,7 @@ public static class Bfs {
         while (queue.TryDequeue(out var current)) {
             for (var y = -1; y <= 1; y++)
             for (var x = -1; x <= 1; x++) {
-                if (Math.Abs(x) == Math.Abs(y)) {
+                if (x == 0 && y == 0) {
                     continue;
                 }
 
