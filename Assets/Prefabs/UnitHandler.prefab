@@ -45,3 +45,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMap: {fileID: 0}
+  deployArea: {fileID: 0}
+  unitInterface: {fileID: 0}
+  unitCellPrefab: {fileID: 5660195029888472448, guid: 4efb0f74513b51445af4fc2ff55c51e7, type: 3}
+  pawn: {fileID: 2572743752466897568, guid: 794412733f3216646ab41d635f8a69ad, type: 3}
+  knight: {fileID: 2572743752466897568, guid: 20c9f1ba390f51d42bfc974795561d48, type: 3}
+  king: {fileID: 2572743752466897568, guid: 0891ad5641dc3de44926bf0e146e0197, type: 3}
+  barbarian: {fileID: 2572743752466897568, guid: 476b23a4600c3934b92cb38e59fc558f, type: 3}
+  jarl: {fileID: 2572743752466897568, guid: fc4d2a1567e81164cbcfbe4002fd57a1, type: 3}
+  rook: {fileID: 2341058757680281788, guid: c4894b01b93c5144fa2af4b60d70eacb, type: 3}
+  bishop: {fileID: 2302396676278738301, guid: c135dc66c69e5fc4fa1e172308ca9571, type: 3}
+  queen: {fileID: 11694682010008481, guid: f898a7eaa07e17d4b9371c16b6e2f40b, type: 3}
+  equippedUnits: []
+  DeployMode: 0

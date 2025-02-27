@@ -4,17 +4,15 @@ using UnityEngine.Tilemaps;
 
 public class CapturePointHandler : MonoBehaviour {
     [SerializeField]
-    private Tilemap tilemap;
-    [SerializeField]
-    private List<Vector3Int> spawnPoints;
-    [SerializeField]
-    private UnitHandler unitHandler;
-    [SerializeField]
     private GameObject capturePointPrefab;
 
     private TileComponent tileComponent;
 
     private int capturePoints = 0;
+
+    public Tilemap tilemap;
+    public UnitHandler unitHandler;
+    public List<Vector3Int> spawnPoints;
 
     public void Start() {
         tileComponent = tilemap.GetComponent<TileComponent>();

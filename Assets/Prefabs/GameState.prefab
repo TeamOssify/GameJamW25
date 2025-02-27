@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4567022985327423417
+--- !u!1 &2709715788505155884
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2892086629376828627}
-  - component: {fileID: 6801748705163954170}
+  - component: {fileID: 1127985953678214933}
+  - component: {fileID: 5996095134372551906}
   m_Layer: 0
-  m_Name: CapturePointHandler
-  m_TagString: Untagged
+  m_Name: GameState
+  m_TagString: GameState
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2892086629376828627
+--- !u!4 &1127985953678214933
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4567022985327423417}
+  m_GameObject: {fileID: 2709715788505155884}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -32,19 +32,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6801748705163954170
+--- !u!114 &5996095134372551906
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4567022985327423417}
+  m_GameObject: {fileID: 2709715788505155884}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 759ced56fa2ce644ebc73955e68f5367, type: 3}
+  m_Script: {fileID: 11500000, guid: 75555099ad115d743a3748b841645bc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unitHandlerPrefab: {fileID: 3973409776510875857, guid: 9fcc169420bb2934fbbde2abfe29f5d0, type: 3}
+  capturePointHandlerPrefab: {fileID: 4567022985327423417, guid: 0272bb56fed1fc747b052e7a840d54eb, type: 3}
   tilemap: {fileID: 0}
-  spawnPoints: []
-  unitHandler: {fileID: 0}
-  capturePointPrefab: {fileID: 656153522905498304, guid: c8a353c518bfb074395d7ddb9dfd4da5, type: 3}
+  deployArea: {fileID: 0}
+  unitFrame: {fileID: 0}
+  unitPositions: []
+  capturePointPositions: []

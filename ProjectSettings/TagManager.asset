@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - HudController
+  - GameState
   layers:
   - Default
   - TransparentFX
