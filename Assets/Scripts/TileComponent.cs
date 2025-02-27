@@ -13,7 +13,7 @@ public class TileComponent : MonoBehaviour {
     private GameObject tileHoverObject;
 
     [SerializeField]
-    private MovementMaskComponent movementMask;
+    private Tilemap movementMask;
 
     private Transform _hoverTransform;
     private Vector3Int _hoverPosition;
@@ -166,7 +166,7 @@ public class TileComponent : MonoBehaviour {
     }
 
     public virtual bool IsUnobstructedTile(Vector3Int pos) {
-        return IsValidTile(pos) && !movementMask.IsPositionBlocked(pos);
+        return IsValidTile(pos) && !movementMask.HasTile(pos);
     }
 
     public void DebugSetTileHints() {

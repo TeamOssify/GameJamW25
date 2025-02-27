@@ -69,7 +69,6 @@
     <Compile Include="Assets\Scripts\Utils\SwapBackArray.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyPortalHandler.cs" />
     <Compile Include="Assets\Scripts\Movement\LongTileMovementComponent.cs" />
-    <Compile Include="Assets\Scripts\MovementMaskComponent.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyComponent.cs" />
     <Compile Include="Assets\Scripts\GameLogic\Models\SubWave.cs" />
     <Compile Include="Assets\Scripts\Menu\UnitInfoOvelayController.cs" />
