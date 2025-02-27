@@ -100,6 +100,9 @@ public class TurnStateManager : MonoBehaviour {
         if (_unitsToBeDeployed.Count > 0) {
             StartNextUnitDeployment();
         }
+        else {
+            FinishDeployment();
+        }
     }
 
     private void FinishDeployment() {
