@@ -135,7 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitName: Knight
   unitDescription: Icathia, first line of defense
-  unitSprite: {fileID: -2877412230355061801, guid: 0bef499326efe5a479276fea82ca5043, type: 3}
+  unitSprite: {fileID: 5132319823859426833, guid: 0bef499326efe5a479276fea82ca5043, type: 3}
   unitRespawnCost: 0
   unitUpgradeCost: 0
   unitBaseMoves: {fileID: 2121639354975059386}

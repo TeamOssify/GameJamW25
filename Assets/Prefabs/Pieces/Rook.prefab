@@ -135,7 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitName: Rook
   unitDescription: Rock solid.
-  unitSprite: {fileID: -5792601297933178350, guid: 39a570231a70398438e16af2d93d931f, type: 3}
+  unitSprite: {fileID: 5285190567972236416, guid: 39a570231a70398438e16af2d93d931f, type: 3}
   unitRespawnCost: 0
   unitUpgradeCost: 0
   unitBaseMoves: {fileID: 4125778948382061874}

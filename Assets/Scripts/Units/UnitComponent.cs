@@ -82,4 +82,16 @@ public class UnitComponent : MonoBehaviour {
 
         return moveSet;
     }
+
+    // Getter for _hasMoved
+    // Probably messier than having a HashMap in UnitHandler but whatev
+    // UPDATE so this doesnt work at all
+    // Leaving this here cuz I think its funny :p - Takk
+    public bool GetMoved() {
+        if (this._hasMoved) {
+            return true;
+        }
+
+        return false;
+    }
 }

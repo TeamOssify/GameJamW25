@@ -5,6 +5,7 @@ using UnityEngine.Tilemaps;
 using TMPro;
 using UnityEngine.UI;
 using System;
+using Unity.Collections;
 
 public class UnitHandler : MonoBehaviour {
     public Tilemap tileMap;
@@ -49,6 +50,8 @@ public class UnitHandler : MonoBehaviour {
 
     [SerializeField]
     private GameObject jumpMoveHint;
+
+    private HashSet<UnitComponent> _movedUnits = new();
 
     private void Start() {
         _tileComponent = tileMap.GetComponent<TileComponent>();
@@ -110,6 +113,11 @@ public class UnitHandler : MonoBehaviour {
     private void SelectUnit(UnitComponent unit) {
         if (ReferenceEquals(_selectedUnit, unit)) {
             // If the user clicked the same unit more than once, they probably want to deselect
+            DeselectUnit();
+            return;
+        }
+
+        if (unit.GetMoved()) {
             DeselectUnit();
             return;
         }
@@ -176,6 +184,7 @@ public class UnitHandler : MonoBehaviour {
             _unitGridPositions.Add(gridPosition, _selectedUnit);
 
             UnitMoved?.Invoke(this, gridPosition);
+            _movedUnits.Add(_selectedUnit);
         }
 
         DeselectUnit();
@@ -202,5 +211,9 @@ public class UnitHandler : MonoBehaviour {
                 actionPopout.SetActive(!actionPopout.activeSelf);
             });
         }
+    }
+    // External call for clearing the moved units hashmap
+    public void ClearMoved() {
+        _movedUnits.Clear();
     }
 }

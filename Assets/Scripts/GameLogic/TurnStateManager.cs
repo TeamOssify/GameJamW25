@@ -57,6 +57,7 @@ public class TurnStateManager : MonoBehaviour {
         if (_firstPlayerTurn) {
             unitHandler.InitDeploy();
         }
+        unitHandler.ClearMoved();
     }
 
     public void BeginEnemyTurn() {
