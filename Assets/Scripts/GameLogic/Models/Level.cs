@@ -4,6 +4,8 @@ using UnityEngine;
 
 [Serializable]
 public class Level : MonoBehaviour {
+    public int levelId;
+
     public string LevelName => levelName;
 
     [SerializeField]

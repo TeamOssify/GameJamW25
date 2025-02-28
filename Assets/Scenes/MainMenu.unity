@@ -1069,8 +1069,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c35bf2ab4611a4e4a8ce5727a5beb2ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levels:
-  - {fileID: 1897430412}
+  levels: {fileID: 1897430411}
   selectedLevel: 0
   levelText: {fileID: 528425970}
   unitDetailsName: {fileID: 983915529}
@@ -2641,6 +2640,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1897430413}
+  - component: {fileID: 1897430414}
   - component: {fileID: 1897430412}
   m_Layer: 0
   m_Name: Levels
@@ -2661,6 +2661,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e7a71344b704490b69289bc4af302a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelId: 0
   levelName: Level 1
   levelScene:
     asset: {fileID: 102900000, guid: 8c9cfa26abfee488c85f1582747f6a02, type: 3}
@@ -2680,6 +2681,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1897430414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1897430411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e7a71344b704490b69289bc4af302a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelId: 0
+  levelName: Tutorial
+  levelScene:
+    asset: {fileID: 102900000, guid: b82fca4e1e27a9f47b03af7de387b506, type: 3}
+    guid: b82fca4e1e27a9f47b03af7de387b506
 --- !u!1 &1931664213
 GameObject:
   m_ObjectHideFlags: 0

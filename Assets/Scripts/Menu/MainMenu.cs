@@ -1,14 +1,15 @@
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour {
     [SerializeField]
-    private Level[] levels;
+    private GameObject levels;
+
+    private Level[] _levelList;
 
     [SerializeField]
     private int selectedLevel;
@@ -39,6 +40,10 @@ public class MainMenu : MonoBehaviour {
     [SerializeField]
     private UnitRosterManagerScriptableObject unitRosterManager;
 
+    private void Awake() {
+        _levelList = levels.GetComponents<Level>().OrderBy(x => x.levelId).ToArray();
+    }
+
     private void Start() {
         ChangeSelectedLevel(0);
     }
@@ -54,18 +59,18 @@ public class MainMenu : MonoBehaviour {
     private void ChangeSelectedLevel(int level) {
         selectedLevel += level;
 
-        if (selectedLevel >= levels.Length) {
+        if (selectedLevel >= _levelList.Length) {
             selectedLevel = 0;
         }
         else if (selectedLevel < 0) {
-            selectedLevel = levels.Length - 1;
+            selectedLevel = _levelList.Length - 1;
         }
 
-        levelText.text = levels[selectedLevel].LevelName;
+        levelText.text = _levelList[selectedLevel].LevelName;
     }
 
     public void StartLevel() {
-        if (selectedLevel >= levels.Length) {
+        if (selectedLevel >= _levelList.Length) {
             Debug.Log($"Tried to load level outside of bounds: {selectedLevel}");
             return;
         }
@@ -76,7 +81,7 @@ public class MainMenu : MonoBehaviour {
 
         unitRosterManager.UnitRoster = _selectedUnits;
 
-        SceneManager.LoadSceneAsync(levels[selectedLevel].LevelScene.BuildIndex);
+        SceneManager.LoadSceneAsync(_levelList[selectedLevel].LevelScene.BuildIndex);
     }
 
     public void SetUnitDetails(UnitComponent unit) {
