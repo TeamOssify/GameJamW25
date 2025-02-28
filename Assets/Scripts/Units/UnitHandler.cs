@@ -8,17 +8,20 @@ using System;
 using System.Linq;
 
 public class UnitHandler : MonoBehaviour {
-    public Tilemap tileMap;
+    [SerializeField]
+    private Tilemap tileMap;
 
-    public DeployAreaComponent deployArea;
+    [SerializeField]
+    private DeployAreaComponent deployArea;
 
-    public GameObject unitInterface;
-
-    public bool isReady {get; private set;} = false;
+    [SerializeField]
+    private GameObject unitInterface;
 
     [SerializeField]
     private GameObject unitCellPrefab;
-    
+
+    [SerializeField]
+    private CapturePointHandler capturePointHandler;
 
     [SerializeField]
     private TurnStateManager turnStateManager;
@@ -50,10 +53,6 @@ public class UnitHandler : MonoBehaviour {
 
     public EventHandler<Vector3Int> UnitMoved;
 
-    [DoNotSerialize]
-    [HideInInspector]
-    public CapturePointHandler capturePointHandler;
-
     [SerializeField]
     private GameObject normalMoveHint;
 
@@ -67,7 +66,6 @@ public class UnitHandler : MonoBehaviour {
         _tileComponent = tileMap.GetComponent<TileComponent>();
         _tileComponent.OnTileSelected += SelectTile;
 
-        isReady = true;
         turnStateManager.OnNextPlayerTurn += OnNextPlayerTurn;
     }
 
@@ -143,7 +141,7 @@ public class UnitHandler : MonoBehaviour {
 
         // ReSharper disable once ConvertToLambdaExpression
         Predicate<Vector3Int> moveFilter = x => {
-            return TryGetUnitAtGridPosition(x, out _) || capturePointHandler.CapturePointPositions.Contains(x);
+            return TryGetUnitAtGridPosition(x, out _) || capturePointHandler.IsCapturePoint(x);
         };
 
         var unitMoves = _selectedUnit.GetUnitMoves(_tileComponent, moveFilter, moveFilter);

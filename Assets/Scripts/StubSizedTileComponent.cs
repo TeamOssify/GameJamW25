@@ -12,5 +12,5 @@ public class StubSizedTileComponent : TileComponent {
         return IsValidTile(pos);
     }
 
-    internal new void Start() { }
+    protected new void Awake() { }
 }

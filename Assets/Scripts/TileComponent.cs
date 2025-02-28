@@ -38,7 +38,7 @@ public class TileComponent : MonoBehaviour {
 
     public bool Interactable { get; set; } = true;
 
-    internal void Start() {
+    protected void Awake() {
         _hoverTransform = tileHoverObject.transform;
         _hoverRenderer = tileHoverObject.GetComponent<SpriteRenderer>();
         _hoverVisible = _hoverRenderer.enabled;
