@@ -51,6 +51,7 @@ public class UnitHandler : MonoBehaviour {
     public EventHandler<Vector3Int> UnitMoved;
 
     [DoNotSerialize]
+    [HideInInspector]
     public CapturePointHandler capturePointHandler;
 
     [SerializeField]
@@ -200,7 +201,7 @@ public class UnitHandler : MonoBehaviour {
         if (_selectedUnitMoves.Contains(gridPosition)
             && _tileComponent.TryGetWorldPositionForTileCenter(gridPosition, out var worldPos)
             && _movedUnits.Add(_selectedUnit)
-        ) {
+           ) {
             // Unit selected, clicked valid move tile
             _unitGridPositions.Remove(_selectedUnit.GridPos);
             _selectedUnit.Move(worldPos, gridPosition);
