@@ -40,15 +40,13 @@ public class EnemyComponent : MonoBehaviour {
         var allMoves = moveSet.NormalMoves.Concat(moveSet.JumpMoves).ToArray();
 
         var closestPoint = allMoves.FirstOrDefault();
-        foreach (var pos in path) {
-            foreach (var pos2 in allMoves) {
-                if (takenPositions.Contains(pos2)) {
-                    continue;
-                }
+        foreach (var pos2 in allMoves) {
+            if (takenPositions.Contains(pos2)) {
+                continue;
+            }
 
-                if (pos2.DistanceSquared(pos) < closestPoint.DistanceSquared(pos)) {
-                    closestPoint = pos2;
-                }
+            if (pos2.DistanceSquared(path[0]) < closestPoint.DistanceSquared(path[0])) {
+                closestPoint = pos2;
             }
         }
 
