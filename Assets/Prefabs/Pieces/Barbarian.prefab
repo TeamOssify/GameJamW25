@@ -135,7 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitName: Barbarian
   unitDescription: The most basic unit
-  unitSprite: {fileID: 21300000, guid: 43e121d986e1bcb4ca1352606857a150, type: 3}
+  unitSprite: {fileID: -238417670559284109, guid: 43e121d986e1bcb4ca1352606857a150, type: 3}
   unitRespawnCost: 0
   unitUpgradeCost: 0
   unitBaseMoves: {fileID: 5967705434433159140}
