@@ -9,15 +9,17 @@ public class EnemyHandler : MonoBehaviour {
     [SerializeField]
     private UnitHandler unitHandler;
 
-    private Vector3Int[] _pointsOfInterest;
+    [SerializeField]
+    private GameObject portalContainer;
 
-    public EnemyComponent barbarian;
+    private Vector3Int[] _pointsOfInterest;
 
     private Dictionary<Vector3Int, EnemyComponent> _enemyGridPositions = new();
     private Dictionary<Vector3Int, EnemyComponent> _futureEnemyGridPositions = new();
     private Dictionary<Vector3Int, int> _enemyPortalPositions = new();
 
     public EventHandler<Dictionary<Vector3Int, EnemyComponent>> enemiesMoved;
+    public EnemyPortalComponent portalPrefab;
 
     public bool CanSpawnEnemy(Vector3Int gridPos) {
         return !unitHandler.TryGetUnitAtGridPosition(gridPos, out _) && !_enemyGridPositions.ContainsKey(gridPos);
@@ -76,11 +78,37 @@ public class EnemyHandler : MonoBehaviour {
         return _enemyGridPositions.ContainsKey(gridPos);
     }
 
-    public void CreatePortal(Vector3Int initPos, EnemyPortalComponent portal) {
+    public void InitWorldPortals() {
+        foreach (EnemyPortalComponent portal in portalContainer.GetComponentsInChildren<EnemyPortalComponent>()) {
+            tileComponent.TryGetTileForWorldPosition(portal.transform.position, out var gridPos);
+            AddPortal(gridPos,portal);
+        }
+    }
 
-        var newPortal = Instantiate(portal, initPos, Quaternion.identity, gameObject.transform);
-        newPortal.Spawn(initPos);
+    public void AddPortal(Vector3Int initPos, EnemyPortalComponent newPortal) {
+        newPortal.SpawnPortal(initPos);
         _enemyPortalPositions.Add(initPos, _enemyPortalPositions.Count);
+    }
+
+    public void TriggerWorldPortals() {
+        foreach (EnemyPortalComponent portal in portalContainer.GetComponentsInChildren<EnemyPortalComponent>()) {
+            StepPortal(portal);
+        }
+    }
+    public void StepPortal(EnemyPortalComponent portal) {
+        foreach (Wave wave in portal.GetComponentsInChildren<Wave>()) {
+            if (portal.currentWave == wave.WaveNumber) {
+                SpawnWave(wave, portal);
+                portal.currentWave++;
+                return;
+            }
+        }
+    }
+
+    public void SpawnWave(Wave wave, EnemyPortalComponent portal) {
+        foreach (SubWave subWave in wave.SubWaves) {
+            SpawnSubwave(subWave, portal);
+        }
     }
 
     public void SpawnSubwave(SubWave wave, EnemyPortalComponent portal) {

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using UnityEngine.Networking;
 
 public class TurnStateManager : MonoBehaviour {
     [SerializeField]
@@ -34,7 +35,7 @@ public class TurnStateManager : MonoBehaviour {
 
     private void Start() {
         CurrentTurnState = TurnState.Player;
-
+        enemyHandler.InitWorldPortals();
         BeginPlayerTurn();
     }
 
@@ -67,7 +68,7 @@ public class TurnStateManager : MonoBehaviour {
     }
 
     public void BeginEnemyTurn() {
-
+        enemyHandler.TriggerWorldPortals();
         EndEnemyTurn();
     }
 

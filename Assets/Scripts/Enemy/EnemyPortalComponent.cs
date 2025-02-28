@@ -10,8 +10,13 @@ public class EnemyPortalComponent : MonoBehaviour {
     [SerializeField]
     private int portalId;
 
-    public void Spawn(Vector3Int gridPosition) {
+    public int currentWave;
+    public void SpawnPortal(Vector3Int gridPosition) {
         GridPos = gridPosition;
+    }
+
+    public void IncreaseWaveCount() {
+        currentWave++;
     }
     void Start() { }
 
