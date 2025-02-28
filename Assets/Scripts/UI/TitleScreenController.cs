@@ -1,12 +1,11 @@
-using System;
+using Eflatun.SceneReference;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
-public class TitleScreenController : MonoBehaviour
-{
+public class TitleScreenController : MonoBehaviour {
     [SerializeField]
-    private String mainScenePath = "Assets/Scenes/MainScene.unity";
+    private SceneReference mainMenu;
 
     // Setup events
     public void Start() {
@@ -18,7 +17,7 @@ public class TitleScreenController : MonoBehaviour
     }
 
     private void onPlay() {
-        SceneManager.LoadScene(mainScenePath);
+        SceneManager.LoadScene(mainMenu.BuildIndex);
     }
 
     private void onQuit() {
