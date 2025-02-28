@@ -19,12 +19,7 @@ public class EnemyComponent : MonoBehaviour {
     public Vector3Int GridPos { get; private set; }
     public Vector3Int NextMove { get; private set; }
 
-    public void Setup(Vector3Int startingPos) {
-        GridPos = startingPos;
-    }
-
     public Vector3Int ComputeNextMove(TileComponent tileComponent, IEnumerable<Vector3Int> objectives, IEnumerable<Vector3Int> playerUnits, IReadOnlyCollection<Vector3Int> takenPositions) {
-        // TODO: Compare path to nearby units & target higher priority
         var pointsOfInterest = new HashSet<Vector3Int>(objectives);
         pointsOfInterest.AddRange(playerUnits);
 

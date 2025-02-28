@@ -45,6 +45,8 @@ public class UnitHandler : MonoBehaviour {
     public bool DeployMode;
     private UnitComponent _deployingUnit;
 
+    public IEnumerable<Vector3Int> UnitPositions => _unitGridPositions.Keys;
+
     private readonly Dictionary<Vector3Int, UnitComponent> _unitGridPositions = new();
 
     private UnitComponent _selectedUnit;

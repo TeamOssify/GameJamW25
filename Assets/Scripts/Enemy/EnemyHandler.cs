@@ -59,7 +59,7 @@ public class EnemyHandler : MonoBehaviour {
         _futureEnemyGridPositions.Clear();
 
         foreach (var enemy in _enemyGridPositions.Values) {
-            var movePoint = enemy.ComputeNextMove(tileComponent, capturePointHandler.CapturePointPositions, Array.Empty<Vector3Int>(), takenPoints);
+            var movePoint = enemy.ComputeNextMove(tileComponent, capturePointHandler.CapturePointPositions, unitHandler.UnitPositions, takenPoints);
             takenPoints.Add(movePoint);
             _futureEnemyGridPositions.Add(movePoint, enemy);
         }
