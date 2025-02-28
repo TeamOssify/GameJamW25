@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyPortalComponent : MonoBehaviour {
@@ -18,7 +17,4 @@ public class EnemyPortalComponent : MonoBehaviour {
     public void IncreaseWaveCount() {
         currentWave++;
     }
-    void Start() { }
-
-    void Update() { }
 }

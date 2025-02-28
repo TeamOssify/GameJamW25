@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
@@ -26,6 +27,35 @@ public static class Bfs {
         }
 
         return notVisited;
+    }
+
+    public static Vector3Int ClosestAvailable(Vector3Int startingPos, TileComponent tileComponent, Predicate<Vector3Int> isAvailable) {
+        var visited = new HashSet<Vector3Int>();
+        var queue = new Queue<Vector3Int>();
+        queue.Enqueue(startingPos);
+
+        while (queue.TryDequeue(out var current)) {
+            for (var y = -1; y <= 1; y++)
+            for (var x = -1; x <= 1; x++) {
+                if (x == 0 && y == 0) {
+                    continue;
+                }
+
+                var newPoint = new Vector3Int(current.x + x, current.y + y, 0);
+                if (!tileComponent.IsUnobstructedTile(newPoint) || !visited.Add(newPoint)) {
+                    continue;
+                }
+
+                if (isAvailable(newPoint)) {
+                    return newPoint;
+                }
+
+                queue.Enqueue(newPoint);
+            }
+        }
+
+        Debug.LogWarning($"Couldn't find free point starting from {startingPos}");
+        return Vector3Int.zero;
     }
 
     /// <returns>The path to the nearest point of interest</returns>

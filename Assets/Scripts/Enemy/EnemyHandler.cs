@@ -21,8 +21,8 @@ public class EnemyHandler : MonoBehaviour {
     public EventHandler<Dictionary<Vector3Int, EnemyComponent>> enemiesMoved;
     public EnemyPortalComponent portalPrefab;
 
-    public bool CanSpawnEnemy(Vector3Int gridPos) {
-        return !unitHandler.TryGetUnitAtGridPosition(gridPos, out _) && !_enemyGridPositions.ContainsKey(gridPos);
+    public bool IsOccupiedByEnemy(Vector3Int gridPos) {
+        return _enemyGridPositions.ContainsKey(gridPos);
     }
 
     public void SpawnEnemy(EnemyComponent enemy, Vector3Int gridPos) {
@@ -35,13 +35,18 @@ public class EnemyHandler : MonoBehaviour {
             Debug.LogWarning($"Spawning enemy on top of unit at {gridPos}!");
         }
 
+        if (IsOccupiedByEnemy(gridPos)) {
+            Debug.LogWarning($"Tried spawning enemy on top of another enemy at {gridPos}!");
+            return;
+        }
+
         var newUnit = Instantiate(enemy, Vector3.zero, Quaternion.identity, gameObject.transform);
         if (!tileComponent.TryGetWorldPositionForTileCenter(gridPos, out var pos)) {
             Debug.LogError($"Failed to find tile center for {gridPos}!");
             return;
-        }   
+        }
 
-        newUnit.Move(pos,gridPos);
+        newUnit.Move(pos, gridPos);
         _enemyGridPositions.Add(gridPos, newUnit);
     }
 
@@ -106,15 +111,16 @@ public class EnemyHandler : MonoBehaviour {
     }
 
     public void SpawnWave(Wave wave, EnemyPortalComponent portal) {
-        foreach (SubWave subWave in wave.SubWaves) {
+        foreach (var subWave in wave.SubWaves) {
             SpawnSubwave(subWave, portal);
         }
     }
 
     public void SpawnSubwave(SubWave wave, EnemyPortalComponent portal) {
 
-        for (int i = 0; i < wave.EnemyCount; i++) {
-            SpawnEnemy(wave.EnemyToSpawn, portal.GridPos);
+        for (var i = 0; i < wave.EnemyCount; i++) {
+            var spawnPos = Bfs.ClosestAvailable(portal.GridPos, tileComponent, x => !IsOccupiedByEnemy(x));
+            SpawnEnemy(wave.EnemyToSpawn, spawnPos);
         }
 
         ComputeEnemyMoves();
