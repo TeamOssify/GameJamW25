@@ -22,10 +22,6 @@ public class TileComponent : MonoBehaviour {
     private bool _hoverDark;
     private bool _hoverVisible;
 
-    [FormerlySerializedAs("tileHintObject")]
-    [SerializeField]
-    private GameObject debugHintObject;
-
     private readonly Dictionary<HintBucket, Dictionary<Vector3Int, GameObject>> _tileHints = new();
 
     private Camera _mainCamera;
@@ -38,7 +34,7 @@ public class TileComponent : MonoBehaviour {
 
     public bool Interactable { get; set; } = true;
 
-    internal void Start() {
+    protected void Awake() {
         _hoverTransform = tileHoverObject.transform;
         _hoverRenderer = tileHoverObject.GetComponent<SpriteRenderer>();
         _hoverVisible = _hoverRenderer.enabled;
@@ -167,19 +163,6 @@ public class TileComponent : MonoBehaviour {
 
     public virtual bool IsUnobstructedTile(Vector3Int pos) {
         return IsValidTile(pos) && !movementMask.HasTile(pos);
-    }
-
-    public void DebugSetTileHints() {
-        var hints = new Vector3Int[] {
-            new(-1, 0, 0),
-            new(1, 0, 0),
-            new(0, -1, 0),
-            new(0, 1, 0),
-            new(-3, -3, 0),
-            new(-3, 0, 0),
-        };
-
-        SetTileHints(HintBucket.NormalMove, hints, debugHintObject);
     }
 
     public void SetTileHints(HintBucket hintBucket, IEnumerable<Vector3Int> hints, GameObject hintObject) {

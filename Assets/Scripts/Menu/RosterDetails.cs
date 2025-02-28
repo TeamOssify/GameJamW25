@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class RosterDetails : MonoBehaviour {
@@ -18,11 +17,13 @@ public class RosterDetails : MonoBehaviour {
     public void SetUnit(UnitComponent unit) {
         this.unit = unit;
         image.sprite = unit.UnitSprite;
+        image.color = Color.white;
     }
 
     public void ClearUnit() {
         this.unit = null;
         image.sprite = null;
+        image.color = Color.clear;
     }
 
     public void OnPointerEnter() {

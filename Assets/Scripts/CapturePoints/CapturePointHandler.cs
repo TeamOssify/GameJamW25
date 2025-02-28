@@ -4,41 +4,56 @@ using UnityEngine.Events;
 
 public class CapturePointHandler : MonoBehaviour {
     [SerializeField]
-    private GameObject capturePointPrefab;
+    private CapturePoint capturePointPrefab;
 
-    public readonly HashSet<Vector3Int> CapturePointPositions = new();
+    [SerializeField]
+    private TileComponent tileComponent;
 
-    public TileComponent tileComponent;
-    public EnemyHandler enemyHandler;
-    public List<Vector3Int> captureSpawns;
+    [SerializeField]
+    private EnemyHandler enemyHandler;
+
+    [SerializeField]
+    private Vector3Int[] captureSpawns;
 
     public UnityEvent allPointsCaptured;
 
-    public void SpawnCapturePoints() {
-        foreach (var i in captureSpawns) {
-            AddCapturePoint(i);
+    private readonly HashSet<Vector3Int> _capturePointPositions = new();
+
+    private void Start() {
+        foreach (var gridPos in captureSpawns) {
+            AddCapturePoint(gridPos);
         }
     }
 
-    public void AddCapturePoint(Vector3Int i) {
-        var newPoint = Instantiate(capturePointPrefab, transform);
-        var pointComponent = newPoint.GetComponent<CapturePoint>();
+    public void AddCapturePoint(Vector3Int gridPos) {
+        if (!tileComponent.TryGetWorldPositionForTileCenter(gridPos, out var worldPos)) {
+            Debug.LogWarning($"Failed to get world pot for capture point at {worldPos}!");
+        }
 
-        tileComponent.TryGetWorldPositionForTileCenter(i, out var pos);
-        pointComponent.Move(pos, i);
+        if (!tileComponent.IsUnobstructedTile(gridPos)) {
+            Debug.LogWarning($"Tried to place capture point on obstructed tile at {gridPos}!");
+            return;
+        }
 
-        CapturePointPositions.Add(i);
+        var newPoint = Instantiate(capturePointPrefab, transform.position, Quaternion.identity);
+        newPoint.Move(worldPos, gridPos);
 
-        enemyHandler.enemiesMoved += pointComponent.OnEnemyMove;
-        pointComponent.captured.AddListener(() => OnPointCaptured(pointComponent));
+        _capturePointPositions.Add(gridPos);
+
+        enemyHandler.enemiesMoved += newPoint.OnEnemyMove;
+        newPoint.captured.AddListener(() => OnPointCaptured(newPoint));
     }
 
     public void OnPointCaptured(CapturePoint capturePoint) {
-        CapturePointPositions.Remove(capturePoint.GridPosition);
+        _capturePointPositions.Remove(capturePoint.GridPosition);
         enemyHandler.enemiesMoved -= capturePoint.OnEnemyMove;
 
-        if (CapturePointPositions.Count == 0) {
+        if (_capturePointPositions.Count == 0) {
             allPointsCaptured.Invoke();
         }
+    }
+
+    public bool IsCapturePoint(Vector3Int gridPos) {
+        return _capturePointPositions.Contains(gridPos);
     }
 }
