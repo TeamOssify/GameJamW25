@@ -1,21 +1,45 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
-
-public enum UnitType {Pawn, Knight, Bishop, Rook, Queen, King, Barbarian, Duke}
 
 public class UnitComponent : MonoBehaviour {
+    public string UnitName => unitName;
+
     [SerializeField]
     private string unitName;
+
+    public string UnitDescription => unitDescription;
 
     [SerializeField]
     private string unitDescription;
 
+    public Sprite UnitSprite => unitSprite;
+
     [SerializeField]
-    private Tilemap unitBaseMoves;
+    public Sprite unitSprite;
+
+    public int RespawnCost => unitRespawnCost;
+
+    [SerializeField]
+    private int unitRespawnCost;
+
+    public int UpgradeCost => unitUpgradeCost;
+
+    [SerializeField]
+    private int unitUpgradeCost;
+
+    [SerializeField]
+    private MovementComponentBase unitBaseMoves;
+
+    [SerializeField]
+    private MovementComponentBase unitFirstMoves;
+
+    [SerializeField]
+    private MovementComponentBase unitTier1Moves;
 
     public Vector3Int GridPos { get; private set; }
+    public int currentTier = 1;
+
+    private bool _hasMoved;
 
     public void Select() {
         Debug.Log("Selected a unit");
@@ -25,51 +49,37 @@ public class UnitComponent : MonoBehaviour {
         Debug.Log("Deselected a unit");
     }
 
-    public bool IsValidMove(Vector3Int gridPosition) {
-        Debug.Log("Yo");
-        return false;
-    }
-
-    public void Move(Vector3 pos, Vector3Int gridPosition) {
+    public void Move(Vector3 pos, Vector3Int gridPosition, bool initializing = false) {
         transform.position = pos;
         GridPos = gridPosition;
-        Debug.Log("tried move to world pos " + pos + " grid pos: " + gridPosition);
-    }
-
-    public List<Vector3Int> GetUnitMoves() {
-        var moves = GetBaseMoves();
-
-        var upgradeMoves = GetUpgradeMoves();
-        moves.AddRange(upgradeMoves);
-
-        return moves;
-    }
-
-    private List<Vector3Int> GetBaseMoves() {
-        var movesSize = unitBaseMoves.size;
-        var movesOrigin = unitBaseMoves.origin;
-
-        var moves = new List<Vector3Int>();
-        for (var y = 0; y < movesSize.y; y++)
-        for (var x = 0; x < movesSize.x; x++) {
-            var tilePos = new Vector3Int(x, y) + movesOrigin;
-
-            if (tilePos is { x: 0, y: 0 }) {
-                // Don't display current unit tile as a move
-                continue;
-            }
-
-            if (unitBaseMoves.HasTile(tilePos)) {
-                moves.Add(tilePos + GridPos);
-            }
+        if (!initializing) {
+            _hasMoved = true;
         }
-        
-        return moves;
     }
 
-    private Vector3Int[] GetUpgradeMoves() {
-        return Array.Empty<Vector3Int>();
+    public MoveSet GetUnitMoves(TileComponent tileComponent, Predicate<Vector3Int> normalAdditionalFilter, Predicate<Vector3Int> jumpAdditionalFilter) {
+        var moveSet = new MoveSet();
+
+        unitBaseMoves.GetMoves(moveSet, GridPos, tileComponent);
+
+        if (!_hasMoved && unitFirstMoves) {
+            unitFirstMoves.GetMoves(moveSet, GridPos, tileComponent);
+        }
+
+        if (unitTier1Moves) {
+            unitTier1Moves.GetMoves(moveSet, GridPos, tileComponent);
+        }
+
+        if (moveSet.NormalMoves.Count == 0 && moveSet.JumpMoves.Count == 0) {
+            Debug.LogWarning($"Unit {unitName} has no known moves! (Including invalid)");
+        }
+
+        moveSet.NormalMoves.RemoveAll(normalAdditionalFilter);
+        moveSet.JumpMoves.RemoveAll(jumpAdditionalFilter);
+
+        var notVisited = Bfs.FloodFill(GridPos, moveSet.NormalMoves, tileComponent);
+        moveSet.NormalMoves.RemoveAll(x => notVisited.Contains(x));
+
+        return moveSet;
     }
-    
-    
 }

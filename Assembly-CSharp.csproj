@@ -47,19 +47,45 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\TileComponent.cs" />
+    <Compile Include="Assets\Scripts\Menu\MainMenu.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyPortalComponent.cs" />
+    <Compile Include="Assets\Scripts\UI\TitleScreenController.cs" />
+    <Compile Include="Assets\Scripts\CapturePoints\CapturePoint.cs" />
+    <Compile Include="Assets\Scripts\Movement\TileMovementComponent.cs" />
     <Compile Include="Assets\Scripts\GameLogic\WaveManager.cs" />
+    <Compile Include="Assets\Scripts\CapturePoints\CapturePointHandler.cs" />
+    <Compile Include="Assets\Scripts\GameLogic\TurnStateManager.cs" />
+    <Compile Include="Assets\Scripts\Menu\UnitMovementRenderer.cs" />
     <Compile Include="Assets\Scripts\Units\UnitHandler.cs" />
+    <Compile Include="Assets\Scripts\GameLogic\GameState.cs" />
+    <Compile Include="Assets\Scripts\Movement\Bfs.cs" />
+    <Compile Include="Assets\Scripts\Movement\Models\Enums.cs" />
+    <Compile Include="Assets\Scripts\DeployAreaComponent.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemyHandler.cs" />
+    <Compile Include="Assets\Scripts\Menu\RosterDetails.cs" />
+    <Compile Include="Assets\Scripts\StubSizedTileComponent.cs" />
     <Compile Include="Assets\Scripts\Units\UnitComponent.cs" />
-    <Compile Include="Assets\Scripts\MovementMaskComponent.cs" />
+    <Compile Include="Assets\Scripts\Menu\UnitDetails.cs" />
+    <Compile Include="Assets\Scripts\Utils\SwapBackArray.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemyPortalHandler.cs" />
+    <Compile Include="Assets\Scripts\Movement\LongTileMovementComponent.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyComponent.cs" />
-    <Compile Include="Assets\Scripts\Pathfinding\PathfindingHandler.cs" />
     <Compile Include="Assets\Scripts\GameLogic\Models\SubWave.cs" />
-    <Compile Include="Assets\Scripts\Enemy\EnemyHandlerComponent.cs" />
+    <Compile Include="Assets\Scripts\Menu\UnitInfoOvelayController.cs" />
+    <Compile Include="Assets\Scripts\UI\MainHudController.cs" />
     <Compile Include="Assets\Scripts\GameLogic\Models\Level.cs" />
+    <Compile Include="Assets\Scripts\Menu\UnitSelectorManager.cs" />
     <Compile Include="Assets\Scripts\GameLogic\LevelManager.cs" />
-    <Compile Include="Assets\Scripts\Units\UnitMovement.cs" />
+    <Compile Include="Assets\Scripts\Enums.cs" />
+    <Compile Include="Assets\Scripts\Movement\MovementComponentBase.cs" />
     <Compile Include="Assets\Scripts\GameLogic\Models\Wave.cs" />
+    <Compile Include="Assets\Scripts\Movement\Models\MoveSet.cs" />
+    <None Include="Assets\UI\Test.uxml" />
+    <None Include="Assets\UI\TurnCounter.uss" />
+    <None Include="Assets\UI\TitleScreen.uss" />
+    <None Include="Assets\UI\TurnCounter.uxml" />
+    <None Include="Assets\UI\GameHud.uxml" />
+    <None Include="Assets\UI\TitleScreen.uxml" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
@@ -954,6 +980,9 @@
     <Reference Include="Unity.RenderPipelines.Core.Editor">
       <HintPath>C:\Users\kianc\Documents\GitHub\GameJamW25\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Toolchain.Win-x86_64-Linux-x86_64">
+      <HintPath>C:\Users\kianc\Documents\GitHub\GameJamW25\Library\ScriptAssemblies\Unity.Toolchain.Win-x86_64-Linux-x86_64.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.Runtime">
       <HintPath>C:\Users\kianc\Documents\GitHub\GameJamW25\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
     </Reference>
@@ -965,6 +994,9 @@
     </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
       <HintPath>C:\Users\kianc\Documents\GitHub\GameJamW25\Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Sysroot.Linux_x86_64">
+      <HintPath>C:\Users\kianc\Documents\GitHub\GameJamW25\Library\ScriptAssemblies\Unity.Sysroot.Linux_x86_64.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Psdimporter.Editor">
       <HintPath>C:\Users\kianc\Documents\GitHub\GameJamW25\Library\ScriptAssemblies\Unity.2D.Psdimporter.Editor.dll</HintPath>
@@ -995,6 +1027,9 @@
     </Reference>
     <Reference Include="Unity.InputSystem">
       <HintPath>C:\Users\kianc\Documents\GitHub\GameJamW25\Library\ScriptAssemblies\Unity.InputSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.SysrootPackage.Editor">
+      <HintPath>C:\Users\kianc\Documents\GitHub\GameJamW25\Library\ScriptAssemblies\Unity.SysrootPackage.Editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

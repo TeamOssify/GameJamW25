@@ -1,0 +1,31 @@
+Label {
+    -unity-text-align: upper-center;
+    font-size: 28px;
+}
+
+#Container {
+    background-color: rgb(89, 159, 111);
+    border-left-color: rgb(0, 58, 17);
+    border-right-color: rgb(0, 58, 17);
+    border-top-color: rgb(0, 58, 17);
+    border-bottom-color: rgb(0, 58, 17);
+    border-top-width: 16px;
+    border-right-width: 16px;
+    border-bottom-width: 16px;
+    border-left-width: 16px;
+    border-top-left-radius: 32px;
+    border-top-right-radius: 32px;
+    border-bottom-right-radius: 32px;
+    border-bottom-left-radius: 32px;
+    justify-content: space-evenly;
+    align-content: stretch;
+    -unity-background-scale-mode: scale-to-fit;
+    transition-duration: 100ms;
+    transition-property: opacity;
+}
+
+#Container:hover {
+    opacity: 0.15;
+    visibility: visible;
+    transition-duration: 100ms;
+}
