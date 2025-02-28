@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 71d49145bcaf45b44bebf54c45696660
+guid: 488c1df557b427a45bdc14273216777a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1887494081247492234
-    second: Rocks_0
-  - first:
-      213: 2007986136508003152
-    second: Rocks_1
+      213: -8553627433989134883
+    second: FallenTreeLeft_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -54,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 64
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -116,45 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Rocks_0
+      name: FallenTreeLeft_0
       rect:
         serializedVersion: 2
-        x: 5
+        x: 0
         y: 0
-        width: 57
-        height: 45
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a88b864ddd9b13a10800000000000000
-      internalID: 1887494081247492234
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Rocks_1
-      rect:
-        serializedVersion: 2
-        x: 37
-        y: 33
-        width: 6
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 053f77c90cccddb10800000000000000
-      internalID: 2007986136508003152
+      spriteID: dd5aa08fa296b4980800000000000000
+      internalID: -8553627433989134883
       vertices: []
       indices: 
       edges: []
@@ -163,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 4983a30b169eaa440aac22c7b0248ebf
     internalID: 0
     vertices: []
     indices: 
@@ -172,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      FallenTreeLeft_0: -8553627433989134883
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
