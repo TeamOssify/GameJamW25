@@ -843,7 +843,7 @@ GameObject:
   - component: {fileID: 528425971}
   - component: {fileID: 528425970}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Level Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1101,6 +1101,7 @@ GameObject:
   - component: {fileID: 758155443}
   - component: {fileID: 758155442}
   - component: {fileID: 758155444}
+  - component: {fileID: 758155445}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1195,8 +1196,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levels:
-  - {fileID: 0}
+  - {fileID: 758155445}
   selectedLevel: 0
+  levelText: {fileID: 528425970}
   unitDetailsName: {fileID: 983915529}
   unitDetailsDescription: {fileID: 511141663}
   unitFirstMoveImage: {fileID: 1511400893}
@@ -1266,6 +1268,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fieldRadius: 3
+--- !u!114 &758155445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 758155438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e7a71344b704490b69289bc4af302a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelName: Level 1
+  levelScene:
+    asset: {fileID: 102900000, guid: 8c9cfa26abfee488c85f1582747f6a02, type: 3}
+    guid: 8c9cfa26abfee488c85f1582747f6a02
 --- !u!1 &875502884
 GameObject:
   m_ObjectHideFlags: 0

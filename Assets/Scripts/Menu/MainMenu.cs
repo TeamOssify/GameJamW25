@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -10,6 +11,9 @@ public class MainMenu : MonoBehaviour {
 
     [SerializeField]
     private int selectedLevel;
+
+    [SerializeField]
+    private TextMeshProUGUI levelText;
 
     [SerializeField]
     private TextMeshProUGUI unitDetailsName;
@@ -31,6 +35,10 @@ public class MainMenu : MonoBehaviour {
 
     private readonly HashSet<UnitComponent> _selectedUnits = new();
 
+    private void Start() {
+        ChangeSelectedLevel(0);
+    }
+
     public void RightArrow() {
         ChangeSelectedLevel(1);
     }
@@ -48,6 +56,8 @@ public class MainMenu : MonoBehaviour {
         else if (selectedLevel < 0) {
             selectedLevel = levels.Length - 1;
         }
+
+        levelText.text = levels[selectedLevel].LevelName;
     }
 
     public void StartLevel() {
