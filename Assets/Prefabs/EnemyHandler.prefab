@@ -46,3 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileComponent: {fileID: 0}
   unitHandler: {fileID: 0}
+  portalContainer: {fileID: 0}
+  portalPrefab: {fileID: 7290055343492574584, guid: 79d5d8dd5a2bbd24f8a3aee6fefba71f, type: 3}
+  enemyTelegraphHint: {fileID: 714943016520926890, guid: b11fbcf9c3650b540b144e20bdc77a80, type: 3}

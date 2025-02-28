@@ -5790,6 +5790,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 913752192}
     - target: {fileID: 5650186298423401230, guid: e27135d426622d34aad6390b2ec92fc1, type: 3}
+      propertyPath: tileComponent
+      value: 
+      objectReference: {fileID: 1232651413}
+    - target: {fileID: 5650186298423401230, guid: e27135d426622d34aad6390b2ec92fc1, type: 3}
       propertyPath: mainHudController
       value: 
       objectReference: {fileID: 956095468}
@@ -5863,10 +5867,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1818598135}
     - target: {fileID: 3125632657500253129, guid: f5794b909f10bee4aa52920e6faa0a02, type: 3}
-      propertyPath: portalPrefab
-      value: 
-      objectReference: {fileID: 7290055343492574584, guid: 79d5d8dd5a2bbd24f8a3aee6fefba71f, type: 3}
-    - target: {fileID: 3125632657500253129, guid: f5794b909f10bee4aa52920e6faa0a02, type: 3}
       propertyPath: tileComponent
       value: 
       objectReference: {fileID: 1232651413}
@@ -5874,6 +5874,10 @@ PrefabInstance:
       propertyPath: portalContainer
       value: 
       objectReference: {fileID: 222542062}
+    - target: {fileID: 3125632657500253129, guid: f5794b909f10bee4aa52920e6faa0a02, type: 3}
+      propertyPath: capturePointHandler
+      value: 
+      objectReference: {fileID: 4645149366752074593}
     - target: {fileID: 5090496391419803782, guid: f5794b909f10bee4aa52920e6faa0a02, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.99607

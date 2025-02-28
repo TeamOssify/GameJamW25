@@ -17,6 +17,8 @@ public class CapturePointHandler : MonoBehaviour {
 
     public UnityEvent allPointsCaptured;
 
+    public IEnumerable<Vector3Int> CapturePointPositions => _capturePointPositions;
+
     private readonly HashSet<Vector3Int> _capturePointPositions = new();
 
     private void Start() {

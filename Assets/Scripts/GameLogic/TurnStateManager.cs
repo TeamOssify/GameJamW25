@@ -1,7 +1,6 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
-using UnityEngine.Networking;
 
 public class TurnStateManager : MonoBehaviour {
     [SerializeField]
@@ -15,6 +14,9 @@ public class TurnStateManager : MonoBehaviour {
 
     [SerializeField]
     private EnemyHandler enemyHandler;
+
+    [SerializeField]
+    private TileComponent tileComponent;
 
     public enum TurnState {
         Player,
@@ -68,6 +70,7 @@ public class TurnStateManager : MonoBehaviour {
     }
 
     public void BeginEnemyTurn() {
+        tileComponent.ClearTileHints(HintBucket.EnemyTelegraph);
         enemyHandler.TriggerWorldPortals();
         EndEnemyTurn();
     }

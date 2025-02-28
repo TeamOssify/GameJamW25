@@ -12,14 +12,18 @@ public class EnemyHandler : MonoBehaviour {
     [SerializeField]
     private GameObject portalContainer;
 
-    private Vector3Int[] _pointsOfInterest;
+    [SerializeField]
+    private CapturePointHandler capturePointHandler;
 
     private Dictionary<Vector3Int, EnemyComponent> _enemyGridPositions = new();
     private Dictionary<Vector3Int, EnemyComponent> _futureEnemyGridPositions = new();
-    private Dictionary<Vector3Int, int> _enemyPortalPositions = new();
+    private readonly Dictionary<Vector3Int, int> _enemyPortalPositions = new();
 
     public EventHandler<Dictionary<Vector3Int, EnemyComponent>> enemiesMoved;
     public EnemyPortalComponent portalPrefab;
+
+    [SerializeField]
+    private GameObject enemyTelegraphHint;
 
     public bool IsOccupiedByEnemy(Vector3Int gridPos) {
         return _enemyGridPositions.ContainsKey(gridPos);
@@ -50,19 +54,17 @@ public class EnemyHandler : MonoBehaviour {
         _enemyGridPositions.Add(gridPos, newUnit);
     }
 
-    public void UpdatePointsOfInterest() {
-
-    }
-
     public void ComputeEnemyMoves() {
         var takenPoints = new HashSet<Vector3Int>();
         _futureEnemyGridPositions.Clear();
 
         foreach (var enemy in _enemyGridPositions.Values) {
-            var movePoint = enemy.ComputeNextMove(tileComponent, _pointsOfInterest, Array.Empty<Vector3Int>(), takenPoints);
+            var movePoint = enemy.ComputeNextMove(tileComponent, capturePointHandler.CapturePointPositions, Array.Empty<Vector3Int>(), takenPoints);
             takenPoints.Add(movePoint);
             _futureEnemyGridPositions.Add(movePoint, enemy);
         }
+
+        tileComponent.AddTileHints(HintBucket.EnemyTelegraph, takenPoints, enemyTelegraphHint);
     }
 
     public void MoveEnemies() {

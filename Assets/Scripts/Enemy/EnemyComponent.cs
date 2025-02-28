@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyComponent : MonoBehaviour {
@@ -21,11 +23,36 @@ public class EnemyComponent : MonoBehaviour {
         GridPos = startingPos;
     }
 
-    public Vector3Int ComputeNextMove(TileComponent tilemap, IEnumerable<Vector3Int> pointsOfInterest, IEnumerable<Vector3Int> playerUnits, IReadOnlyCollection<Vector3Int> takenPositions) {
-        // TODO: Compute path to POI
+    public Vector3Int ComputeNextMove(TileComponent tileComponent, IEnumerable<Vector3Int> objectives, IEnumerable<Vector3Int> playerUnits, IReadOnlyCollection<Vector3Int> takenPositions) {
         // TODO: Compare path to nearby units & target higher priority
-        NextMove = GridPos;
+        var pointsOfInterest = new HashSet<Vector3Int>(objectives);
+        pointsOfInterest.AddRange(playerUnits);
 
+        var path = Bfs.NearestPointOfInterest(GridPos, pointsOfInterest, tileComponent);
+        if (path is null) {
+            Debug.Log("No path available.");
+            return GridPos;
+        }
+
+        var moveSet = new MoveSet();
+        enemyBaseMoves.GetMoves(moveSet, GridPos, tileComponent);
+
+        var allMoves = moveSet.NormalMoves.Concat(moveSet.JumpMoves).ToArray();
+
+        var closestPoint = allMoves.FirstOrDefault();
+        foreach (var pos in path) {
+            foreach (var pos2 in allMoves) {
+                if (takenPositions.Contains(pos2)) {
+                    continue;
+                }
+
+                if (pos2.DistanceSquared(pos) < closestPoint.DistanceSquared(pos)) {
+                    closestPoint = pos2;
+                }
+            }
+        }
+
+        NextMove = closestPoint;
         return NextMove;
     }
 
