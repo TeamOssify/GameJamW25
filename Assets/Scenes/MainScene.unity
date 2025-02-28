@@ -6165,6 +6165,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1232651413}
     - target: {fileID: 5996095134372551906, guid: a00817b02a88d184e96d4b8430d2de8c, type: 3}
+      propertyPath: turnStateManager
+      value: 
+      objectReference: {fileID: 52438254}
+    - target: {fileID: 5996095134372551906, guid: a00817b02a88d184e96d4b8430d2de8c, type: 3}
       propertyPath: capturePointHandler
       value: 
       objectReference: {fileID: 4645149366752074593}

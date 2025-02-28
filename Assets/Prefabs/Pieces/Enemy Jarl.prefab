@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 100
-  m_Sprite: {fileID: 4958322611494568298, guid: cc0c5a87a67421a4fa1d38fb5683b1f3, type: 3}
+  m_Sprite: {fileID: -8696312407752333741, guid: fdd56c4209d637843a16703629643387, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -96,7 +96,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1328483591800289427}
-  - component: {fileID: 2572743752466897568}
   - component: {fileID: 6395855153515128427}
   m_Layer: 0
   m_Name: Enemy Jarl
@@ -122,27 +121,6 @@ Transform:
   - {fileID: 9143423862064333545}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2572743752466897568
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7205913911990244250}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e09490ace2075844a66e3e6b14ea7f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unitName: Jarl
-  unitDescription: Acknowledge your tribal chief.
-  unitSprite: {fileID: 623643810848611641, guid: 5e8284b5f4f99cd45b3453f8d906e870, type: 3}
-  unitRespawnCost: 0
-  unitUpgradeCost: 0
-  unitBaseMoves: {fileID: 5547288297182982234}
-  unitFirstMoves: {fileID: 0}
-  unitTier1Moves: {fileID: 0}
-  currentTier: 1
 --- !u!114 &6395855153515128427
 MonoBehaviour:
   m_ObjectHideFlags: 0
