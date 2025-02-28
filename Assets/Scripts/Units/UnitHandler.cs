@@ -114,6 +114,11 @@ public class UnitHandler : MonoBehaviour {
         }
     }
 
+    public void CaptureUnit(Vector3Int gridPos,UnitComponent unit) {
+        _unitGridPositions.Remove(gridPos);
+        Destroy(unit.gameObject);
+    }
+
     public void SpawnUnit(Vector3Int gridPos, UnitComponent unitType) {
         if (!_tileComponent.IsUnobstructedTile(gridPos)) {
             Debug.LogError($"Invalid grid position: {gridPos}");
@@ -210,7 +215,7 @@ public class UnitHandler : MonoBehaviour {
         }
 
         if (enemyHandler.WouldCaptureEnemy(gridPosition)) {
-            if(enemyHandler.TryGetEnemyAtGridPosition(gridPosition, out var enemy)){
+            if (enemyHandler.TryGetEnemyAtGridPosition(gridPosition, out var enemy)){
                 enemyHandler.CaptureEnemy(gridPosition, enemy);
             }
         }

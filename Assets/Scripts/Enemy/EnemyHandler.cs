@@ -95,8 +95,12 @@ public class EnemyHandler : MonoBehaviour {
                 Debug.LogError($"Failed to get new world pos for enemy at {gridPos}!");
                 continue;
             }
+
+            if (unitHandler.TryGetUnitAtGridPosition(gridPos, out var unit)) {
+                unitHandler.CaptureUnit(gridPos, unit);
+            }
             enemy.Move(worldPos, gridPos);
-            
+
         }
 
         (_enemyGridPositions, _futureEnemyGridPositions) = (_futureEnemyGridPositions, _enemyGridPositions);
