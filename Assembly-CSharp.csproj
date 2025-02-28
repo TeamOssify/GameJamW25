@@ -57,6 +57,7 @@
     <Compile Include="Assets\Scripts\CapturePoints\CapturePointHandler.cs" />
     <Compile Include="Assets\Scripts\GameLogic\TurnStateManager.cs" />
     <Compile Include="Assets\Scripts\Menu\UnitMovementRenderer.cs" />
+    <Compile Include="Assets\Scripts\CameraMovement.cs" />
     <Compile Include="Assets\Scripts\Units\UnitHandler.cs" />
     <Compile Include="Assets\Scripts\GameLogic\GameState.cs" />
     <Compile Include="Assets\Scripts\Movement\Bfs.cs" />
