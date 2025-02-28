@@ -89,6 +89,7 @@ public class UnitHandler : MonoBehaviour {
         equippedUnits.Add(pawn);
         equippedUnits.Add(king);
         equippedUnits.Add(knight);
+        equippedUnits.Add(queen);
 
         PopulateUnitInterface();
         turnStateManager.EnterDeployment();
