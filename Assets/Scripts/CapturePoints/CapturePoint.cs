@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -11,9 +12,9 @@ public class CapturePoint : MonoBehaviour
         GridPosition = gridPos;
     }
     
-    // Should be linked to UnitHandler's unitMoved
-    public void OnUnitMove(object sender, Vector3Int pos) {
-        if (pos == GridPosition) {
+    // Should be linked to EnemyHandler's enemiesMoveds
+    public void OnEnemyMove(object sender, Dictionary<Vector3Int, EnemyComponent> enemyPositions) {
+        if (enemyPositions.ContainsKey(GridPosition)) {
             captured.Invoke();
             Destroy(gameObject);
         }

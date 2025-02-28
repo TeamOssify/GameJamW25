@@ -2,8 +2,6 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
-
-
 public class TurnStateManager : MonoBehaviour {
     [SerializeField]
     private UnitHandler unitHandler;
@@ -28,8 +26,10 @@ public class TurnStateManager : MonoBehaviour {
     private bool _firstPlayerTurn = true;
 
     private int _unitsDeployed = 0;
-    private Queue<UnitComponent> _unitsToBeDeployed = new Queue<UnitComponent>();
+    private readonly Queue<UnitComponent> _unitsToBeDeployed = new();
     private bool _waitingDeployment;
+
+    public EventHandler OnNextPlayerTurn;
 
     private void Start() {
         CurrentTurnState = TurnState.Player;
@@ -57,6 +57,8 @@ public class TurnStateManager : MonoBehaviour {
     }
 
     public void BeginPlayerTurn() {
+        OnNextPlayerTurn?.Invoke(this, EventArgs.Empty);
+
         if (_firstPlayerTurn) {
             unitHandler.InitDeploy();
         }

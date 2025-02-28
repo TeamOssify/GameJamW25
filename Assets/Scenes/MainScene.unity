@@ -610,7 +610,7 @@ PrefabInstance:
     - target: {fileID: 4174565896089572940, guid: 9fcc169420bb2934fbbde2abfe29f5d0, type: 3}
       propertyPath: enemyHandler
       value: 
-      objectReference: {fileID: 1192960601}
+      objectReference: {fileID: 913752192}
     - target: {fileID: 4174565896089572940, guid: 9fcc169420bb2934fbbde2abfe29f5d0, type: 3}
       propertyPath: unitInterface
       value: 
@@ -1065,6 +1065,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &913752192 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3125632657500253129, guid: f5794b909f10bee4aa52920e6faa0a02, type: 3}
+  m_PrefabInstance: {fileID: 8751120818954391765}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d04fe1ced75040879ca5fde0ab908276, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &956095468 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4652167733984886649, guid: b345891ea0f233044a9aedf27ebb1f57, type: 3}
@@ -1497,17 +1508,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1178525364}
   m_CullTransparentMesh: 1
---- !u!114 &1192960601 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3125632657500253129, guid: f5794b909f10bee4aa52920e6faa0a02, type: 3}
-  m_PrefabInstance: {fileID: 8751120818954391765}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d04fe1ced75040879ca5fde0ab908276, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1193936070
 GameObject:
   m_ObjectHideFlags: 0
@@ -2238,6 +2238,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1818598135}
     - target: {fileID: 5996095134372551906, guid: a00817b02a88d184e96d4b8430d2de8c, type: 3}
+      propertyPath: enemyHandler
+      value: 
+      objectReference: {fileID: 913752192}
+    - target: {fileID: 5996095134372551906, guid: a00817b02a88d184e96d4b8430d2de8c, type: 3}
       propertyPath: unitPositions.Array.size
       value: 8
       objectReference: {fileID: 0}
@@ -2378,6 +2382,10 @@ PrefabInstance:
       propertyPath: unitHandler
       value: 
       objectReference: {fileID: 1818598135}
+    - target: {fileID: 5650186298423401230, guid: e27135d426622d34aad6390b2ec92fc1, type: 3}
+      propertyPath: enemyHandler
+      value: 
+      objectReference: {fileID: 1192960601}
     - target: {fileID: 5650186298423401230, guid: e27135d426622d34aad6390b2ec92fc1, type: 3}
       propertyPath: mainHudController
       value: 

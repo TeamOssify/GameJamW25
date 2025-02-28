@@ -16,6 +16,8 @@ public class GameState : MonoBehaviour
     private Tilemap tilemap;
 
     [SerializeField]
+    private EnemyHandler enemyHandler;
+    [SerializeField]
     private UnitHandler unitHandler;
 
     // Setup
@@ -24,7 +26,7 @@ public class GameState : MonoBehaviour
     [SerializeField]
     private List<Vector3Int> capturePointPositions;
 
-    private UnitHandler _unitHandler;
+    private EnemyHandler _enemyHandler;
     private CapturePointHandler _capturePointHandler;
     private TileComponent _tileComponent;
 
@@ -36,7 +38,8 @@ public class GameState : MonoBehaviour
 
         // Inject required fields
         _capturePointHandler.tilemap = tilemap;
-        _capturePointHandler.unitHandler = unitHandler;
+        _capturePointHandler.enemyHandler = enemyHandler;
+        unitHandler.capturePointHandler = _capturePointHandler;
 
         // Create Capture points and units
         _capturePointHandler.spawnPoints = capturePointPositions;
