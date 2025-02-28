@@ -64,6 +64,7 @@ MonoBehaviour:
   queen: {fileID: 11694682010008481, guid: f898a7eaa07e17d4b9371c16b6e2f40b, type: 3}
   equippedUnits: []
   DeployMode: 0
+  unitRosterManager: {fileID: 11400000, guid: d8103897655c5c44a8df86eae92464af, type: 2}
   normalMoveHint: {fileID: 2909026734135586527}
   jumpMoveHint: {fileID: 1646668485632666500}
   captureMoveHint: {fileID: 1305935354328240396}

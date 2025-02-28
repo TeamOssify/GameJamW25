@@ -90,6 +90,8 @@ public class UnitHandler : MonoBehaviour {
     }
 
     public void InitDeploy() {
+        unitRosterManager.UnitRoster ??= new() { pawn };
+
         foreach (var unit in unitRosterManager.UnitRoster) {
             equippedUnits.Add(unit);
         }
