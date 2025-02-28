@@ -12,9 +12,11 @@ public class UnitMovementRenderer : MonoBehaviour {
 
     private StubSizedTileComponent _tileComponent;
 
-    private Texture2D _texture;
-    private Sprite _sprite;
-    private readonly Dictionary<UnitComponent, MoveSet> _cachedMoves = new();
+    private Texture2D _texture1;
+    private Texture2D _texture2;
+    private Sprite _sprite1;
+    private Sprite _sprite2;
+    private readonly Dictionary<UnitComponent, (MoveSet FirstMove, MoveSet NormalMove)> _cachedMoves = new();
 
     private void Start() {
         if (_tileComponent) {
@@ -25,16 +27,27 @@ public class UnitMovementRenderer : MonoBehaviour {
         _tileComponent.GridRadius = fieldRadius;
 
         var tileCount = fieldRadius * 2 + 1;
-        _texture = new Texture2D(TILE_SIZE * tileCount, TILE_SIZE * tileCount);
-        _texture.filterMode = FilterMode.Point;
-        _sprite = Sprite.Create(_texture, new Rect(0, 0, _texture.width, _texture.height), Vector2.zero);
+        _texture1 = new Texture2D(TILE_SIZE * tileCount, TILE_SIZE * tileCount);
+        _texture1.filterMode = FilterMode.Point;
+        _sprite1 = Sprite.Create(_texture1, new Rect(0, 0, _texture1.width, _texture1.height), Vector2.zero);
+
+        _texture2 = new Texture2D(TILE_SIZE * tileCount, TILE_SIZE * tileCount);
+        _texture2.filterMode = FilterMode.Point;
+        _sprite2 = Sprite.Create(_texture2, new Rect(0, 0, _texture2.width, _texture2.height), Vector2.zero);
     }
 
-    public Sprite RenderUnitMovement(UnitComponent unit) {
+    public (Sprite FirstMove, Sprite NormalMove) RenderUnitMovement(UnitComponent unit) {
         // Debug.Log($"Rendering {unit.UnitName} moves to {_texture.width}x{_texture.height} texture.");
 
         var moveSet = GetOrGenerateMoveSet(unit);
 
+        RenderMoveSet(moveSet.FirstMove, _texture1);
+        RenderMoveSet(moveSet.NormalMove, _texture2);
+
+        return (_sprite1, _sprite2);
+    }
+
+    private void RenderMoveSet(MoveSet moveSet, Texture2D texture) {
         var pixels = new Color32[TILE_SIZE * TILE_SIZE];
 
         for (var y = -fieldRadius; y <= fieldRadius; y++)
@@ -60,24 +73,28 @@ public class UnitMovementRenderer : MonoBehaviour {
                 }
             }
 
-            _texture.SetPixels32(x1 * TILE_SIZE, y1 * TILE_SIZE, TILE_SIZE, TILE_SIZE, pixels);
+            texture.SetPixels32(x1 * TILE_SIZE, y1 * TILE_SIZE, TILE_SIZE, TILE_SIZE, pixels);
         }
 
-        _texture.Apply();
-
-        return _sprite;
+        texture.Apply();
     }
 
-    private MoveSet GetOrGenerateMoveSet(UnitComponent unit) {
+    private (MoveSet FirstMove, MoveSet NormalMove) GetOrGenerateMoveSet(UnitComponent unit) {
         if (_cachedMoves.TryGetValue(unit, out var moveSet)) {
             return moveSet;
         }
 
         var unitObject = Instantiate(unit, new Vector3(1000, 1000, 1000), Quaternion.identity);
-        moveSet = unitObject.GetUnitMoves(_tileComponent, _ => false, _ => false);
+
+        var firstMove = unitObject.GetUnitMoves(_tileComponent, _ => false, _ => false);
+        unitObject.Move(new Vector3(1000, 1000, 1000), Vector3Int.zero);
+        var normalMove = unitObject.GetUnitMoves(_tileComponent, _ => false, _ => false);
+
         Destroy(unitObject.gameObject);
 
+        moveSet = (firstMove, normalMove);
         _cachedMoves[unit] = moveSet;
+
         return moveSet;
     }
 

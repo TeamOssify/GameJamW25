@@ -18,7 +18,10 @@ public class MainMenu : MonoBehaviour {
     private TextMeshProUGUI unitDetailsDescription;
 
     [SerializeField]
-    private Image unitDetailsImage;
+    private Image unitFirstMoveImage;
+
+    [SerializeField]
+    private Image unitNormalMoveImage;
 
     [SerializeField]
     private RosterDetails[] rosterSlots;
@@ -60,7 +63,9 @@ public class MainMenu : MonoBehaviour {
         unitDetailsName.text = unit.UnitName;
         unitDetailsDescription.text = unit.UnitDescription;
         // unitDetailsImage.sprite = unit.UnitSprite;
-        unitDetailsImage.sprite = movementRenderer.RenderUnitMovement(unit);
+        var moves = movementRenderer.RenderUnitMovement(unit);
+        unitFirstMoveImage.sprite = moves.FirstMove;
+        unitNormalMoveImage.sprite = moves.NormalMove;
     }
 
     public void SelectUnit(UnitComponent unit) {
