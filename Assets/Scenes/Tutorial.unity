@@ -6858,11 +6858,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5274623345943611483, guid: 316567b40d1a5004a99a0bf9b66d557f, type: 3}
       propertyPath: captureSpawns.Array.data[0].x
-      value: -4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5274623345943611483, guid: 316567b40d1a5004a99a0bf9b66d557f, type: 3}
       propertyPath: captureSpawns.Array.data[0].y
-      value: 0
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 5274623345943611483, guid: 316567b40d1a5004a99a0bf9b66d557f, type: 3}
       propertyPath: captureSpawns.Array.data[0].z
