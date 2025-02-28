@@ -1294,6 +1294,10 @@ PrefabInstance:
       propertyPath: enemyCount
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1617637769528317094, guid: 79d5d8dd5a2bbd24f8a3aee6fefba71f, type: 3}
+      propertyPath: enemyToSpawn
+      value: 
+      objectReference: {fileID: 2886597105513780598, guid: 5464028ed65e0ff4ebfa6520234f7338, type: 3}
     - target: {fileID: 2202064837822643999, guid: 79d5d8dd5a2bbd24f8a3aee6fefba71f, type: 3}
       propertyPath: subWaves.Array.size
       value: 2
@@ -1306,6 +1310,10 @@ PrefabInstance:
       propertyPath: 'subWaves.Array.data[1]'
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6753949021366611937, guid: 79d5d8dd5a2bbd24f8a3aee6fefba71f, type: 3}
+      propertyPath: enemyToSpawn
+      value: 
+      objectReference: {fileID: 8643676179988871973, guid: b5cec795cc9b4fd41b93cd054af3c313, type: 3}
     - target: {fileID: 7290055343492574584, guid: 79d5d8dd5a2bbd24f8a3aee6fefba71f, type: 3}
       propertyPath: currentWave
       value: 1
@@ -1318,6 +1326,10 @@ PrefabInstance:
       propertyPath: enemyCount
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7840902770560200129, guid: 79d5d8dd5a2bbd24f8a3aee6fefba71f, type: 3}
+      propertyPath: enemyToSpawn
+      value: 
+      objectReference: {fileID: 8643676179988871973, guid: b5cec795cc9b4fd41b93cd054af3c313, type: 3}
     - target: {fileID: 8062566508865195667, guid: 79d5d8dd5a2bbd24f8a3aee6fefba71f, type: 3}
       propertyPath: enemyCount
       value: 1
@@ -1340,6 +1352,7 @@ PrefabInstance:
     - {fileID: 7189310193657093021, guid: 79d5d8dd5a2bbd24f8a3aee6fefba71f, type: 3}
     - {fileID: 3268059004912915256, guid: 79d5d8dd5a2bbd24f8a3aee6fefba71f, type: 3}
     - {fileID: 2115337970636043085, guid: 79d5d8dd5a2bbd24f8a3aee6fefba71f, type: 3}
+    - {fileID: 5459197038492600993, guid: 79d5d8dd5a2bbd24f8a3aee6fefba71f, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79d5d8dd5a2bbd24f8a3aee6fefba71f, type: 3}
