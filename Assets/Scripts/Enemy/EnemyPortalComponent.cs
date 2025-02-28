@@ -9,6 +9,8 @@ public class EnemyPortalComponent : MonoBehaviour {
     [SerializeField]
     private int portalId;
 
+    public bool spawnedAllUnits;
+
     public int currentWave;
     public void SpawnPortal(Vector3Int gridPosition) {
         GridPos = gridPosition;
