@@ -1,25 +1,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Tilemaps;
 
 public class CapturePointHandler : MonoBehaviour {
     [SerializeField]
     private GameObject capturePointPrefab;
 
-    private TileComponent _tileComponent;
-
     public readonly HashSet<Vector3Int> CapturePointPositions = new();
 
-    public Tilemap tilemap;
+    public TileComponent tileComponent;
     public EnemyHandler enemyHandler;
     public List<Vector3Int> captureSpawns;
 
     public UnityEvent allPointsCaptured;
-
-    public void Start() {
-        _tileComponent = tilemap.GetComponent<TileComponent>();
-    }
 
     public void SpawnCapturePoints() {
         foreach (var i in captureSpawns) {
@@ -31,7 +24,7 @@ public class CapturePointHandler : MonoBehaviour {
         var newPoint = Instantiate(capturePointPrefab, transform);
         var pointComponent = newPoint.GetComponent<CapturePoint>();
 
-        _tileComponent.TryGetWorldPositionForTileCenter(i, out var pos);
+        tileComponent.TryGetWorldPositionForTileCenter(i, out var pos);
         pointComponent.Move(pos, i);
 
         CapturePointPositions.Add(i);
