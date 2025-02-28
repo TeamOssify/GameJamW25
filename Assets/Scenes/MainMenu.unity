@@ -976,7 +976,6 @@ GameObject:
   - component: {fileID: 758155443}
   - component: {fileID: 758155442}
   - component: {fileID: 758155444}
-  - component: {fileID: 758155445}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1071,7 +1070,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levels:
-  - {fileID: 758155445}
+  - {fileID: 1897430412}
   selectedLevel: 0
   levelText: {fileID: 528425970}
   unitDetailsName: {fileID: 983915529}
@@ -1142,22 +1141,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fieldRadius: 3
---- !u!114 &758155445
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 758155438}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e7a71344b704490b69289bc4af302a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelName: Level 1
-  levelScene:
-    asset: {fileID: 102900000, guid: 8c9cfa26abfee488c85f1582747f6a02, type: 3}
-    guid: 8c9cfa26abfee488c85f1582747f6a02
 --- !u!1 &875502884
 GameObject:
   m_ObjectHideFlags: 0
@@ -2649,6 +2632,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1834756307}
   m_CullTransparentMesh: 1
+--- !u!1 &1897430411
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1897430413}
+  - component: {fileID: 1897430412}
+  m_Layer: 0
+  m_Name: Levels
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1897430412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1897430411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e7a71344b704490b69289bc4af302a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelName: Level 1
+  levelScene:
+    asset: {fileID: 102900000, guid: 8c9cfa26abfee488c85f1582747f6a02, type: 3}
+    guid: 8c9cfa26abfee488c85f1582747f6a02
+--- !u!4 &1897430413
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1897430411}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 406.26636, y: 208.72612, z: -2.5410166}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1931664213
 GameObject:
   m_ObjectHideFlags: 0
@@ -3015,3 +3046,4 @@ SceneRoots:
   - {fileID: 758155441}
   - {fileID: 1419393454}
   - {fileID: 183803041}
+  - {fileID: 1897430413}
