@@ -29,6 +29,22 @@ public class EnemyHandler : MonoBehaviour {
         return _enemyGridPositions.ContainsKey(gridPos);
     }
 
+    public bool TryGetEnemyAtGridPosition(Vector3Int gridPosition, out EnemyComponent enemy) {
+        return _enemyGridPositions.TryGetValue(gridPosition, out enemy);
+    }
+
+    public void CaptureEnemy(Vector3Int gridPos, EnemyComponent enemy) {
+        _enemyGridPositions.Remove(gridPos);
+        foreach (var kvp in _futureEnemyGridPositions) {
+            if (kvp.Value == enemy) {
+                _futureEnemyGridPositions.Remove(kvp.Key);
+                break;
+            }
+        }
+        Destroy(enemy);
+        Destroy(enemy.gameObject);
+    }
+
     public void SpawnEnemy(EnemyComponent enemy, Vector3Int gridPos) {
         // if (!tileComponent.IsUnobstructedTile(gridPos)) {
         //     Debug.LogError($"Invalid grid position: {gridPos}");
@@ -59,13 +75,15 @@ public class EnemyHandler : MonoBehaviour {
         _futureEnemyGridPositions.Clear();
 
         foreach (var (currentPos, enemy) in _enemyGridPositions) {
-            var movePoint = enemy.ComputeNextMove(tileComponent, capturePointHandler.CapturePointPositions, unitHandler.UnitPositions, takenPoints);
-            if (movePoint != currentPos) {
-                takenPoints.Remove(currentPos);
-                takenPoints.Add(movePoint);
-            }
+            if (enemy) {
+                var movePoint = enemy.ComputeNextMove(tileComponent, capturePointHandler.CapturePointPositions, unitHandler.UnitPositions, takenPoints);
+                if (movePoint != currentPos) {
+                    takenPoints.Remove(currentPos);
+                    takenPoints.Add(movePoint);
+                }
 
-            _futureEnemyGridPositions.Add(movePoint, enemy);
+                _futureEnemyGridPositions.Add(movePoint, enemy);
+            }
         }
 
         tileComponent.AddTileHints(HintBucket.EnemyTelegraph, takenPoints, enemyTelegraphHint);
@@ -77,8 +95,8 @@ public class EnemyHandler : MonoBehaviour {
                 Debug.LogError($"Failed to get new world pos for enemy at {gridPos}!");
                 continue;
             }
-
             enemy.Move(worldPos, gridPos);
+            
         }
 
         (_enemyGridPositions, _futureEnemyGridPositions) = (_futureEnemyGridPositions, _enemyGridPositions);

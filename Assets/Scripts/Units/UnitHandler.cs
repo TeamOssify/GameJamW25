@@ -178,6 +178,7 @@ public class UnitHandler : MonoBehaviour {
         _selectedUnit = null;
     }
 
+
     private void SelectTile(object sender, Vector3Int gridPosition) {
 
         click.Play();   // play click sfx
@@ -206,6 +207,12 @@ public class UnitHandler : MonoBehaviour {
         if (!_selectedUnit) {
             // No unit selected
             return;
+        }
+
+        if (enemyHandler.WouldCaptureEnemy(gridPosition)) {
+            if(enemyHandler.TryGetEnemyAtGridPosition(gridPosition, out var enemy)){
+                enemyHandler.CaptureEnemy(gridPosition, enemy);
+            }
         }
 
         if (_selectedUnitMoves.Contains(gridPosition)
