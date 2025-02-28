@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour {
@@ -35,6 +36,9 @@ public class MainMenu : MonoBehaviour {
 
     private readonly HashSet<UnitComponent> _selectedUnits = new();
 
+    [SerializeField]
+    private UnitRosterManagerScriptableObject unitRosterManager;
+
     private void Start() {
         ChangeSelectedLevel(0);
     }
@@ -65,6 +69,12 @@ public class MainMenu : MonoBehaviour {
             Debug.Log($"Tried to load level outside of bounds: {selectedLevel}");
             return;
         }
+
+        if (_selectedUnits.Count < 1) {
+            return;
+        }
+
+        unitRosterManager.UnitRoster = _selectedUnits;
 
         SceneManager.LoadSceneAsync(levels[selectedLevel].LevelScene.BuildIndex);
     }

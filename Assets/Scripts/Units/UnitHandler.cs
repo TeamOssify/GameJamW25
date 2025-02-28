@@ -53,6 +53,9 @@ public class UnitHandler : MonoBehaviour {
     private readonly HashSet<Vector3Int> _selectedUnitMoves = new();
     private readonly HashSet<UnitComponent> _movedUnits = new();
 
+    [SerializeField]
+    private UnitRosterManagerScriptableObject unitRosterManager;
+
     public EventHandler<Vector3Int> UnitMoved;
 
     [SerializeField]
@@ -87,11 +90,9 @@ public class UnitHandler : MonoBehaviour {
     }
 
     public void InitDeploy() {
-        //eventually, we'll grab the stuff from main menu here
-        equippedUnits.Add(pawn);
-        equippedUnits.Add(king);
-        equippedUnits.Add(knight);
-        equippedUnits.Add(queen);
+        foreach (var unit in unitRosterManager.UnitRoster) {
+            equippedUnits.Add(unit);
+        }
 
         PopulateUnitInterface();
         turnStateManager.EnterDeployment();
