@@ -13,13 +13,16 @@ public class CapturePointHandler : MonoBehaviour {
 
     public Tilemap tilemap;
     public EnemyHandler enemyHandler;
-    public List<Vector3Int> spawnPoints;
+    public List<Vector3Int> captureSpawns;
 
     public UnityEvent allPointsCaptured;
 
     public void Start() {
         _tileComponent = tilemap.GetComponent<TileComponent>();
-        foreach (var i in spawnPoints) {
+    }
+
+    public void SpawnCapturePoints() {
+        foreach (var i in captureSpawns) {
             AddCapturePoint(i);
         }
     }
@@ -34,7 +37,7 @@ public class CapturePointHandler : MonoBehaviour {
         CapturePointPositions.Add(i);
 
         enemyHandler.enemiesMoved += pointComponent.OnEnemyMove;
-        pointComponent.captured.AddListener(() => {OnPointCaptured(pointComponent);});
+        pointComponent.captured.AddListener(() => OnPointCaptured(pointComponent));
     }
 
     public void OnPointCaptured(CapturePoint capturePoint) {

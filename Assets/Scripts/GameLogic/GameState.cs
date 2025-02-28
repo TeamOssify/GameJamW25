@@ -42,7 +42,8 @@ public class GameState : MonoBehaviour
         unitHandler.capturePointHandler = _capturePointHandler;
 
         // Create Capture points and units
-        _capturePointHandler.spawnPoints = capturePointPositions;
+        _capturePointHandler.captureSpawns = capturePointPositions;
+        _capturePointHandler.SpawnCapturePoints();
 
         _capturePointHandler.allPointsCaptured.AddListener(DisableInput);
         HandlersReady = true;
