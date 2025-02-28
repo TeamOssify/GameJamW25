@@ -1,3 +1,4 @@
+using Eflatun.SceneReference;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,6 +11,9 @@ public class GameState : MonoBehaviour {
 
     [SerializeField]
     private Canvas FailureScreen;
+
+    [SerializeField]
+    private SceneReference mainMenu;
 
     private void Awake() {
         capturePointHandler.allPointsCaptured.AddListener(DisableInput);
@@ -26,11 +30,17 @@ public class GameState : MonoBehaviour {
     }
 
     public void ReturnToMenu() {
-        SceneManager.LoadScene(0, LoadSceneMode.Single);
+        SceneManager.LoadScene(mainMenu.BuildIndex, LoadSceneMode.Single);
     }
 
     private void EnableInput() {
         tileComponent.Interactable = true;
         Debug.Log("Welcome back");
+    }
+
+    private void Update() {
+        if (Input.GetKey(KeyCode.Escape)) {
+            ReturnToMenu();
+        }
     }
 }
