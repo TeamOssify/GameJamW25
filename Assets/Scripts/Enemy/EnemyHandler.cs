@@ -124,8 +124,5 @@ public class EnemyHandler : MonoBehaviour {
             var spawnPos = Bfs.ClosestAvailable(portal.GridPos, tileComponent, x => !IsOccupiedByEnemy(x));
             SpawnEnemy(wave.EnemyToSpawn, spawnPos);
         }
-
-        ComputeEnemyMoves();
-        MoveEnemies();
     }
 }

@@ -70,8 +70,10 @@ public class TurnStateManager : MonoBehaviour {
     }
 
     public void BeginEnemyTurn() {
+        enemyHandler.MoveEnemies();
         tileComponent.ClearTileHints(HintBucket.EnemyTelegraph);
         enemyHandler.TriggerWorldPortals();
+        enemyHandler.ComputeEnemyMoves();
         EndEnemyTurn();
     }
 
