@@ -116,10 +116,10 @@ TextureImporter:
       name: bluebishop_spr_0
       rect:
         serializedVersion: 2
-        x: 18
-        y: 25
-        width: 91
-        height: 91
+        x: 49
+        y: 26
+        width: 29
+        height: 75
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
