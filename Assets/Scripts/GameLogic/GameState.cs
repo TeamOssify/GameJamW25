@@ -17,9 +17,11 @@ public class GameState : MonoBehaviour {
 
     private void DisableInput() {
         tileComponent.Interactable = false;
+        Debug.Log("Game over");
     }
 
     private void EnableInput() {
         tileComponent.Interactable = true;
+        Debug.Log("Welcome back");
     }
 }

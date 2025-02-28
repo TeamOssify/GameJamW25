@@ -106,6 +106,7 @@ public class EnemyHandler : MonoBehaviour {
             StepPortal(portal);
         }
     }
+
     public void StepPortal(EnemyPortalComponent portal) {
         foreach (Wave wave in portal.GetComponentsInChildren<Wave>()) {
             if (portal.currentWave == wave.WaveNumber) {
