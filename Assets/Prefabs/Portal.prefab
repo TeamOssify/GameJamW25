@@ -44,10 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd158d3b73c647d9aaa1be28be8600a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnIndex: 2
   enemyToSpawn: {fileID: -1893874399672768844, guid: 67460be3d7d62524a96e39a46c53a272, type: 3}
   enemyCount: 2
-  forceSpawnTogether: 0
 --- !u!1 &2461755779332668702
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,10 +90,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd158d3b73c647d9aaa1be28be8600a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnIndex: 2
   enemyToSpawn: {fileID: -1893874399672768844, guid: 67460be3d7d62524a96e39a46c53a272, type: 3}
   enemyCount: 2
-  forceSpawnTogether: 0
 --- !u!1 &2474173060411252341
 GameObject:
   m_ObjectHideFlags: 0
@@ -192,10 +188,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd158d3b73c647d9aaa1be28be8600a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnIndex: 1
   enemyToSpawn: {fileID: -1893874399672768844, guid: 67460be3d7d62524a96e39a46c53a272, type: 3}
   enemyCount: 1
-  forceSpawnTogether: 0
 --- !u!1 &3268059004912915256
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,10 +234,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd158d3b73c647d9aaa1be28be8600a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnIndex: 3
   enemyToSpawn: {fileID: -1893874399672768844, guid: 67460be3d7d62524a96e39a46c53a272, type: 3}
   enemyCount: 2
-  forceSpawnTogether: 0
 --- !u!1 &3362935497263475318
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,10 +330,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd158d3b73c647d9aaa1be28be8600a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnIndex: 1
   enemyToSpawn: {fileID: -1893874399672768844, guid: 67460be3d7d62524a96e39a46c53a272, type: 3}
   enemyCount: 1
-  forceSpawnTogether: 0
 --- !u!1 &5459197038492600993
 GameObject:
   m_ObjectHideFlags: 0
@@ -438,10 +428,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd158d3b73c647d9aaa1be28be8600a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnIndex: 2
   enemyToSpawn: {fileID: -1893874399672768844, guid: 67460be3d7d62524a96e39a46c53a272, type: 3}
   enemyCount: 2
-  forceSpawnTogether: 0
 --- !u!1 &6877084120748937090
 GameObject:
   m_ObjectHideFlags: 0
@@ -486,10 +474,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd158d3b73c647d9aaa1be28be8600a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnIndex: 1
   enemyToSpawn: {fileID: -1893874399672768844, guid: 67460be3d7d62524a96e39a46c53a272, type: 3}
   enemyCount: 1
-  forceSpawnTogether: 0
 --- !u!1 &7189310193657093021
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,10 +520,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd158d3b73c647d9aaa1be28be8600a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnIndex: 3
   enemyToSpawn: {fileID: -1893874399672768844, guid: 67460be3d7d62524a96e39a46c53a272, type: 3}
   enemyCount: 2
-  forceSpawnTogether: 0
 --- !u!1 &8441988596488383520
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,3 +626,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   portalId: 0
+  currentWave: 1

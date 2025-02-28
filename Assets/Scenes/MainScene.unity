@@ -452,6 +452,10 @@ PrefabInstance:
       propertyPath: portalId
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7290055343492574584, guid: 79d5d8dd5a2bbd24f8a3aee6fefba71f, type: 3}
+      propertyPath: currentWave
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8441988596488383520, guid: 79d5d8dd5a2bbd24f8a3aee6fefba71f, type: 3}
       propertyPath: m_Name
       value: Portal (1)
