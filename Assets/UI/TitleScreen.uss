@@ -1,6 +1,6 @@
 #MenuContainer {
     flex-basis: auto;
-    margin-top: 20%;
+    margin-top: 10%;
     margin-right: 20%;
     margin-bottom: 20%;
     margin-left: 20%;
@@ -24,11 +24,13 @@ Button {
 
 #MainMenu {
     background-color: rgb(96, 183, 138);
+    background-image: url("project://database/Assets/Art/TitleScreenImageish/Illustration4.png?fileID=2800000&guid=af6a927fc1c69e6429b18b0b28fb7cd9&type=3#Illustration4");
 }
 
 #TempLogo {
     -unity-text-align: upper-center;
     font-size: 92px;
+    color: rgb(255, 255, 255);
 }
 
 Button:hover {
