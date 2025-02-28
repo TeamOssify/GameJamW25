@@ -135,7 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitName: Queen
   unitDescription: Bow before me!
-  unitSprite: {fileID: -4406130371382078661, guid: aebf8504a3173d94489af12778400803, type: 3}
+  unitSprite: {fileID: 21300000, guid: 0cac68ee98312e04ba2a00a4a556830f, type: 3}
   unitRespawnCost: 0
   unitUpgradeCost: 0
   unitBaseMoves: {fileID: 334027994311954807}

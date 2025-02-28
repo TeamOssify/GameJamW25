@@ -135,7 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitName: Bishop
   unitDescription: Isn't fond of the straight and narrow lifestyle
-  unitSprite: {fileID: -3615114644971614754, guid: 04c02a89b1d364146a9dae8a4ab23bec, type: 3}
+  unitSprite: {fileID: 21300000, guid: f55dd7dfe42c37e40a796c0bc484a1a7, type: 3}
   unitRespawnCost: 0
   unitUpgradeCost: 0
   unitBaseMoves: {fileID: 7055723526005383914}

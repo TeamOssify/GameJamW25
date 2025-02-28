@@ -135,7 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitName: King
   unitDescription: I used to rule the world
-  unitSprite: {fileID: 4734655190638285085, guid: cb3d63af4445e7d40aad1a7eefcd55a6, type: 3}
+  unitSprite: {fileID: 21300000, guid: 8b4bfd07e4b711b41b67deaf3f8adbb9, type: 3}
   unitRespawnCost: 0
   unitUpgradeCost: 0
   unitBaseMoves: {fileID: 1937079523596410767}
