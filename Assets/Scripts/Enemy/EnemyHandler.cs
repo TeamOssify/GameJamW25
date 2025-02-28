@@ -15,6 +15,7 @@ public class EnemyHandler : MonoBehaviour {
 
     private Dictionary<Vector3Int, EnemyComponent> _enemyGridPositions = new();
     private Dictionary<Vector3Int, EnemyComponent> _futureEnemyGridPositions = new();
+    private Dictionary<Vector3Int, int> _enemyPortalPositions = new();
 
     public EventHandler<Dictionary<Vector3Int, EnemyComponent>> enemiesMoved;
 
@@ -73,5 +74,22 @@ public class EnemyHandler : MonoBehaviour {
 
     public bool WouldCaptureEnemy(Vector3Int gridPos) {
         return _enemyGridPositions.ContainsKey(gridPos);
+    }
+
+    public void CreatePortal(Vector3Int initPos, EnemyPortalComponent portal) {
+
+        var newPortal = Instantiate(portal, initPos, Quaternion.identity, gameObject.transform);
+        newPortal.Spawn(initPos);
+        _enemyPortalPositions.Add(initPos, _enemyPortalPositions.Count);
+    }
+
+    public void SpawnSubwave(SubWave wave, EnemyPortalComponent portal) {
+
+        for (int i = 0; i < wave.EnemyCount; i++) {
+            SpawnEnemy(wave.EnemyToSpawn, portal.GridPos);
+        }
+
+        ComputeEnemyMoves();
+        MoveEnemies();
     }
 }
