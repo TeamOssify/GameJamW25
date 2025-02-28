@@ -407,6 +407,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TitleScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 808782310845280534, guid: 8116645dd71b9d84598849a1194e96f6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2378787608202368613, guid: 8116645dd71b9d84598849a1194e96f6, type: 3}
       propertyPath: Loop
       value: 1

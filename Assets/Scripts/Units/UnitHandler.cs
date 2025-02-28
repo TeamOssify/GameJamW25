@@ -62,6 +62,12 @@ public class UnitHandler : MonoBehaviour {
     [SerializeField]
     private GameObject captureMoveHint;
 
+    [SerializeField]
+    private AudioSource click;
+
+    [SerializeField]
+    private AudioSource move;
+
     private void Start() {
         _tileComponent = tileMap.GetComponent<TileComponent>();
         _tileComponent.OnTileSelected += SelectTile;
@@ -170,6 +176,9 @@ public class UnitHandler : MonoBehaviour {
     }
 
     private void SelectTile(object sender, Vector3Int gridPosition) {
+
+        click.Play();   // play click sfx
+
         if (!_tileComponent.IsUnobstructedTile(gridPosition)) {
             // Blocked tile
             DeselectUnit();
@@ -206,6 +215,8 @@ public class UnitHandler : MonoBehaviour {
             _unitGridPositions.Add(gridPosition, _selectedUnit);
 
             UnitMoved?.Invoke(this, gridPosition);
+            click.Stop();
+            move.Play();
         }
 
         DeselectUnit();
