@@ -376,8 +376,8 @@ GameObject:
   - component: {fileID: 9056715107743644941}
   - component: {fileID: 8724683128074681390}
   - component: {fileID: 6936140238791530140}
-  - component: {fileID: 6721159089404856928}
   - component: {fileID: 7551567042665552968}
+  - component: {fileID: 7845884385420156612}
   m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
@@ -1654,8 +1654,22 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
---- !u!61 &6721159089404856928
-BoxCollider2D:
+--- !u!114 &7551567042665552968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3536607273929237973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fd22ab3212b4a24dbf59a25e5f6f44d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileHoverObject: {fileID: 0}
+  movementMask: {fileID: 4920706111355611648}
+--- !u!19719996 &7845884385420156612
+TilemapCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1689,31 +1703,9 @@ BoxCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 14, y: 8}
-  m_EdgeRadius: 0
---- !u!114 &7551567042665552968
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3536607273929237973}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fd22ab3212b4a24dbf59a25e5f6f44d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tileHoverObject: {fileID: 0}
-  movementMask: {fileID: 4920706111355611648}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0
+  m_UseDelaunayMesh: 0
 --- !u!1 &6636019015699851073
 GameObject:
   m_ObjectHideFlags: 0

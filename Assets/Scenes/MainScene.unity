@@ -2442,6 +2442,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6721159089404856928, guid: 377de235fcb11bc49b0196b4c735cbef, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7551567042665552968, guid: 377de235fcb11bc49b0196b4c735cbef, type: 3}
       propertyPath: deployArea
       value: 
