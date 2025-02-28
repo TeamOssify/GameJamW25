@@ -65,10 +65,15 @@ public class MainMenu : MonoBehaviour {
 
     public void SelectUnit(UnitComponent unit) {
         if (_selectedUnits.Count >= rosterSlots.Length) {
+            if (_selectedUnits.Contains(unit)) {
+                DeselectUnit(unit);
+            }
+
             return;
         }
 
         if (!_selectedUnits.Add(unit)) {
+            DeselectUnit(unit);
             return;
         }
 

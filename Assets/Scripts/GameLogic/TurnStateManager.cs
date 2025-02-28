@@ -25,6 +25,7 @@ public class TurnStateManager : MonoBehaviour {
     public TurnState CurrentTurnState { get; private set; }
     private bool _firstPlayerTurn = true;
 
+
     private int _unitsDeployed = 0;
     private readonly Queue<UnitComponent> _unitsToBeDeployed = new();
     private bool _waitingDeployment;
@@ -33,6 +34,7 @@ public class TurnStateManager : MonoBehaviour {
 
     private void Start() {
         CurrentTurnState = TurnState.Player;
+
         BeginPlayerTurn();
     }
 
@@ -65,6 +67,7 @@ public class TurnStateManager : MonoBehaviour {
     }
 
     public void BeginEnemyTurn() {
+
         EndEnemyTurn();
     }
 

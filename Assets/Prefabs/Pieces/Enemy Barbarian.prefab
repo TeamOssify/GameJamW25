@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 5295394562723481661}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -76,8 +76,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 100
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.9607843, g: 0.0588235, b: 0.16344208, a: 1}
+  m_Sprite: {fileID: 8992605640338919237, guid: 14a92dfb85f302043b6e5087ebb35f32, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -133,8 +133,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a585f6f8326a60648af1373ae6d0d01a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: 
-  enemyMoves: {fileID: 0}
+  enemyName: Barbarian
+  enemyBaseMoves: {fileID: 5967705434433159140}
+  enemyFirstMoves: {fileID: 1182854177662469690}
+  enemyTier1Moves: {fileID: 0}
 --- !u!1001 &8457889661566448365
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -192,6 +194,28 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a5d89e76ddb22d44969bec111e73c3f, type: 3}
+--- !u!114 &1182854177662469690 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7280669467405022423, guid: 8a5d89e76ddb22d44969bec111e73c3f, type: 3}
+  m_PrefabInstance: {fileID: 8457889661566448365}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b90ca664b542fc88ace0287a4a4e7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5967705434433159140 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2860341758516235529, guid: 8a5d89e76ddb22d44969bec111e73c3f, type: 3}
+  m_PrefabInstance: {fileID: 8457889661566448365}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b90ca664b542fc88ace0287a4a4e7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &9143423862064333545 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 829650083085627396, guid: 8a5d89e76ddb22d44969bec111e73c3f, type: 3}
