@@ -34,7 +34,7 @@ public class EnemyComponent : MonoBehaviour {
 
         var allMoves = moveSet.NormalMoves.Concat(moveSet.JumpMoves).ToArray();
 
-        var closestPoint = allMoves.FirstOrDefault();
+        var closestPoint = GridPos;
         foreach (var pos2 in allMoves) {
             if (takenPositions.Contains(pos2)) {
                 continue;
