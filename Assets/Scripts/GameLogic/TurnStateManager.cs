@@ -63,7 +63,7 @@ public class TurnStateManager : MonoBehaviour {
     }
 
     public void BeginEnemyTurn() {
-
+        EndEnemyTurn();
     }
 
     public void EnterDeployment() {
