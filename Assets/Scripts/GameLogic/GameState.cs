@@ -37,12 +37,13 @@ public class GameState : MonoBehaviour
         _tileComponent = tilemap.GetComponent<TileComponent>();
 
         // Inject required fields
-        _capturePointHandler.tilemap = tilemap;
+        _capturePointHandler.tileComponent = _tileComponent;
         _capturePointHandler.enemyHandler = enemyHandler;
         unitHandler.capturePointHandler = _capturePointHandler;
 
         // Create Capture points and units
-        _capturePointHandler.spawnPoints = capturePointPositions;
+        _capturePointHandler.captureSpawns = capturePointPositions;
+        _capturePointHandler.SpawnCapturePoints();
 
         _capturePointHandler.allPointsCaptured.AddListener(DisableInput);
         HandlersReady = true;
