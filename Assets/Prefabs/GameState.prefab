@@ -44,10 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75555099ad115d743a3748b841645bc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitHandlerPrefab: {fileID: 3973409776510875857, guid: 9fcc169420bb2934fbbde2abfe29f5d0, type: 3}
-  capturePointHandlerPrefab: {fileID: 4567022985327423417, guid: 0272bb56fed1fc747b052e7a840d54eb, type: 3}
-  tilemap: {fileID: 0}
-  deployArea: {fileID: 0}
-  unitFrame: {fileID: 0}
-  unitPositions: []
-  capturePointPositions: []
+  tileComponent: {fileID: 0}
+  capturePointHandler: {fileID: 0}
+  FailureScreen: {fileID: 0}
+  mainMenu:
+    asset: {fileID: 102900000, guid: 91f74e668f28bbb479f2e7f0ac178686, type: 3}
+    guid: 91f74e668f28bbb479f2e7f0ac178686
