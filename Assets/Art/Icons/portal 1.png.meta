@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: d94c78e44a168fb468197fa842e0a20d
+guid: 8b9d211088e47eb4b8e83e52ef358680
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1837428302120115801
-    second: jungletilesDIRT_0
+      213: -5095469082599066051
+    second: portal 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: jungletilesDIRT_0
+      name: portal 1_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 6
         y: 0
-        width: 640
-        height: 640
+        width: 43
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7a1a1efb1b42086e0800000000000000
-      internalID: -1837428302120115801
+      spriteID: d3672b7cdd14949b0800000000000000
+      internalID: -5095469082599066051
       vertices: []
       indices: 
       edges: []
@@ -147,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      jungletilesDIRT_0: -1837428302120115801
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

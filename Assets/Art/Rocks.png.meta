@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: d94c78e44a168fb468197fa842e0a20d
+guid: 71d49145bcaf45b44bebf54c45696660
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1837428302120115801
-    second: jungletilesDIRT_0
+      213: 1887494081247492234
+    second: Rocks_0
+  - first:
+      213: 2007986136508003152
+    second: Rocks_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: jungletilesDIRT_0
+      name: Rocks_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 5
         y: 0
-        width: 640
-        height: 640
+        width: 57
+        height: 45
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +131,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7a1a1efb1b42086e0800000000000000
-      internalID: -1837428302120115801
+      spriteID: a88b864ddd9b13a10800000000000000
+      internalID: 1887494081247492234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rocks_1
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 33
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 053f77c90cccddb10800000000000000
+      internalID: 2007986136508003152
       vertices: []
       indices: 
       edges: []
@@ -147,8 +172,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      jungletilesDIRT_0: -1837428302120115801
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
