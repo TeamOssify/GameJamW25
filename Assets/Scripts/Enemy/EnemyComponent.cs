@@ -40,7 +40,7 @@ public class EnemyComponent : MonoBehaviour {
                 continue;
             }
 
-            if (pos2.DistanceSquared(path[0]) < closestPoint.DistanceSquared(path[0])) {
+            if (pos2.DistanceSquared(path[^1]) < closestPoint.DistanceSquared(path[^1])) {
                 closestPoint = pos2;
             }
         }

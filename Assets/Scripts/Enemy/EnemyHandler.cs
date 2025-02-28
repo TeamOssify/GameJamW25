@@ -55,12 +55,16 @@ public class EnemyHandler : MonoBehaviour {
     }
 
     public void ComputeEnemyMoves() {
-        var takenPoints = new HashSet<Vector3Int>();
+        var takenPoints = new HashSet<Vector3Int>(_enemyGridPositions.Keys);
         _futureEnemyGridPositions.Clear();
 
-        foreach (var enemy in _enemyGridPositions.Values) {
+        foreach (var (currentPos, enemy) in _enemyGridPositions) {
             var movePoint = enemy.ComputeNextMove(tileComponent, capturePointHandler.CapturePointPositions, unitHandler.UnitPositions, takenPoints);
-            takenPoints.Add(movePoint);
+            if (movePoint != currentPos) {
+                takenPoints.Remove(currentPos);
+                takenPoints.Add(movePoint);
+            }
+
             _futureEnemyGridPositions.Add(movePoint, enemy);
         }
 
