@@ -94,6 +94,7 @@
     <Compile Include="Assets\Scripts\GameLogic\LevelManager.cs" />
     <Compile Include="Assets\Scripts\Enums.cs" />
     <Compile Include="Assets\Scripts\Movement\MovementComponentBase.cs" />
+    <Compile Include="Assets\Scripts\AudioHandler\AudioHandler.cs" />
     <Compile Include="Assets\Scripts\GameLogic\Models\Wave.cs" />
     <Compile Include="Assets\Scripts\Movement\Models\MoveSet.cs" />
   </ItemGroup>
